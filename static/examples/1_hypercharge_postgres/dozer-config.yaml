@@ -1,0 +1,43 @@
+app_name: 1-hypercharge-postgres-sample
+connections:
+  - config: !Postgres
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5434
+      database: stocks
+    name: stocks
+sources:
+  - name: stocks
+    table_name: stocks
+    columns:
+      - id
+      - ticker
+      - date
+      - open
+      - high
+      - low
+      - close
+      - adj_close
+      - volume
+    connection: !Ref stocks
+  - name: stocks_meta
+    table_name: stocks_meta
+    columns:
+      - symbol
+      - security_name
+    connection: !Ref stocks
+endpoints:
+  - name: stocks
+    path: /stocks
+    table_name: stocks
+    index:
+      primary_key:
+        - id
+  - id: null
+    name: stocks_meta
+    path: /stocks-meta
+    table_name: stocks_meta
+    index:
+      primary_key:
+        - symbol
