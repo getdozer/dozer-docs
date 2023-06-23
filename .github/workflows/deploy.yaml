@@ -1,0 +1,55 @@
+name: Deploy S3 CI
+on:
+  push:
+    branches: [main, deploy]
+
+concurrency:
+  group: main
+  cancel-in-progress: true
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.WEB_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.WEB_AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: c-hive/gha-yarn-cache@v2
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: build
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          bucket: ${{ secrets.WEB_BUCKET }}
+          bucket-region: ap-southeast-1
+          invalidation: /*
+          delete-removed: true
+          no-cache: true
+          private: false
+          filesToInclude: ".*/*,*/*,**"
+
+      # - name: Discord notification
+      #   env:
+      #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_GITHUB_WEBOOK }}
+      #     DISCORD_EMBEDS: '[{
+      #       "title": "Documentation updated",
+      #       "author": {
+      #         "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}",
+      #         "name": "${{ github.actor }}",
+      #         "url": "https://github.com/${{ github.actor }}"
+      #       },
+      #       "fields": [
+      #         { "name": "Github", "value": "https://github.com/getdozer/dozer-docs", "inline": false },
+      #         { "name": "Docs", "value": "https://getdozer.io/docs/dozer", "inline": false },
+      #       ],
+      #       "color": 990099
+      #     }]'
+      #   uses: Ilshidur/action-discord@master
