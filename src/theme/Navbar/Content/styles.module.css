@@ -1,0 +1,9 @@
+/*
+Hide color mode toggle in small viewports
+ */
+@media (max-width: 996px) {
+  .navbarSearch {
+    position: relative;
+    right: 0;
+  }
+}
