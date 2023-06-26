@@ -1,0 +1,8 @@
+.Link {
+  --ifm-link-hover-decoration: none;
+}
+
+.Link :global(.pagination-nav__label):before,
+.Link :global(.pagination-nav__label):after {
+  content: ''
+}
