@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import PaginationLeft from '@site/static/pagination/arrow-left.svg';
+import PaginationRight from '@site/static/pagination/arrow-right.svg';
 
 
 import styles from './styles.module.css';
@@ -20,9 +22,9 @@ export default function PaginatorNavLink(props) {
         'pagination-nav__sublabel',
         'inline-flex gap-1 justify-center items-center overflow-hidden text-sm font-medium transition rounded-full bg-zinc-100 py-1 px-3 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800/40 dark:text-zinc-400 dark:ring-1 dark:ring-inset dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300'
       )}>
-        {isNext ? null : <img src="/pagination/arrow-left.svg" className='w-3 h-3' />}
+        {isNext ? null : <PaginationLeft className='w-3 h-3' />}
         <span>{subLabel}</span>
-        {isNext ? <img src="/pagination/arrow-right.svg" className='w-3 h-3' /> : null}
+        {isNext ? <PaginationRight className='w-3 h-3' /> : null}
       </Link>}
       <Link to={permalink} className="pagination-nav__label text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300">{title}</Link>
     </div>
