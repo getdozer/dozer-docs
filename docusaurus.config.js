@@ -86,15 +86,15 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://getdozer.io/blog',
+            href: '/blog',
             label: 'Blog',
             position: 'right',
           },
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
-          },
+          // {
+          //   href: 'https://github.com/facebook/docusaurus',
+          //   label: 'GitHub',
+          //   position: 'right',
+          // },
         ],
       },
       docs: {
