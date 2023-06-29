@@ -23,6 +23,9 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Move to docs folder
+        run: mkdir -p build/docs && mv build/* build/docs/*
+
       - name: Deploy
         uses: reggionick/s3-deploy@v3
         with:
