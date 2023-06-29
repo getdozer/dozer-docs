@@ -24,7 +24,7 @@ jobs:
         run: yarn build
 
       - name: Move to docs folder
-        run: mkdir -p build/docs && mv build/* build/docs/*
+        run: mv build blogdocs && mkdir -p build && mv blogdocs build/docs
 
       - name: Deploy
         uses: reggionick/s3-deploy@v3
@@ -33,7 +33,7 @@ jobs:
           dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
           bucket: ${{ secrets.WEB_BUCKET }}
           bucket-region: ap-southeast-1
-          invalidation: /*
+          invalidation: /docs*
           delete-removed: true
           no-cache: true
           private: false
