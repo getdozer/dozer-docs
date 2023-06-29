@@ -9,6 +9,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
+
+  --ifm-font-size-base: 90%;
   --ifm-color-primary: #42679b;
   --ifm-color-primary-dark: #406293;
   --ifm-color-primary-darker: #416597;
@@ -20,6 +22,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-height: 3.5rem;
   --ifm-navbar-item-padding-horizontal: 0;
+  --ifm-menu-color-active: #af488b;
+  --ifm-global-shadow-lw: 0;
+  --ifm-global-shadow-md: 0;
+  --ifm-global-shadow-tl: 0;
+  --ifm-font-weight-bold: 600;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -33,6 +40,52 @@
   --ifm-color-primary-lightest: #c879ac;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-navbar-background-color: var(--ifm-background-color);
+}
+
+nav {
+  box-shadow: none !important;
+}
+
+a {
+  box-shadow: none !important;
+}
+
+aside {
+  background-color: rgba(0,0,0,0.05) !important;
+}
+
+[data-theme='dark'] aside {
+  background-color: rgba(255,255,255,0.05) !important;
+}
+
+.menu__link {
+  font-weight: 400;
+  border-radius: 1rem;
+  color: #707070;
+}
+
+[data-theme='dark'] .menu__link {
+  font-weight: 400;
+  border-radius: 1rem;
+  color: #b4b4b4;
+}
+
+.menu__list-item-collapsible {
+  border-radius: 1rem;
+}
+
+.menu__caret:before {
+  transform: scale(0.7);
+  opacity: 0.7;
+}
+
+.menu__list-item--collapsed .menu__link--sublist:after, .menu__list-item--collapsed .menu__caret:before {
+  transform: scale(0.7);
+  opacity: 0.7;
+}
+
+.navbar__link {
+  font-weight: 400;
 }
 
 
