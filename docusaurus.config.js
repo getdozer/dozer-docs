@@ -69,7 +69,7 @@ const config = {
       navbar: {
         logo: {
           alt: 'Dozer',
-          src: '/img/logo.svg',
+          src: '/img/logo-dark.svg',
           srcDark: '/img/logo-dark.svg',
           width: 121,
           height: 32,
