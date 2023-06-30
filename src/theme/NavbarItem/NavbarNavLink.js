@@ -37,6 +37,15 @@ export default function NavbarNavLink({
         ),
       };
   if (href) {
+    // seperate docs and blog
+    const isSubsite = href.startsWith('/docs') || href.startsWith('/blog');
+    if (isSubsite) {
+      return <a
+        href={href}
+        className={props.className}
+      >{label}</a>
+    }
+
     return (
       <Link
         href={prependBaseUrlToHref ? normalizedHref : href}
