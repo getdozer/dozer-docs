@@ -1,5 +1,6 @@
 .Link {
   --ifm-link-hover-decoration: none;
+  display: flex;
 }
 
 .Link :global(.pagination-nav__label):before,
