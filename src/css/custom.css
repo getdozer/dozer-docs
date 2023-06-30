@@ -11,13 +11,13 @@
 :root {
 
   --ifm-font-size-base: 90%;
-  --ifm-color-primary: #5865f2;
-  --ifm-color-primary-dark: #5865f2;
-  --ifm-color-primary-darker: #5865f2;
-  --ifm-color-primary-darkest: #5865f2;
-  --ifm-color-primary-light: #5865f2;
-  --ifm-color-primary-lighter: #5865f2;
-  --ifm-color-primary-lightest: #5865f2;
+  --ifm-color-primary: #5957B0;
+  --ifm-color-primary-dark: #5957B0;
+  --ifm-color-primary-darker: #5957B0;
+  --ifm-color-primary-darkest: #5957B0;
+  --ifm-color-primary-light: #5957B0;
+  --ifm-color-primary-lighter: #5957B0;
+  --ifm-color-primary-lightest: #5957B0;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-height: 3.5rem;
