@@ -34,7 +34,7 @@
   --ifm-table-border-color: rgba(0,0,0,0.05);
   --ifm-table-border-width: 1px;
   --ifm-toc-border-color: rgba(0,0,0,0.1);
-  --ifm-navbar-link-color: rgba(0,0,0,.6);
+  --ifm-navbar-link-color: rgb(0,0,0);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -53,9 +53,12 @@
   --ifm-table-border-width: 1px;
   --ifm-toc-border-color: rgba(255,255,255,.3);
   --ifm-toc-border-color: rgba(255,255,255,0.05);
-  --ifm-navbar-link-color: rgba(255,255,255,.6);
+  --ifm-navbar-link-color: rgb(255,255,255);
 }
 
+.navbar__item {
+  font-size: 15px;
+}
 
 aside {
   background-color: #474b7c;
