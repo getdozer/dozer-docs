@@ -105,26 +105,32 @@ const config = {
           height: 32,
         },
         items: [
-          // {
-          //   type: 'search',
-          //   position: 'left',
-          // },
+
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
-            position: 'right',
+            position: 'left',
             label: 'Docs',
           },
           {
             href: '/blog',
             label: 'Blog',
-            position: 'right',
+            position: 'left',
           },
           // {
-          //   href: 'https://github.com/facebook/docusaurus',
-          //   label: 'GitHub',
-          //   position: 'right',
+          //   type: 'search',
+          //   position: 'left',
           // },
+          {
+            href: 'https://github.com/getdozer/dozer',
+            label: 'GitHub',
+            position: 'right',
+          },
+          {
+            href: 'https://discord.gg/3eWXBgJaEQ',
+            label: 'Discord',
+            position: 'right',
+          },
         ],
       },
       docs: {

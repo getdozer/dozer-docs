@@ -1,5 +1,5 @@
 import React from 'react';
-import {useThemeConfig, ErrorCauseBoundary} from '@docusaurus/theme-common';
+import { useThemeConfig, ErrorCauseBoundary } from '@docusaurus/theme-common';
 import {
   splitNavbarItems,
   useNavbarMobileSidebar,
@@ -16,7 +16,7 @@ function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items;
 }
-function NavbarItems({items}) {
+function NavbarItems({ items }) {
   return (
     <div className='flex align-center gap-8'>
       {items.map((item, i) => (
@@ -27,7 +27,7 @@ function NavbarItems({items}) {
               `A theme navbar item failed to render.
 Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
 ${JSON.stringify(item, null, 2)}`,
-              {cause: error},
+              { cause: error },
             )
           }>
           <NavbarItem {...item} />
@@ -36,7 +36,7 @@ ${JSON.stringify(item, null, 2)}`,
     </div>
   );
 }
-function NavbarContentLayout({left, right}) {
+function NavbarContentLayout({ left, right }) {
   return (
     <div className="navbar__inner">
       <div className="navbar__items">{left}</div>
@@ -56,12 +56,13 @@ export default function NavbarContent() {
         <>
           {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           {mobileSidebar.shouldRender && <NavbarLogo />}
-          {!searchBarItem && (
+
+          <NavbarItems items={leftItems} />
+          {/* {!searchBarItem && (
             <NavbarSearch className="hidden lg:block">
               <SearchBar />
             </NavbarSearch>
-          )}
-          <NavbarItems items={leftItems} />
+          )} */}
         </>
       }
       right={
@@ -71,11 +72,11 @@ export default function NavbarContent() {
           <NavbarItems items={rightItems} />
           <div className="hidden lg:block lg:h-5 lg:w-px lg:bg-zinc-900/10 lg:dark:bg-white/15"></div>
           <NavbarColorModeToggle className={styles.colorModeToggle} />
-          {!searchBarItem && (
+          {/* {!searchBarItem && (
             <NavbarSearch className={clsx('lg:hidden', styles.navbarSearch)}>
               <SearchBar />
             </NavbarSearch>
-          )}
+          )} */}
         </div>
       }
     />
