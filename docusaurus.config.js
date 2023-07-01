@@ -109,13 +109,13 @@ const config = {
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
-            position: 'left',
+            position: 'right',
             label: 'Docs',
           },
           {
             href: '/blog',
             label: 'Blog',
-            position: 'left',
+            position: 'right',
           },
           // {
           //   type: 'search',
