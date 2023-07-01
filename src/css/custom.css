@@ -35,6 +35,7 @@
   --ifm-table-border-width: 1px;
   --ifm-toc-border-color: rgba(0,0,0,0.1);
   --ifm-navbar-link-color: rgb(0,0,0);
+  --ifm-navbar-background-color: rgba(255,255,255,.8);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -54,6 +55,17 @@
   --ifm-toc-border-color: rgba(255,255,255,.3);
   --ifm-toc-border-color: rgba(255,255,255,0.05);
   --ifm-navbar-link-color: rgb(255,255,255);
+  --ifm-navbar-background-color: rgba(27,27,29,.7);
+}
+
+.navbar--fixed-top {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  backdrop-filter: blur(3px);
+}
+
+[data-theme='dark'] .navbar--fixed-top {
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  backdrop-filter: blur(3px);
 }
 
 .navbar__item {
