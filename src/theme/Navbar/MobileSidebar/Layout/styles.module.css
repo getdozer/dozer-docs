@@ -2,4 +2,5 @@
   top: var(--ifm-navbar-height);
   box-shadow: none;
   --ifm-navbar-sidebar-width: 24rem;
+  height: calc(100vh - var(--ifm-navbar-height));
 }
