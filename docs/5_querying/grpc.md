@@ -1,6 +1,7 @@
 ---
 id: grpc
 slug: /querying/grpc
+sidebar_custom_props: {icon: '/docs/img/favicon.ico'}
 ---
 # Using gRPC APIs
 
