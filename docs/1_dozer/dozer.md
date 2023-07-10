@@ -53,3 +53,20 @@ This is where Dozer steps in, aiming to dramatically simplify this process. Doze
 5. **Scalability and High Availability**: Designed to handle high-volume operations, Dozer provides scalability and high availability. This ensures the robustness of your application, even under heavy loads.
 
 8. **Security and Authorization**: Dozer is designed with robust security measures in place, providing secure data access, and also includes features for managing access and authorization to ensure that only authorized users can access specific data.
+
+## Why Dozer Cloud ?
+Dozer Cloud is out fully-managed solution for real-time data application development. Leveraging the power and scalability of cloud services, it simplifies the process and boosts productivity. With features like enhanced connectivity, automated deployments, and improved observability, Dozer Cloud is an end-to-end solution that mitigates common development challenges. Here's a look at the key capabilities of Dozer Cloud:
+
+1. **Dynamic Scalability**: Dozer Cloud service automatically scales up and down according to load variations, smoothly accommodating a range of data processing needs.
+
+2. **Geographically Distributed Data and APIs**: Leveraging the global infrastructure of cloud providers, Dozer Cloud distributes data and APIs closer to end users for reduced latency and improved user experiences.
+
+5. **Automated API Versioning and Blue-Green Deployments**: Dozer Cloud incorporates automated API versioning and blue-green deployment strategies. This means that your team can seamlessly roll out updates, minimize downtime during deployments, and quickly roll back if necessary.
+
+6. **Enhanced Security and Compliance**: With advanced cloud security measures in place, Dozer Cloud offers enhanced access control and compliance with various regulatory standards.
+
+7. **Extended Connectivity**: Dozer Cloud provides additional connectors to enterprise databases like Oracle, broadening Dozer's data ingestion capabilities.
+
+8. **Enhanced Observability and Monitoring Integration**: Dozer Cloud offers improved observability features and easily integrates with monitoring tools like Prometheus, offering insights into system health and performance metrics.
+
+11. **Automated Data Recovery**: Leveraging cloud capabilities, Dozer provides automated backups and a robust disaster recovery plan to ensure data application resilience.
