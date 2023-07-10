@@ -69,7 +69,7 @@ More complex tests require connection a real database. Such test cases are expec
 * Connection configuration (with placeholders)
 * It should be possible to run test cases without any manual modification to the database.
 
-[Short description of how to run existing tests.](src/tests/README.md)
+[Short description of how to run existing tests.](https://github.com/getdozer/dozer/blob/main/dozer-ingestion/src/tests/README.md)
 
 ## E2E tests
 
