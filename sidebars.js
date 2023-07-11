@@ -18,30 +18,32 @@ const sidebars = {
 
   // But you can create a sidebar manually
   tutorialSidebar: [
-    {
-      type: 'category',
-      label: 'Introduction',
-      link: {
-        type: 'doc', 
-        id: 'dozer/dozer',
-      },
-      items: [
-        {
-          type: 'html',
-          value: 'DOZER CLOUD',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-        },
-        'dozer/architecture',
-        {
-          type: 'html',
-          value: 'DOZER CORE',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-        },
-        'dozer/comparision',
-      ],
-    },
+    'dozer',
+    'architecture',
+    // {
+    //   type: 'category',
+    //   label: 'Introduction',
+    //   link: {
+    //     type: 'doc', 
+    //     id: 'dozer/dozer',
+    //   },
+    //   items: [
+    //     {
+    //       type: 'html',
+    //       value: 'DOZER CLOUD',
+    //       defaultStyle: false,
+    //       className: 'sidebar-item-group',
+    //     },
+    //     'dozer/architecture',
+    //     {
+    //       type: 'html',
+    //       value: 'DOZER CORE',
+    //       defaultStyle: false,
+    //       className: 'sidebar-item-group',
+    //     },
+    //     'dozer/comparision',
+    //   ],
+    // },
     'installation',
     'getting_started',
     {

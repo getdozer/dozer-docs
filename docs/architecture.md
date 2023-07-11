@@ -1,8 +1,9 @@
----
-sidebar_position: 2
----
 
 # Architecture
+
+The architectural design of Dozer utilizes three distinct types of nodes: Ingestor, Processor, and Store/API. These nodes work in harmony, communicating with each other through gRPC to perform their respective functions seamlessly. In a typical production deployment, each of these nodes operates as an independent Docker image, making it easy to scale, manage, and deploy.
+
+However, for development purposes and ease of use, it's possible to run multiple types of nodes as separate threads within the same process. This flexibility in its architectural design further enhances Dozer's adaptability, making it a robust and reliable solution for building and maintaining real-time data applications. 
 
 ## Node Types
 Dozer's architecture is designed to efficiently process and deliver data through three types of nodes: Ingestor nodes, Processor nodes, and Store/API nodes. 
@@ -13,11 +14,11 @@ Dozer's architecture is designed to efficiently process and deliver data through
 
 **Store/API Nodes**: Once data is processed, it's transferred to the Store nodes. These nodes implement a data store using LMDB (Lightning Memory-Mapped Database), an ultra-fast, ultra-compact key-value embedded data store. The stored data is automatically indexed to expedite lookup performance and is accessible through gRPC and REST APIs. The definitions of the exposed data are available through OpenAPI or Protocol Buffers definitions.
 
-![Dozer Architecture](./arch.svg)
+![Dozer Architecture](./architecture/arch.svg)
 
 ## Data Flows
 
-![Dozer Architecture](./images/e2e.svg)
+![Dozer Architecture](./architecture/e2e.svg)
 
 ### Ingestor Nodes
 Ingestor nodes form the initial data pipeline by connecting to various data sources and streaming data into the system. Each Ingestor node maintains an in-memory queue of all incoming messages, allowing for high-speed data processing. However, this queue has a size limit to prevent memory overflow. 
@@ -35,7 +36,7 @@ In addition to data queue management, Processor nodes maintain a state for data 
 
 Each Processor node hosts numerous micro-nodes, each responsible for executing individual operations. For instance, if a query involves joining several data sources, filtering, and aggregations, each operation is assigned to an individual micro-node. These micro-nodes each run in their own thread, with data passed from one micro-node to the next in a pipeline fashion. This approach maximizes efficiency when running on multi-core processors, ensuring fast and reliable data processing.
 
-![Dozer Architecture](./images/proc_node_start.svg)
+![Dozer Architecture](./architecture/proc_node_start.svg)
 
 When a new Processor node is instantiated in Dozer, several key steps occur to initialize it and prepare it for operation:
 
@@ -46,3 +47,26 @@ When a new Processor node is instantiated in Dozer, several key steps occur to i
 3. **Data Access from Upstream Nodes**: In response to the request from the Processor node, the upstream nodes provide both the location of offloaded data stored in cloud storage, as well as streaming their in-memory data to the downstream node. This process ensures the Processor node receives all necessary data for processing.
 
 4. **Data Processing**: Upon receiving the data, the Processor node combines the offloaded data with the live data it receives. It starts processing this consolidated data set, generating a new data stream. This newly created data stream is partially kept in memory and partially offloaded to cloud storage, maintaining a balance for efficient resource usage.
+
+
+### Store/API Nodes
+
+The Store/API nodes are the backbone of Dozer's data accessibility and storage mechanism. They connect to upstream nodes, be they Ingestion or Processor nodes, in a similar manner as previously described for Processor nodes. 
+
+Upon establishing this connection, the Store/API nodes receive a flow of data which they then store using an embedded LMDB (Lightning Memory-Mapped Database) system. LMDB has been selected for its memory-efficient and high-performance attributes which align perfectly with Dozer's ethos of efficient and effective data management.
+
+To facilitate rapid and efficient data access, all stored data in the Store/API nodes is automatically indexed. This streamlined indexing process drastically improves data retrieval times, which is especially beneficial when dealing with vast volumes of data.
+
+Beyond data storage and retrieval, Store/API nodes also expose APIs in both gRPC and REST formats. This dual-API exposure creates an accessible and flexible interface for data querying and manipulation by users or other downstream systems.
+
+The querying capabilities of the Store/API nodes extend beyond simple primary key lookup, supporting secondary key lookups, full-text search, filtering, and pagination.
+
+Lastly, to ensure durability and data safety, the LMDB database used by the Store/API nodes is periodically snapshotted to cloud storage. To bolster scalability and elasticity, the architecture of Dozer allows for the dynamic scaling of Store/API nodes, much like stateless API servers in a microservice-oriented architecture. 
+
+![Dozer Architecture](./architecture/store_node_start.svg)
+
+When a new Store/API node is initiated, it commences its operation cycle with a "hydration" phase. In this phase, it is populated with the most recent snapshot of the data from cloud storage. This snapshot serves as a baseline data set for the new node to start operating.
+
+Following the hydration phase, the new Store/API node catches up to the current data stream by connecting to its upstream node, which could be either a Processor or Ingestor node. The upstream node starts streaming the in-memory data to the newly initiated node, effectively bringing it up to speed with the latest data changes.
+
+This dynamic scaling functionality offers a significant advantage when dealing with fluctuating workloads or when swift system expansion is required. It ensures that the Dozer system can adapt to the demands of the data environment, providing consistent performance even under changing conditions.

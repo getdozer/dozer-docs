@@ -1,9 +1,3 @@
----
-sidebar_position: 1
-slug: /dozer
-title: Introduction
-hide_table_of_contents: false
----
 
 # Introduction
 
@@ -15,7 +9,7 @@ Additionally, Dozer includes a low-latency datastore where transformed data is s
 
 Drawing similarities with a Content Delivery Network (CDN), Dozer aims to bring data and APIs closer to the end user. This drastically reduces latency, optimizes performance, and enables the capacity to handle high-volume data operations efficiently. Furthermore, Dozer's distributed architecture ensures scalability and high availability.
 
-![Dozer Architecture](./arch_summary.svg)
+![Dozer Architecture](./dozer/arch_summary.svg)
 
 ## Why Dozer ?
 As teams embark on the journey of implementing real-time data applications, they invariably come across a host of challenges that can make the task seem daunting:
@@ -32,7 +26,7 @@ As teams embark on the journey of implementing real-time data applications, they
 
 To address all the above issues, teams often find themselves stitching together multiple technologies and a significant amount of custom code. This could involve integrating diverse systems like Kafka for real-time data streaming, Redis for low-latency data access and caching, and Spark or Flink for processing and analyzing streaming data. Below is a typical setup:
 
-![Complex Tools Setup](./tools.svg)
+![Complex Tools Setup](./dozer/tools.svg)
 
 The complexity of such a setup can become overwhelming. Ensuring that these different technologies communicate effectively, maintaining them, and handling potential failure points requires extensive effort and expertise.
 
