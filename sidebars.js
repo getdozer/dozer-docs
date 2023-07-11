@@ -20,6 +20,35 @@ const sidebars = {
   tutorialSidebar: [
     'dozer',
     'architecture',
+    {
+      type: 'category',
+      label: 'Getting Started',
+      link: {
+        type: 'generated-index', 
+        slug: '/getting_started',
+      },
+      items: [
+        {
+          type: 'html',
+          value: 'DOZER CORE',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+        },
+        'getting_started/core/installation',
+        'getting_started/core/source',
+        'getting_started/core/query',
+        'getting_started/core/transform',
+        'getting_started/core/learn',
+        {
+          type: 'html',
+          value: 'DOZER CLOUD',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+        },
+        'getting_started/cloud/installation',
+      
+      ]
+    },
     // {
     //   type: 'category',
     //   label: 'Introduction',
@@ -44,58 +73,58 @@ const sidebars = {
     //     'dozer/comparision',
     //   ],
     // },
-    'installation',
-    'getting_started',
-    {
-      type: 'category',
-      label: 'Configuration',
-      link: {
-        type: 'doc',
-        id: 'configuration/overview', 
-      },
-      items: [
-        'configuration/connectors',
-        'configuration/endpoints',
-        'configuration/security',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Queries',
-      link: {
-        type: 'generated-index',
-        slug: '/querying',
-      },
-      items: [
-        'querying/grpc',
-        'querying/rest',
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Dozer SQL',
-      link: {
-        type: 'doc',
-        id: 'sql/introduction',
-      },
-      items: [
-        'sql/functions_and_operators',
-        'sql/data_types',
-      ]
-    },
-    'data_types',
-    {
-      type: 'category',
-      label: 'Contributing',
-      link: {
-        type: 'doc',
-        id: 'contributing/overview', 
-      },
-      items: [
-        'contributing/settingup',
-        'contributing/connector',
-      ],
-    },
+    // 'installation',
+    // 'getting_started',
+    // {
+    //   type: 'category',
+    //   label: 'Configuration',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'configuration/overview', 
+    //   },
+    //   items: [
+    //     'configuration/connectors',
+    //     'configuration/endpoints',
+    //     'configuration/security',
+    //   ],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Queries',
+    //   link: {
+    //     type: 'generated-index',
+    //     slug: '/querying',
+    //   },
+    //   items: [
+    //     'querying/grpc',
+    //     'querying/rest',
+    //   ]
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Dozer SQL',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'sql/introduction',
+    //   },
+    //   items: [
+    //     'sql/functions_and_operators',
+    //     'sql/data_types',
+    //   ]
+    // },
+    // 'data_types',
+    // {
+    //   type: 'category',
+    //   label: 'Contributing',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'contributing/overview', 
+    //   },
+    //   items: [
+    //     'contributing/settingup',
+    //     'contributing/connector',
+    //   ],
+    // },
   ],
 };
 
