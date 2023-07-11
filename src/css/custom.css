@@ -94,11 +94,11 @@ pre code {
 
 aside {
   background-color: #474b7c;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.75);
-  clip-path: inset(0px -10px 0px 0px);
-  border-right: 3px solid #af488b !important;
 }
 
+[data-theme='dark'] aside {
+  background-color: #474b7c55;
+}
 
 h1 {
   font-weight: 500;
@@ -164,11 +164,11 @@ a {
   font-weight: 400;
   border-radius: 1rem;
   font-size: 15px;
-  line-height: 1;
+  line-height: 1.3;
 }
 
 [data-theme='dark'] .menu__link {
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 1rem;
 }
 
@@ -184,7 +184,7 @@ a {
 
 .menu__list-item--collapsed .menu__link--sublist:after, .menu__list-item--collapsed .menu__caret:before {
   filter: invert(1);
-  transform: scale(0.7) rotateZ(90deg);
+  transform: scale(0.7) rotateZ(180deg);
   opacity: 0.8;
 }
 
@@ -242,9 +242,14 @@ a {
   border-top: 1px solid rgba(0,0,0,.06);
 }
 
-
 .sidebar-item-group {
-  color: grey; 
-  font-size: 14px; 
+  color: rgba(255,255,255,.4);
+  font-size: 12px;
   font-weight: 400;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.menu__list .menu__list {
+  margin-top: 0 !important;
 }
