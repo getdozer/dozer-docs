@@ -20,7 +20,7 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: 'category',
-      label: 'What\'s the dozer',
+      label: 'Introduction',
       link: {
         type: 'doc', 
         id: 'dozer/dozer',
@@ -28,14 +28,14 @@ const sidebars = {
       items: [
         {
           type: 'html',
-          value: 'CUBE CLOUD',
+          value: 'DOZER CLOUD',
           defaultStyle: false,
           className: 'sidebar-item-group',
         },
         'dozer/architecture',
         {
           type: 'html',
-          value: 'CUBE CORE',
+          value: 'DOZER CORE',
           defaultStyle: false,
           className: 'sidebar-item-group',
         },
