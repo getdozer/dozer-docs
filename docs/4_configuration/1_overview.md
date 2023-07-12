@@ -39,8 +39,7 @@ sql: |
 sources:
   - name: trips
     table_name: trips
-    connection: !Ref ny_taxi
-    columns:
+    connection: ny_taxi
 
 # APIs to automatically publish
 endpoints:
@@ -85,9 +84,7 @@ connections:
 sources:
   - name: trips  # The name of the source. This is used to distinguish between multiple sources.
     table_name: trips  # The name of the table in the source database.
-    connection: !Ref ny_taxi  # The connection to use for this source. This should match a name defined in the 'connections' section.
-    columns:  # The columns to use from the source table.
-    schema:
+    connection: ny_taxi  # The connection to use for this source. This should match a name defined in the 'connections' section.
     refresh_config: !RealTime  # The refresh configuration for this source.
 
 # Define the SQL transformations to apply to the source data.
@@ -106,7 +103,6 @@ sql: |
 # Define the API endpoints to expose.
 endpoints:
   - name: trips_cache  # The name of the endpoint. This will be used in generating a gRPC/REST service & APIs.
-    version:
     path: /trips  # The endpoint route/path for the REST endpoint.
     table_name: trips_cache  # The name of the table in the source database that this endpoint will expose.
     conflict_resolution: # Optional. The conflict resolution strategy for this endpoint.
@@ -123,7 +119,6 @@ endpoints:
               fields:
               - hvfhs_license_num
               - trip_miles
-       skip_default:  # Whether to skip the default index configuration for this endpoint.
 
 # Define the API server configuration.
 api:

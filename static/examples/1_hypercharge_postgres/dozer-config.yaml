@@ -20,13 +20,13 @@ sources:
       - close
       - adj_close
       - volume
-    connection: !Ref stocks
+    connection: stocks
   - name: stocks_meta
     table_name: stocks_meta
     columns:
       - symbol
       - security_name
-    connection: !Ref stocks
+    connection: stocks
 endpoints:
   - name: stocks
     path: /stocks
