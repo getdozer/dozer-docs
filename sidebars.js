@@ -33,6 +33,9 @@ const sidebars = {
           value: 'DOZER CORE',
           defaultStyle: false,
           className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-core',
+          },
         },
         'getting_started/core/installation',
         'getting_started/core/source',
@@ -45,6 +48,9 @@ const sidebars = {
           value: 'DOZER CLOUD',
           defaultStyle: false,
           className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-cloud',
+          },
         },
         'getting_started/cloud/installation',
       

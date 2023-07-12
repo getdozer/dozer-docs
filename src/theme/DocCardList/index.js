@@ -15,14 +15,27 @@ export default function DocCardList(props) {
     return <DocCardListForCurrentSidebarCategory {...props} />;
   }
   const filteredItems = filterDocCardListItems(items);
-  console.log('DocCardList', filteredItems);
   return (
     <section className={clsx('row', className)}>
-      {filteredItems.filter(item => ['category', 'link'].includes(item.type)).map((item, index) => (
-        <article key={index} className="col col--6 margin-bottom--lg">
-          <DocCard item={item} />
-        </article>
-      ))}
+      {filteredItems.map((item, index) => {
+        if (item.type === 'html') {
+          const id = item.customProps?.id;
+          return (
+            <h2 key={index} className="col col--12 margin-bottom--lg" style={{ 
+              '--ifm-h2-font-size': '2rem',
+              scrollMarginTop: 'calc(var(--ifm-navbar-height) + 0.5rem)'
+            }} id={id}>
+              <span dangerouslySetInnerHTML={{__html: item.value}} />
+              {id ? <a href={'#' + id} class="hash-link" aria-label="Direct link to Node Types" title="Direct link to Node Types">​</a> : null}
+            </h2>
+          )
+        }
+        return (
+          <article key={index} className="col col--6 margin-bottom--lg">
+            <DocCard item={item} />
+          </article>
+        );
+      })}
     </section>
   );
 }
