@@ -48,8 +48,28 @@ This is where Dozer steps in, aiming to dramatically simplify this process. Doze
 
 8. **Security and Authorization**: Dozer is designed with robust security measures in place, providing secure data access, and also includes features for managing access and authorization to ensure that only authorized users can access specific data.
 
+## How does it compare to ... ?
+
+### Redis
+Redis, an in-memory data structure store, is often used as a database, cache, and message broker, delivering exceptional speed for in-memory operations. However, when used as a cache, one of the biggest challenges is determining the appropriate TTL (Time to Live) for each record, which essentially determines the freshness of the data.
+
+In contrast, Dozer is an advanced data management tool designed specifically for real-time or near real-time data ingestion from diverse sources. It leverages Change Data Capture (CDC) mechanisms to ensure that data is always fresh, avoiding the complexities of managing TTLs associated with traditional caching solutions. Moreover, Dozer is more than just a data store - it also offers a streaming SQL engine for real-time data transformations and aggregation, and actively distributes data and APIs closer to the end user, similar to a Content Delivery Network (CDN).
+
+### Hasura
+Hasura is a powerful GraphQL engine that connects directly to your databases and microservices and auto-generates a production-ready GraphQL API. However, its performance is contingent on the underlying database it's querying. This can lead to slower responses and increased load on your source system, especially with complex queries or large datasets.
+
+Contrarily, Dozer operates differently by leveraging Change Data Capture (CDC) to continuously synchronize data from the source system to its own in-built store. This store is specifically optimized for high-speed data read operations. This not only ensures fresher data, but also significantly reduces the load on the source system, and provides consistent low-latency responses, regardless of query complexity.
+
+### Cube.js
+Cube.js is a robust analytics API layer, designed to facilitate creating aggregate data queries and supporting complex analytics tasks. Its strength lies in the ability to generate metrics and visualizations for business intelligence applications.
+
+### Materialize and RisingWave
+Materialize and RisingWave are streaning databases.
+
+Dozer, however, is engineered as a comprehensive data API backend, aiming to simplify the real-time data application building process. It ingests data continuously from different sources through CDC or period polling, processes it using its embedded streaming SQL engine, and then stores it in an optimized low-latency datastore. Beyond just maintaining updated views of data, Dozer offers a complete end-to-end solution, integrating real-time data transformation, storage, and distribution closer to the end user through its APIs.
+
 ## Why Dozer Cloud ?
-Dozer Cloud is out fully-managed solution for real-time data application development. Leveraging the power and scalability of cloud services, it simplifies the process and boosts productivity. With features like enhanced connectivity, automated deployments, and improved observability, Dozer Cloud is an end-to-end solution that mitigates common development challenges. Here's a look at the key capabilities of Dozer Cloud:
+Dozer Cloud is our fully-managed solution for real-time data application development. Leveraging the power and scalability of cloud services, it simplifies the process and boosts productivity. With features like enhanced connectivity, automated deployments, and improved observability, Dozer Cloud is an end-to-end solution that mitigates common development challenges. Here's a look at the key capabilities of Dozer Cloud:
 
 1. **Dynamic Scalability**: Dozer Cloud service automatically scales up and down according to load variations, smoothly accommodating a range of data processing needs.
 
