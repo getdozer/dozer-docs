@@ -25,7 +25,7 @@ dozer -c dozer-config.yaml
 ```
 :::note
 **Note:**
-You can see the progress of the execution from your device terminal or console.
+You are able to monitor the execution progress through the terminal or console on your device.
 :::
 
 ## Step 3: Query the APIs
