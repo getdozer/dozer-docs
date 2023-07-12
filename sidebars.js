@@ -38,6 +38,7 @@ const sidebars = {
         'getting_started/core/source',
         'getting_started/core/transform',
         'getting_started/core/query',
+        'getting_started/core/monitoring',
         'getting_started/core/learn',
         {
           type: 'html',
