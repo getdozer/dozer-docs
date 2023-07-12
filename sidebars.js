@@ -24,8 +24,8 @@ const sidebars = {
       type: 'category',
       label: 'Getting Started',
       link: {
-        type: 'generated-index', 
-        slug: '/getting_started',
+        type: 'doc', 
+        id: 'getting_started/introduction',
       },
       items: [
         {
@@ -36,8 +36,8 @@ const sidebars = {
         },
         'getting_started/core/installation',
         'getting_started/core/source',
-        'getting_started/core/query',
         'getting_started/core/transform',
+        'getting_started/core/query',
         'getting_started/core/learn',
         {
           type: 'html',
