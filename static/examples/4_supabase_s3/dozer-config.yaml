@@ -1,0 +1,47 @@
+app_name: aws-s3-sample
+connections:
+  - config : !S3Storage
+      details:
+        access_key_id: {{YOUR_ACCESS_KEY}}
+        secret_access_key: {{YOUR_SECRET_KEY}}
+        region: {{YOUR_REGION}}
+        bucket_name: {{YOUR_BUCKET_NAME}}
+      tables:
+        - !Table
+          name: yellow_trips
+          config: !Parquet
+            path: . # path to files or folder inside a bucket
+            extension: .parquet
+    name: s3
+
+  - config: !Postgres
+      user: {{PG_USER}}
+      password: {{PG_PASSWORD}}
+      host: {{PG_HOST}}
+      port: {{PG_PORT}}
+      database: {{PG_DATABASE}}
+    name: pg
+
+sql: |
+  SELECT t.tpep_pickup_datetime AS pickup_time, z.Zone AS zone
+  INTO pickup
+  FROM yellow_trips t 
+  JOIN zones z 
+    ON t.PULocationID = z.LocationID;
+
+sources:
+  - name: zones
+    table_name: zones
+    connection: pg
+
+  - name: yellow_trips
+    table_name: yellow_trips
+    connection: s3
+
+endpoints:
+  - name: pickup
+    path: /pickup
+    table_name: pickup
+
+telemetry:
+  metrics: !Prometheus # You can check the metrics at http://localhost:9000

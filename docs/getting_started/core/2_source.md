@@ -58,3 +58,6 @@ sources:
     connection: pg       # match with connections.name
 ```
 
+<br /><br />
+
+Want to jump into the end result? Here is the [link](https://github.com/getdozer/dozer/blob/main/examples/4_supabase_s3/dozer-config.yaml) for you to download the whole `dozer-config.yaml` for you to get started.
