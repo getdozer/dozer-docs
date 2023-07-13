@@ -2,17 +2,17 @@ version: '3.9'
 services:
   postgres:
     container_name: quick-start-postgres
-    image: public.ecr.aws/k7k6x1d4/dozer-samples-pg-stocks
-    command: postgres -c hba_file=/var/lib/stock-sample/pg_hba.conf
+    image: public.ecr.aws/getdozer/dozer:latest
+    command: postgres -c hba_file=${PATH_TO_HBA_FILE}
     environment:
-      POSTGRES_DB: stocks
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       ALLOW_IP_RANGE: 0.0.0.0/0
     ports:
       - '5434:5432'
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres  -h 0.0.0.0 -d stocks" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -h ${PG_HOST} -d ${PG_DB}" ]
       interval: 5s
       timeout: 5s
       retries: 5  
