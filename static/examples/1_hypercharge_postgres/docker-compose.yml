@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   postgres:
-    container_name: quick-start-postgres
+    container_name: postgres-dozer
     image: public.ecr.aws/getdozer/dozer:latest
     command: postgres -c hba_file=${PATH_TO_HBA_FILE}
     environment:
