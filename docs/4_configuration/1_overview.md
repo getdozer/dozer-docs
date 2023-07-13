@@ -1,5 +1,5 @@
 ---
-id: configuration
+# id: configuration
 slug: "/configuration"
 ---
 # Overview

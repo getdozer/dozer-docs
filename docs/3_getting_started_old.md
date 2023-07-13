@@ -24,7 +24,6 @@ To initiate the processing of data and populate the cache, follow the steps belo
 dozer -c dozer-config.yaml
 ```
 :::note
-**Note**
 You are able to monitor the execution progress through the terminal or console on your device.
 :::
 
@@ -32,7 +31,6 @@ You are able to monitor the execution progress through the terminal or console o
 Once data has been processed and populated in the cache, you can query the API by utilizing either the gRPC or REST API server. The following code can be used to query the APIs:
 
 :::note
-**Note:**
 Dozer enables both gRPC and REST API by default when loading the sample configuration data.
 :::
 
