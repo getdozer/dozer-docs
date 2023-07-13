@@ -24,6 +24,7 @@ To initiate the processing of data and populate the cache, follow the steps belo
 dozer -c dozer-config.yaml
 ```
 :::note
+**Note**
 You are able to monitor the execution progress through the terminal or console on your device.
 :::
 
