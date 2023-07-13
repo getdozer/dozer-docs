@@ -1,4 +1,8 @@
-# Installation
+---
+description: Installation guide for Ubuntu, MacOS and Windows
+---
+
+# Dozer Core Installation
 
 ## Ubuntu (20.04) and above
 
