@@ -1,25 +1,29 @@
 # Adding Transformations
 
-To further aggregate on trips data with zone lookup, you can utilize real-time sql transformation as part of your `dozer-config.yaml`.
+We now want to join the two datasets and perform an aggregations to determine the average fare of trips between zones. For this we will add a `sql` section to the `dozer-config.yaml` that looks like this:
 
 ```yaml
 sql: |
-  SELECT t.tpep_pickup_datetime AS pickup_time, z.Zone AS zone
-  INTO pickup
-  FROM yellow_trips t 
-  JOIN zones z 
-    ON t.PULocationID = z.LocationID;
+    SELECT 
+      PULocationID, DOLocationID, 
+      pu_zones.Zone as PULocationName, 
+      do_zones.Zone as DOLocationName, 
+      AVG(fare_amount) as avg_amount
+    INTO avg_fares
+    FROM trips
+    INNER JOIN zones pu_zones ON trips.PULocationID = pu_zones.LocationID
+    INNER JOIN zones do_zones ON trips.DOLocationID = do_zones.LocationID
+    GROUP BY PULocationID, DOLocationID;
 ```
-
-`SELECT` statement with `JOIN` ON zone lookup to transform your raw data and export that result using `INTO` clause. Once this is done, you can use that `INTO` temporary view in your endpoints directly.
+To expose the result of this query as an API we will also need to add an additional endpoint:
 
 ```yaml
 endpoints:
-  - name: pickup
-    path: /pickup
-    table_name: pickup  # match with sql INTO clause
+
+  ...
+
+  - name: avg_fares
+    path: /avg_fares
+    table_name: avg_fares
 ```
 
-<br /><br />
-
-Want to jump into the end result? Here is the [link](https://github.com/getdozer/dozer/blob/main/examples/4_supabase_s3/dozer-config.yaml) for you to download the whole `dozer-config.yaml` for you to get started.

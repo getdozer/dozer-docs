@@ -79,7 +79,7 @@ We will now be adding a second connection to a PostgreSQL database. For simplici
 
 Head over to [Supabase](htpps://www.supabase.com) and create a new project. Create a new table named `zones` and import the data from [this CSV file](https://d37ci6vzurychx.cloudfront.net/misc/taxi+_zone_lookup.csv). To do that, click on the button **Import data via spreadsheet** when creating a  new table in Supabase. Upload the CSV file and select `LocationID` as primary key.
 
-Once created, head over to your project settings in Supabase, click on *Database* and take note of the *Connection Info* details. These will be used in the Dozer configuration to connect to this database instance.
+Once created, head over to your project settings in Supabase, click on **Database** and take note of the **Connection Info** details. These will be used in the Dozer configuration to connect to this database instance.
 
 Now edit your `dozer-config.yaml` and add a new PostgreSQL connection, a new source and a new endpoint. The new `dozer-config.yaml` file should look like this:
 
