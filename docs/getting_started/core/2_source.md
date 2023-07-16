@@ -6,11 +6,6 @@ We will be working with two distinct datasets from the [NY taxi dataset](https:/
 
 Create a new `dozer-config.yaml` file and a new empty directory `data/trips` that we will be using as a base location for all trips data.
 
-```bash
-touch dozer-config.yaml
-mkdir -p data/trips
-```
-
 Open the `dozer-config.yaml` and add the following configuration section:
 
 ```yaml
@@ -31,8 +26,7 @@ connections:
 sources:
   - name: trips
     table_name: trips
-    connection: !Ref local_storage
-    columns:
+    connection: local_storage
 
 endpoints:
   - name: trips
@@ -43,7 +37,7 @@ endpoints:
 Now download some sample trip data and copy it to the `data/trips` directory:
 
 ```bash 
-curl -o data/trips/yellow_tripdata_2023-01.parquet https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
+curl --create-dirs -o data/trips/yellow_tripdata_2023-01.parquet https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
 ```
 
 Finally start `dozer` with the command:
@@ -109,13 +103,11 @@ connections:
 sources:
   - name: trips
     table_name: trips
-    connection: !Ref local_storage
-    columns:
+    connection: local_storage
 
   - name: zones
     table_name: zones
-    connection: !Ref pg
-    columns:
+    connection: pg
 
 endpoints:
   - name: trips
@@ -127,5 +119,14 @@ endpoints:
     table_name: zones
 
 ```
+
+If you do not wish to setup your own Supabase instance, we have created a test acoount that can be used for testing. Here are the connection parameters:
+
+| Parameter  | Value  |
+| :------------ |:---------------| 
+| `user`     | `postgres` | 
+| `password`      | `$no_1_enter$`        | 
+| `host` | `db.fawvjxbsdfxeavxetmmx.supabase.co`        | 
+| `port` | `5432`       |   
 
 Now you can restart Dozer. You will notice that a new collection called `zones` will be available. In the next section we will be adding SQL transformations to our data sources.

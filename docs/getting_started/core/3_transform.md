@@ -19,9 +19,6 @@ To expose the result of this query as an API we will also need to add an additio
 
 ```yaml
 endpoints:
-
-  ...
-
   - name: avg_fares
     path: /avg_fares
     table_name: avg_fares
