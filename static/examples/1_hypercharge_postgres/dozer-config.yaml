@@ -1,4 +1,4 @@
-app_name: 1-hypercharge-postgres-sample
+app_name: postgres-sample
 connections:
   - config: !Postgres
       user: postgres

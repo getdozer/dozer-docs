@@ -1,0 +1,26 @@
+# Adding Transformations
+
+We now want to join the two datasets and perform an aggregations to determine the average fare of trips between zones. For this we will add a `sql` section to the `dozer-config.yaml` that looks like this:
+
+```yaml
+sql: |
+    SELECT 
+      PULocationID, DOLocationID, 
+      pu_zones.Zone as PULocationName, 
+      do_zones.Zone as DOLocationName, 
+      AVG(fare_amount) as avg_amount
+    INTO avg_fares
+    FROM trips
+    INNER JOIN zones pu_zones ON trips.PULocationID = pu_zones.LocationID
+    INNER JOIN zones do_zones ON trips.DOLocationID = do_zones.LocationID
+    GROUP BY PULocationID, DOLocationID;
+```
+To expose the result of this query as an API we will also need to add an additional endpoint:
+
+```yaml
+endpoints:
+  - name: avg_fares
+    path: /avg_fares
+    table_name: avg_fares
+```
+

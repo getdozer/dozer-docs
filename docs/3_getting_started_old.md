@@ -1,38 +1,28 @@
 ---
 hide_table_of_contents: true
 ---
-import flow from '/docs/flow.png';
-
 # Getting Started
-A quick start guide on how to get yourself started quickly with Dozer. The purpose of this documentation is to assist in quickly setting up Dozer, enabling you to understand and establish your API using the provided sample easily. It aims to streamline the process and facilitate a smooth introduction to Dozer's functionalities.
 
-<img src={flow} style={{width: '50%', display: 'block', marginLeft: 'auto', marginRight: 'auto'}} />
+**Download sample configuration and data**
 
-# Prerequisites
-Before using the dozer for the first time, please see the installation guide [here](2_installation.md) for more details on installing dozer on different platforms.
+Create a new empty directory and run the commands below. This will download a [sample configuration file](https://github.com/getdozer/dozer-samples/blob/main/local-storage/dozer-config.yaml) and a sample [NY Taxi Dataset file](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
 
-## Step 1: Clone the Sample Configuration and Data Repository
-To clone the dozer samples repository, and follow the steps below:
-1. Head over to the dozer sample repository [here](https://github.com/getdozer/dozer-samples/tree/main).
-2. Select the sample that you want to run on your device by clicking on the connectors folder. In this example, we choose the local-storage connectors.
-3. Download a sample [NY Taxi Dataset file](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+```bash
+curl -o dozer-config.yaml https://raw.githubusercontent.com/getdozer/dozer-samples/main/connectors/local-storage/dozer-config.yaml
+curl --create-dirs -o data/trips/fhvhv_tripdata_2022-01.parquet https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2022-01.parquet
+```
 
-## Step 2: Run Dozer Binary
-To initiate the processing of data and populate the cache, follow the steps below by running the provided code after downloading the sample configuration and dataset:
+**Run Dozer binary**
 
 ```bash
 dozer -c dozer-config.yaml
 ```
-:::note
-You are able to monitor the execution progress through the terminal or console on your device.
-:::
 
-## Step 3: Query the APIs
-Once data has been processed and populated in the cache, you can query the API by utilizing either the gRPC or REST API server. The following code can be used to query the APIs:
+Dozer will start processing the data and populating the cache. You can see a progress of the execution from the console.
 
-:::note
-Dozer enables both gRPC and REST API by default when loading the sample configuration data.
-:::
+**Query the APIs**
+
+When some data is loaded, you can query the cache using gRPC or REST
 
 ```bash
 # gRPC
@@ -42,5 +32,10 @@ grpcurl -d '{"query": "{\"$limit\": 1}"}' -plaintext localhost:50051 dozer.gener
 curl -X POST  http://localhost:8080/trips/query --header 'Content-Type: application/json' --data-raw '{"$limit":3}'
 ```
 
-### Step 3.1: Query the APIs using Postman
-Once the data has been loaded and cached, you can alternatively interact with the generated APIs using both the gRPC and HTTP server using [Postman](https://www.postman.com/). This allows you to seamlessly make queries and perform operations on the APIs using the [Postman](https://www.postman.com/) platform.
+Alternatively, you can use [Postman](https://www.postman.com/) to discover gRPC endpoints through gRPC reflection
+
+![postman query](postman.png)
+
+### More Samples
+
+Check out Dozer's [samples repository](https://github.com/getdozer/dozer-samples) for more comprehensive examples and use case scenarios. 
