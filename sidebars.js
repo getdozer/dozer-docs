@@ -24,7 +24,7 @@ const sidebars = {
       type: 'category',
       label: 'Getting Started',
       link: {
-        type: 'generated-index',
+        type: 'generated-index', 
         slug: '/getting_started',
       },
       items: [
@@ -33,24 +33,17 @@ const sidebars = {
           value: 'DOZER CORE',
           defaultStyle: false,
           className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-core',
-          },
         },
         'getting_started/core/installation',
         'getting_started/core/source',
-        'getting_started/core/transform',
         'getting_started/core/query',
-        'getting_started/core/monitoring',
+        'getting_started/core/transform',
         'getting_started/core/learn',
         {
           type: 'html',
           value: 'DOZER CLOUD',
           defaultStyle: false,
           className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-cloud',
-          },
         },
         'getting_started/cloud/installation',
       

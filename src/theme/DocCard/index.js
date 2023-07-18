@@ -73,6 +73,7 @@ function CardLink({item}) {
   );
 }
 export default function DocCard({item}) {
+  console.log('DocCard', item)
   switch (item.type) {
     case 'link':
       return <CardLink item={item} />;

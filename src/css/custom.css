@@ -166,11 +166,10 @@ a {
   border-radius: 1rem;
   font-size: 15px;
   line-height: 1.3;
-  font-size: 16px;
 }
 
 [data-theme='dark'] .menu__link {
-  font-weight: 300;
+  font-weight: 400;
   border-radius: 1rem;
 }
 
@@ -247,8 +246,8 @@ a {
 .sidebar-item-group {
   color: rgba(255,255,255,.4);
   font-size: 12px;
-  font-weight: 600;
-  margin-top: 16px;
+  font-weight: 400;
+  margin-top: 6px;
   margin-bottom: 6px;
 }
 
