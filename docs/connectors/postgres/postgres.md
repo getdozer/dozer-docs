@@ -2,10 +2,10 @@
 description: Integration guide for Postgres Connector
 ---
 
-# Postgres Connector Integration
+# Connecting to Postgres 
 Dozer's Postgres connector integration is a robust feature that seamlessly connects with Postgres databases using Change Data Capture (CDC) technology. It incorporates a Real-Time SQL Engine to connect to various data sources, transform data, and store it in an embedded cache powered by LMDB. The integration automates the creation and offers instant REST and gRPC APIs generation.
 
-At Dozer, the focus is on streamlining development processes and minimizing the integration of multiple tools. The Postgres connector integration eliminates the need for complex toolsets, offering comprehensive functionality from data sources to API generation within a single product.
+Dozer's Postgres Connector aims to simplify development processes and reduce the reliance on multiple tools. By connecting Dozer's Postgres Connector, the necessity for complicated toolsets is eliminated, as it provides all-inclusive functionality from data sources to API generation in one cohesive product.
 
 # How to Connect Postgres with Dozer
 
@@ -13,16 +13,20 @@ At Dozer, the focus is on streamlining development processes and minimizing the 
 
 Before connecting Postgres with Dozer, ensure you have already done the following:
 
-- Postgres **v10** or **latest**.
-- **Logical** WAL Level
-- Postgres database should have at least **one available replication slot**.
-- Postgres database user should have replication permission - **userepl**.
+- Postgres version 10 or the most recent version.
+- Logical Write-Ahead Log (WAL) Replication is enabled.
+- At least one replication slot is available on your Postgres database.
+- The Postgres database user must have replication permissions, specifically the "userepl" permission.
 - [Install Dozer](https://getdozer.io/docs/installation).
 - [Install Docker](https://www.docker.com/).
 - Postgres Account Information for the authentication and database access:
-  - **Postgres Username**.
-  - **Postgres Password**.
-  - **Postgress Database**.
+
+  | Field                | Description                                                                                           |
+  |----------------------|-------------------------------------------------------------------------------------------------------|
+  | Postgres Username    | The unique identifier of a user account within the PostgreSQL database system.                      |
+  | Postgres Password    | A confidential string of characters associated with the Postgres username for security purposes.    |
+  | Postgres Database    | A collection of related data and schema objects within the PostgreSQL database management system.   |
+
 
 ## Integrate Postgres with Dozer
 

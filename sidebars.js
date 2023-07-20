@@ -95,56 +95,55 @@ const sidebars = {
     // },
     // 'installation',
     // 'getting_started',
-    // {
-    //   type: 'category',
-    //   label: 'Configuration',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'configuration/overview', 
-    //   },
-    //   items: [
-    //     'configuration/connectors',
-    //     'configuration/endpoints',
-    //     'configuration/security',
-    //   ],
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Queries',
-    //   link: {
-    //     type: 'generated-index',
-    //     slug: '/querying',
-    //   },
-    //   items: [
-    //     'querying/grpc',
-    //     'querying/rest',
-    //   ]
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Dozer SQL',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'sql/introduction',
-    //   },
-    //   items: [
-    //     'sql/functions_and_operators',
-    //     'sql/data_types',
-    //   ]
-    // },
-    // 'data_types',
-    // {
-    //   type: 'category',
-    //   label: 'Contributing',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'contributing/overview', 
-    //   },
-    //   items: [
-    //     'contributing/settingup',
-    //     'contributing/connector',
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Configuration',
+      link: {
+        type: 'doc',
+        id: 'configuration/overview', 
+      },
+      items: [
+        'configuration/endpoints',
+        'configuration/security',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Queries',
+      link: {
+        type: 'generated-index',
+        slug: '/querying',
+      },
+      items: [
+        'querying/grpc',
+        'querying/rest',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Dozer SQL',
+      link: {
+        type: 'doc',
+        id: 'sql/introduction',
+      },
+      items: [
+        'sql/functions_and_operators',
+        'sql/data_types',
+      ]
+    },
+    'data_types',
+    {
+      type: 'category',
+      label: 'Contributing',
+      link: {
+        type: 'doc',
+        id: 'contributing/overview', 
+      },
+      items: [
+        'contributing/settingup',
+        'contributing/connector',
+      ],
+    },
   ],
 };
 

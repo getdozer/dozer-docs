@@ -2,7 +2,7 @@
 description: Integration guide for Snowflake Connector
 ---
 
-# Snowflake Connector Integration
+# Connecting to Snowflake
 Dozer's Snowflake connector integration utilizes Snowflake's Table Streams for real-time data integration and synchronization. Using Table Streams, Dozer captures and processes data changes from Snowflake tables, ensuring instant updates without constant polling or manual synchronization. The captured changes are efficiently stored in an embedded cache powered by LMDB, enabling lightning-fast data access and query performance.
 
 Dozer's Snowflake connector integration simplifies data infrastructure by automating data synchronization, transformation, and API generation. With the automatic creation of seamless REST and gRPC API generation, developers can save time and effort while focusing on core application development.
@@ -15,12 +15,17 @@ Before connecting Snowflake with Dozer, ensure you have already done the followi
 - [Install Dozer](https://getdozer.io/docs/installation).
 - [Install Docker](https://www.docker.com/).
 - To connect Dozer with Snowflake, set up a Snowflake account and gather the following Snowflake parameters:
-  - [Snowflake Account URL](https://docs.snowflake.com/en/user-guide/admin-account-identifier): Your Snowflake account URL, which you can get in your Snowflake account section. This parameter will be used as SN_SERVER for integration.
-  - Snowflake Username: Your Snowflake account's username. This parameter will be used as SN_USER for integration.
-  - Snowflake Password: Your Snowflake account's password. This parameter will be used as SN_PASSWORD for integration.
-  - [Snowflake Database](https://docs.snowflake.com/en/user-guide/ui-snowsight-data-databases): Create a database within Snowflake, which will serve as your project database. This parameter will be used as SN_DATABASE for integration.
-  - [Snowflake Warehouse](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse): Create a warehouse within Snowflake for your project. This parameter will be used as SN_WAREHOUSE for integration.
-  - Snowflake Role: Your Snowflake account role. This parameter will be used as SN_ROLE for integration.
+
+  | Parameter             | Description                                                                                                          | Integration Variable  |
+  |-----------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------|
+  | Snowflake Account URL | Your Snowflake account URL, which you can get in your Snowflake account section.                                   | SN_SERVER             |
+  | Snowflake Username    | Your Snowflake account's username.                                                                                  | SN_USER               |
+  | Snowflake Password    | Your Snowflake account's password.                                                                                  | SN_PASSWORD           |
+  | [Snowflake Database](https://docs.snowflake.com/en/user-guide/ui-snowsight-data-databases)    | Create a database within Snowflake, which will serve as your project database.        | SN_DATABASE           |
+  | [Snowflake Warehouse](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse)   | Create a warehouse within Snowflake for your project. | SN_WAREHOUSE          |
+  | Snowflake Role        | Your Snowflake account role.                                                                                         | SN_ROLE               |
+
+
 
 ## Integrate Snowflake with Dozer
 
