@@ -3,9 +3,7 @@ description: Integration guide for Postgres Connector
 ---
 
 # Connecting to Postgres 
-Dozer's Postgres connector integration is a robust feature that seamlessly connects with Postgres databases using Change Data Capture (CDC) technology. It incorporates a Real-Time SQL Engine to connect to various data sources, transform data, and store it in an embedded cache powered by LMDB. The integration automates the creation and offers instant REST and gRPC APIs generation.
-
-Dozer's Postgres Connector aims to simplify development processes and reduce the reliance on multiple tools. By connecting Dozer's Postgres Connector, the necessity for complicated toolsets is eliminated, as it provides all-inclusive functionality from data sources to API generation in one cohesive product.
+Dozer's Postgres connector integration is a robust feature that seamlessly connects with Postgres databases using Change Data Capture (CDC) technology.
 
 # How to Connect Postgres with Dozer
 
@@ -21,11 +19,20 @@ Before connecting Postgres with Dozer, ensure you have already done the followin
 - [Install Docker](https://www.docker.com/).
 - Postgres Account Information for the authentication and database access:
 
-  | Field                | Description                                                                                           |
-  |----------------------|-------------------------------------------------------------------------------------------------------|
-  | Postgres Username    | The unique identifier of a user account within the PostgreSQL database system.                      |
-  | Postgres Password    | A confidential string of characters associated with the Postgres username for security purposes.    |
-  | Postgres Database    | A collection of related data and schema objects within the PostgreSQL database management system.   |
+  | Field              | Description                                                                                             | Parameters   |
+  |--------------------|---------------------------------------------------------------------------------------------------------|--------------|
+  | Postgres Username  | The unique identifier of a user account within the PostgreSQL database system.                         | `PG_USER`    |
+  | Postgres Password  | A confidential string of characters associated with the Postgres username for security purposes.       | `PG_PASSWORD`  |
+  | Postgres Database  | A collection of related data and schema objects within the PostgreSQL database management system.       | `PG_DB`        |
+
+  If you do not wish to setup your own postgres instance, we have created a sample acoount that can be used for testing. Here are the connection parameters:
+
+  | Parameter             | Value     |
+  |-----------------------|-----------|
+  | `POSTGRES_DB`           | `pagila`    |
+  | `POSTGRES_USER`         | `postgres`  |
+  | `POSTGRES_PASSWORD`     | `postgres`  |
+
 
 
 ## Integrate Postgres with Dozer
@@ -151,6 +158,6 @@ This will make the data accessible via REST or gRPC server.
 
 ### Step 6: Query the APIs
 
-You can query the APIs using Postman using the REST (HTTP) method or the gRPC method.
+You can query the APIs using Postman's REST (HTTP) method or the gRPC method.
 
 ![](image4.gif)

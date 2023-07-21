@@ -65,7 +65,7 @@ const sidebars = {
       items: [
         'connectors/postgres/postgres',
         'connectors/snowflake/snowflake',
-        'connectors/supabase'
+        'connectors/supabase/supabase'
       ]
     },
     // {
