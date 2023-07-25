@@ -3,6 +3,7 @@ sidebar_position: 2
 ---
 
 # Setting up local environment
+
 Dozer is fully built on Rust. You can install the following dependencies to set up locally.
 
 #### Build Dependencies
@@ -11,7 +12,9 @@ Dozer is fully built on Rust. You can install the following dependencies to set 
 - [`protoc`](https://github.com/protocolbuffers/protobuf/releases) latest release on your `PATH`
 - `sqlite3` (`sudo apt install libsqlite3-dev` on Ubuntu)
 - `openssl` (brew install pkg-config openssl on MacOS)
+- `libprotobuf-dev` (sudo apt install libprotobuf-dev on Ubuntu. Package is named protobuf-devel in Fedora)
 
+_Note: If you run across a file not found protoc error while building, that's probably due to the absence of libprotobuf-dev_.
 
 ### Running locally
 
@@ -23,7 +26,8 @@ cargo run --bin dozer -- -h
 cargo run --bin dozer
 ```
 
-Build 
+Build
+
 ```bash
 cargo build --release dozer
 ```
