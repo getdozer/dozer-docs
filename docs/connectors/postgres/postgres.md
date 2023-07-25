@@ -1,103 +1,10 @@
----
-description: Integration guide for Postgres Connector
----
+# PostgreSQL
+The Dozer PostgreSQL connector serves as an essential link for real-time data replication from a PostgreSQL database to Dozer. Upon its initial start, the connector begins by taking a snapshot of the existing data in specified tables. This process provides a foundation from which further data changes can be efficiently managed. After snapshotting, the connector taps into PostgreSQL's logical replication by connecting to a designated replication slot, monitoring for data changes in real time. Any changes occurring in the PostgreSQL database are detected and instantly sent to Dozer, ensuring a continuous stream of updated data. The specific tables to observe are customizable within the connector configuration, ensuring a targeted and resource-optimized data handling process.
 
-# Connecting to Postgres 
-Dozer's Postgres connector integration is a robust feature that seamlessly connects with Postgres databases using Change Data Capture (CDC) technology.
-
-# How to Connect Postgres with Dozer
-
-## Prerequisites
-
-Before connecting Postgres with Dozer, ensure you have already done the following:
-
-- Postgres version 10 or the most recent version.
-- Logical Write-Ahead Log (WAL) Replication is enabled.
-- At least one replication slot is available on your Postgres database.
-- The Postgres database user must have replication permissions, specifically the "userepl" permission.
-- [Install Dozer](https://getdozer.io/docs/installation).
-- [Install Docker](https://www.docker.com/).
-- Postgres Account Information for the authentication and database access:
-
-  | Field              | Description                                                                                             | Parameters   |
-  |--------------------|---------------------------------------------------------------------------------------------------------|--------------|
-  | Postgres Username  | The unique identifier of a user account within the PostgreSQL database system.                         | `PG_USER`    |
-  | Postgres Password  | A confidential string of characters associated with the Postgres username for security purposes.       | `PG_PASSWORD`  |
-  | Postgres Database  | A collection of related data and schema objects within the PostgreSQL database management system.       | `PG_DB`        |
-
-  If you do not wish to setup your own postgres instance, we have created a sample acoount that can be used for testing. Here are the connection parameters:
-
-  | Parameter             | Value     |
-  |-----------------------|-----------|
-  | `POSTGRES_DB`           | `pagila`    |
-  | `POSTGRES_USER`         | `postgres`  |
-  | `POSTGRES_PASSWORD`     | `postgres`  |
-
-
-
-## Integrate Postgres with Dozer
-
-![](image2.png)
-
-### Step 1: Download the Sample Dataset and Postgres Schema
-
-Before downloading the sample dataset:
-
-1. Create **a new empty file project** to store all the required files for the Postgres connectors.
-2. Download the **sample dataset and Postgres schema** for Pagila by running the following code:
-
-```bash
-mkdir -p data
-
-curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-data.sql --output ./data/pagila-data.sql
-curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-schema.sql --output ./data/pagila-schema.sql
-
-cat ./data/pagila-schema.sql > ./data/init.sql
-cat ./data/pagila-data.sql >> ./data/init.sql
-
-```
-
-### Step 2: Create a Docker Provision File for Postgres SQL
-
-To create a docker provision file, follow the steps below:
-
-1. On your Project folder, create a new file named ` **docker-compose.yml** `.
-2. Paste the following code on your **docker provision** file:
+## Configuration
+The following configuration block can be used in `dozer-config.yaml` to define a new PostgreSQL connection:
 
 ```yaml
-version: '3.8'
-services:
-  postgres:
-    container_name: dozer-pagila-postgres
-    image: debezium/postgres:13
-    volumes:
-      - ./pg_hba.conf:/var/lib/foo/pg_hba.conf
-      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
-    command: postgres -c hba_file=/var/lib/foo/pg_hba.conf
-    environment:
-      POSTGRES_DB: pagila
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      ALLOW_IP_RANGE: 0.0.0.0/0
-    ports:
-      - '5433:5432'
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d pagila" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-```
-
-### Step 3: Create a Dozer Configuration File
-
-To create a dozer configuration file, follow the steps below:
-
-1. On your Project folder, create a new file named ` **dozer-config.yaml** `.
-2. Paste the following code on your **dozer configuration** file:
-
-```yaml
-app_name: simple-pg-sample
 connections:
   - name: pagila_conn
     config: !Postgres
@@ -105,59 +12,24 @@ connections:
       password: postgres
       host: localhost
       port: 5433
-      database: pagila
-
-sources:
-  - name: actors
-    table_name: actor
-    connection: !Ref pagila_conn
-    columns:
-      - actor_id
-      - first_name
-  - name: films
-    table_name: film
-    connection: !Ref pagila_conn
-    columns:
-      - film_id
-      - title
-
-endpoints:
-  - name: actors
-    path: /actors
-    table_name: actors
-
-  - name: films
-    path: /films
-    table_name: films
-
+      database: film
 ```
 
-### Step 4: Run the Docker Command
+### Parameters
 
-After everything has been set up within your Postgres project folder, run the docker command below:
+| **Parameter Name** | **Type** | **Description** | 
+|--------------------|----------|-----------------|
+| `user` | String | The username required for authenticating the user's access to the PostgreSQL instance. |
+| `password` | String | The password corresponding to the above username, required for secure authentication to the PostgreSQL instance. |
+| `host` | String or IP address | The host address of the PostgreSQL instance. It could be an IP address or a valid hostname. |
+| `port` | Integer | The specific port on which the PostgreSQL service is running. |
+| `database` | String | The specific database within the PostgreSQL instance to which the connector needs to establish a connection. |
 
-```bash
-docker-compose up
-```
+## Additional Notes
 
-This will automatically process and store the processed data in the cache. The data is prepared and available for access.
+## Testing it out
 
-![](image1.gif)
+To test a PostgreSQL sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/postgres).
 
-### Step 5: Run the Dozer Command
 
-Run the sample database that has been processed by running the following command:
 
-```bash
-dozer
-```
-
-This will make the data accessible via REST or gRPC server.
-
-![](image3.gif)
-
-### Step 6: Query the APIs
-
-You can query the APIs using Postman's REST (HTTP) method or the gRPC method.
-
-![](image4.gif)
