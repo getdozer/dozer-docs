@@ -1,4 +1,9 @@
 # PostgreSQL
+
+
+![](postgre.png)
+
+
 The Dozer PostgreSQL connector serves as an essential link for real-time data replication from a PostgreSQL database to Dozer. Upon its initial start, the connector begins by taking a snapshot of the existing data in specified tables. This process provides a foundation from which further data changes can be efficiently managed. After snapshotting, the connector taps into PostgreSQL's logical replication by connecting to a designated replication slot, monitoring for data changes in real time. Any changes occurring in the PostgreSQL database are detected and instantly sent to Dozer, ensuring a continuous stream of updated data. The specific tables to observe are customizable within the connector configuration, ensuring a targeted and resource-optimized data handling process.
 
 ## Configuration
@@ -24,8 +29,6 @@ connections:
 | `host` | String or IP address | The host address of the PostgreSQL instance. It could be an IP address or a valid hostname. |
 | `port` | Integer | The specific port on which the PostgreSQL service is running. |
 | `database` | String | The specific database within the PostgreSQL instance to which the connector needs to establish a connection. |
-
-## Additional Notes
 
 ## Testing it out
 
