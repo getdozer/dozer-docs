@@ -12,9 +12,31 @@ Dozer is fully built on Rust. You can install the following dependencies to set 
 - [`protoc`](https://github.com/protocolbuffers/protobuf/releases) latest release on your `PATH`
 - `sqlite3` (`sudo apt install libsqlite3-dev` on Ubuntu)
 - `openssl` (brew install pkg-config openssl on MacOS)
-- `libprotobuf-dev` (sudo apt install libprotobuf-dev on Ubuntu. Package is named protobuf-devel in Fedora)
 
-_Note: If you run across a file not found protoc error while building, that's probably due to the absence of libprotobuf-dev_.
+#### Installing protoc with a package manager
+
+You can install protoc with your package manager or by using pre-built binaries. On Debian and Ubuntu based distros run
+
+```sh
+sudo apt install protobuf protobuf-compiler
+```
+
+to install protobuf-compiler which provides the `protoc` command.
+
+Similarly for Fedora, run
+
+```sh
+sudo dnf install protobuf protobuf-compiler
+```
+
+and for Arch based distros,
+
+```sh
+sudo pacman -S protobuf protobuf-compiler
+```
+
+**Note: If you encounter a File not found error, it's probably due to the absence of libprotobuf-dev,
+the package is named libprotobuf-dev on Ubuntu and protobuf-devel in Fedora.**
 
 ### Running locally
 
