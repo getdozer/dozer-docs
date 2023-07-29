@@ -2,7 +2,7 @@
 
 ![](snowflake.png)
 
-Dozer's Snowflake connector integration utilizes Snowflake's Table Streams for real-time data integration and synchronization. Using Table Streams, Dozer captures and processes data changes from Snowflake tables, ensuring instant updates without constant polling or manual synchronization.
+Dozer's Snowflake connector integration utilizes Snowflake's Table Streams for real-time data integration and synchronization. Dozer captures and processes data changes from Snowflake tables using Table Streams, ensuring instant updates without constant polling or manual synchronization.
 
 ## Configuration
 The following configuration block can be used in `dozer-config.yaml` to define a new Snowflake connection:
@@ -38,4 +38,4 @@ connections:
 
 ## Testing it out
 
-To test a Snowflake sample, clone the `dozer-samples` GitHub repo and follow the steps described here.
+To test a Snowflake sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/snowflake).

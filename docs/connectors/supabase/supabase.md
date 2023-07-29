@@ -2,7 +2,8 @@
 
 ![](supabase.png)
 
-The Dozer Supabase connector offers a robust connector that facilitates real-time data replication from a PostgreSQL database to Supabase. The connector begins with an initial data snapshot of selected tables, establishing a foundation for efficient data management. Leveraging PostgreSQL's logical replication, it continuously monitors for data changes, instantly sending updates to Supabase. The connector's customizable configuration allows users to choose specific tables for replication, optimizing resource usage.
+Dozer Supabase connector replicates data from Supabase, taking an initial snapshot of selected tables. It uses PostgreSQL's logical replication to monitor data changes continuously, sending updates to Dozer. Users can customize the configuration to optimize resource usage by selecting specific tables for replication.
+
 
 ## Configuration
 The following configuration block can be used in `dozer-config.yaml` to define a new Supabase connection:
@@ -29,4 +30,4 @@ connections:
 
 ## Testing it out
 
-To test a Supabase PostgreSQL sample, clone the `dozer-samples` GitHub repo and follow the steps described here.
+To test a Supabase PostgreSQL sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/supabase).
