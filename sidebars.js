@@ -41,6 +41,7 @@ const sidebars = {
         'getting_started/core/ingestion',
         'getting_started/core/transform',
         'getting_started/core/query',
+        'getting_started/core/propagation',
         'getting_started/core/monitoring',
         'getting_started/core/learn',
         {

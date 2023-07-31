@@ -1,7 +1,5 @@
 # Supabase
 
-![](supabase.png)
-
 Dozer Supabase connector replicates data from Supabase, taking an initial snapshot of selected tables. It uses PostgreSQL's logical replication to monitor data changes continuously, sending updates to Dozer. Users can customize the configuration to optimize resource usage by selecting specific tables for replication.
 
 

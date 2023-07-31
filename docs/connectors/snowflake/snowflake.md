@@ -1,7 +1,5 @@
 # Snowflake
 
-![](snowflake.png)
-
 Dozer's Snowflake connector integration utilizes Snowflake's Table Streams for real-time data integration and synchronization. Dozer captures and processes data changes from Snowflake tables using Table Streams, ensuring instant updates without constant polling or manual synchronization.
 
 ## Configuration
