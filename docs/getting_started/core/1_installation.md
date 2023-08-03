@@ -1,71 +1,35 @@
----
-description: Installation guide for Ubuntu, MacOS and Windows
----
+# Installation
 
-# Dozer Core Installation
-
-## Ubuntu (20.04) and above
-
-```bash
+### For the Ubuntu 20.04 and later
+Start by opening your terminal to create a new folder for the project, then run the command:
+```
 # amd64
 curl -sLO https://github.com/getdozer/dozer/releases/latest/download/dozer-linux-amd64.deb && sudo dpkg -i dozer-linux-amd64.deb
-```
-```bash
+
 # aarch
 curl -sLO https://github.com/getdozer/dozer/releases/latest/download/dozer-linux-aarch64.deb && sudo dpkg -i dozer-linux-aarch64.deb
 ```
-Dozer requires `protobuf-compiler`, installation instructions can be found in [additional steps](/docs/getting_started/core/installation/#additional-steps-for-protobuf-compiler-dependency).
 
+### For the MacOS Monterey 12 and later
 
-## MacOS Monterey (12) and above
+Type the following commands in terminal:
 
-```bash
-brew tap getdozer/dozer && brew install dozer
+```
+brew tap getdozer/dozer
+brew install dozer
 ```
 
-## Build from Docker Image
+### For the Windows users and other platforms
 
-### Dozer with Postgres Docker Image
+Before installing from source, ensure that you have Rust and Protocol Buffers installed. Don't forget to add Protocol Buffers to your system's path variable. This will ensure a smooth installation process for Dozer. 
 
-Download `docker-compose.yml` from this [link](https://github.com/getdozer/dozer/blob/main/examples/1_hypercharge_postgres/docker-compose.yml) and populate necessary environment variables.
+Type the followig command:
 
-```bash
-# brings up public.ecr.aws/getdozer/dozer:latest docker image
-docker-compose up
-```
+`cargo install --git https://github.com/getdozer/dozer dozer-cli --locked`
 
-### Dozer with Snowflake Docker Image
+## ✅ Check Dozer version
 
-Download `docker-compose.yml` from this [link](https://github.com/getdozer/dozer/blob/main/examples/3_snowflake_sample/docker-compose.yml) and sample `dozer-config.yaml` from [here](https://github.com/getdozer/dozer/blob/main/examples/3_snowflake_sample/dozer-config.yaml). Run following command to run dozer with snowflake. 
+In Linux, you can check the Dozer version and installation by running:
 
-```bash
-# brings up public.ecr.aws/getdozer/dozer-features:latest docker image
-docker-compose up
-```
+`dozer --version`
 
-## Build from Source (Windows and Other Platforms)
-
-For other platforms, you can build from source.
-
-> **Important**: Before installing from source, ensure that you have [Rust](https://www.rust-lang.org/tools/install) and [Protocol Buffers](https://protobuf.dev/downloads/) installed. Don't forget to add Protocol Buffers to your system's path variable. This will ensure a smooth installation process for Dozer.
-
-```bash
-cargo install --git https://github.com/getdozer/dozer dozer-cli --locked
-```
-
-### Additional steps for protobuf-compiler dependency
-By default, Ubuntu `20.04` uses protobuf-compiler version `3.6.1.3`, which is insufficient for dozer. To install the newer version you can use the commands below.
-
-```bash
-# amd64
-curl -sLO https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-x86_64.zip
-unzip protoc-22.2-linux-x86_64.zip -d $HOME/.local
-export PATH="$PATH:$HOME/.local/bin"
-```
-
-```bash
-# aarch
-curl -sLO https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-aarch_64.zip
-unzip protoc-22.2-linux-aarch_64.zip -d $HOME/.local
-export PATH="$PATH:$HOME/.local/bin"
-```

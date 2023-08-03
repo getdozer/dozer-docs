@@ -24,8 +24,8 @@ const sidebars = {
       type: 'category',
       label: 'Getting Started',
       link: {
-        type: 'generated-index',
-        slug: '/getting_started',
+        type: 'doc',
+        id: 'getting_started_summary',
       },
       items: [
         {
