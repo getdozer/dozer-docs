@@ -28,13 +28,13 @@ Now, it's time to start using Dozer. You can get started in one of two ways: Doz
 
 ## Dozer Core
 
-- [Create a new project](/docs/getting_started/core/new-project.md)
-- [Querying your Data](/docs/getting_started/core/query)
-- [Monitoring your Application](/docs/getting_started/core/motitoring)
+- [Create a new project](./getting_started/core/new-project.md)
+- [Querying your Data](./getting_started/core/query)
+- [Monitoring your Application](./getting_started/core/motitoring)
 
 ## Dozer Cloud
 
-- [Dozer Cloud Installation](/cloud/installation)
+- [Dozer Cloud Installation](./getting_started/cloud/installation.md)
 
 
 
