@@ -24,8 +24,8 @@ const sidebars = {
       type: 'category',
       label: 'Getting Started',
       link: {
-        type: 'generated-index',
-        slug: '/getting_started',
+        type: 'doc',
+        id: 'getting_started',
       },
       items: [
         {
@@ -38,11 +38,11 @@ const sidebars = {
           },
         },
         'getting_started/core/installation',
-        'getting_started/core/source',
-        'getting_started/core/transform',
-        'getting_started/core/query',
-        'getting_started/core/monitoring',
-        'getting_started/core/learn',
+        'getting_started/core/connecting-to-sources',
+        'getting_started/core/adding-transformations',
+        'getting_started/core/querying-data',
+        'getting_started/core/monitoring-your-application',
+        'getting_started/core/learn-more',
         {
           type: 'html',
           value: 'DOZER CLOUD',
@@ -53,9 +53,67 @@ const sidebars = {
           },
         },
         'getting_started/cloud/installation',
-      
       ]
     },
+
+    'cli-reference',
+
+    {
+      type: 'category',
+      label: 'Configuration',
+      link: {
+        type: 'doc',
+        id: 'configuration',
+      },
+      items: [
+        'configuration/configuring-sources',
+        'configuration/configuring-transformations',
+        'configuration/configuring-endpoints',
+        {
+          type: 'html',
+          value: 'DATA SOURCES',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-core',
+          },
+        },
+        'configuration/sources/postgres',
+        'configuration/sources/snowflake',
+        'configuration/sources/amazon-s3',
+        'configuration/sources/deltalake',
+        'configuration/sources/ethereum',
+        'configuration/sources/grpc',
+      ]
+    },
+
+    {
+      type: 'category',
+      label: 'Transforming Data using SQL',
+      link: {
+        type: 'doc',
+        id: 'transforming-data',
+      },
+      items: [
+        'transforming-data/data-types'
+      ]
+    },
+
+
+    {
+      type: 'category',
+      label: 'Accessing Data',
+      link: {
+        type: 'doc',
+        id: 'accessing-data',
+      },
+      items: [
+        'accessing-data/querying-using-grpc',
+        'accessing-data/querying-using-rest',
+        'accessing-data/authorization'
+      ]
+    }
+
     // {
     //   type: 'category',
     //   label: 'Introduction',
