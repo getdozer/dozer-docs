@@ -25,7 +25,7 @@ Dozer Core
 
 Dozer Cloud
 ---
-- [Sign up](/theme-dark?both)
-- [Tutorial](/theme-vertical-writing?both)
+- [Sign up](/)
+- [Tutorial](/)
 
 ###### tags: `Dozer` `Core` `Cloud`
