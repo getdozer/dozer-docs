@@ -56,6 +56,7 @@ const sidebars = {
       ]
     },
 
+    'cli-reference',
 
     {
       type: 'category',
@@ -65,9 +66,12 @@ const sidebars = {
         id: 'configuration',
       },
       items: [
+        'configuration/configuring-sources',
+        'configuration/configuring-transformations',
+        'configuration/configuring-endpoints',
         {
           type: 'html',
-          value: 'SOURCES',
+          value: 'DATA SOURCES',
           defaultStyle: false,
           className: 'sidebar-item-group',
           customProps: {
@@ -80,29 +84,36 @@ const sidebars = {
         'configuration/sources/deltalake',
         'configuration/sources/ethereum',
         'configuration/sources/grpc',
-        {
-          type: 'html',
-          value: 'TRANSFORMATIONS',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-core',
-          },
-        },
+      ]
+    },
 
-        {
-          type: 'html',
-          value: 'ENDPOINTS',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-core',
-          },
-        },
+    {
+      type: 'category',
+      label: 'Transforming Data using SQL',
+      link: {
+        type: 'doc',
+        id: 'transforming-data',
+      },
+      items: [
+        'transforming-data/data-types'
+      ]
+    },
 
-      
+
+    {
+      type: 'category',
+      label: 'Accessing Data',
+      link: {
+        type: 'doc',
+        id: 'accessing-data',
+      },
+      items: [
+        'accessing-data/querying-using-grpc',
+        'accessing-data/querying-using-rest',
+        'accessing-data/authorization'
       ]
     }
+
     // {
     //   type: 'category',
     //   label: 'Introduction',
