@@ -27,9 +27,9 @@ Type the followig command:
 
 `cargo install --git https://github.com/getdozer/dozer dozer-cli --locked`
 
-## ✅ Check Dozer version
+## ✅ Verify the installation
 
-In Linux, you can check the Dozer version and installation by running:
+You can verify the installation and check the Dozer version by running:
 
 `dozer --version`
 

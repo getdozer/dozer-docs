@@ -25,7 +25,7 @@ const sidebars = {
       label: 'Getting Started',
       link: {
         type: 'doc',
-        id: 'getting_started_summary',
+        id: 'getting_started',
       },
       items: [
         {
@@ -38,11 +38,11 @@ const sidebars = {
           },
         },
         'getting_started/core/installation',
-        'getting_started/core/source',
-        'getting_started/core/transform',
-        'getting_started/core/query',
-        'getting_started/core/monitoring',
-        'getting_started/core/learn',
+        'getting_started/core/connecting-to-sources',
+        'getting_started/core/adding-transformations',
+        'getting_started/core/querying-data',
+        'getting_started/core/monitoring-your-application',
+        'getting_started/core/learn-more',
         {
           type: 'html',
           value: 'DOZER CLOUD',
@@ -53,9 +53,56 @@ const sidebars = {
           },
         },
         'getting_started/cloud/installation',
-      
       ]
     },
+
+
+    {
+      type: 'category',
+      label: 'Configuration',
+      link: {
+        type: 'doc',
+        id: 'configuration',
+      },
+      items: [
+        {
+          type: 'html',
+          value: 'SOURCES',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-core',
+          },
+        },
+        'configuration/sources/postgres',
+        'configuration/sources/snowflake',
+        'configuration/sources/amazon-s3',
+        'configuration/sources/deltalake',
+        'configuration/sources/ethereum',
+        'configuration/sources/grpc',
+        {
+          type: 'html',
+          value: 'TRANSFORMATIONS',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-core',
+          },
+        },
+
+        {
+          type: 'html',
+          value: 'ENDPOINTS',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-core',
+          },
+        },
+
+      
+      ]
+    }
     // {
     //   type: 'category',
     //   label: 'Introduction',
