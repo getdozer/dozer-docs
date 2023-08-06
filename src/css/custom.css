@@ -255,3 +255,7 @@ a {
 .menu__list .menu__list {
   margin-top: 0 !important;
 }
+
+img {
+  border-radius: 10px;
+}
