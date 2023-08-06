@@ -19,7 +19,7 @@ Dozer automatically produces gRPC APIs in two formats.
 * **Common Query Format**: This format serves using common `Record` and `FieldDefinition` format with full type support. 
 * **Typed Query Format**: It generates code for endpoint and provides statically typed APIs for `Endpoint`.
 
-Note: this format of query requires the module grpcurl. You can install it  from its version in [grpcurl repository](https://github.com/fullstorydev/grpcurl).
+> *__NOTE__: this format of query requires the module grpcurl. You can install it  from its version in [grpcurl repository](https://github.com/fullstorydev/grpcurl).*
 
 
 ## List the gRPC services
@@ -51,7 +51,7 @@ In our dataset, one of the endpoints we have is called `trips_cache`. Let's coun
 
 In the terminal, write the command:
 
-```
+```bash
 grpcurl -d '{"endpoint": "trips_cache"}' \
     -plaintext localhost:50051 dozer.common.CommonGrpcService/count
 ```
@@ -59,7 +59,7 @@ grpcurl -d '{"endpoint": "trips_cache"}' \
 you will get the number of entries, which in this case is 3782. 
     
     
-```
+```json
 {
   "count": "3782"
 }
@@ -84,7 +84,7 @@ grpcurl -d '{"endpoint": "trips_cache", "query": "{\"$limit\":1}"}' \
 It will be displayed a single entry, which is similar to this example. Note, there are displayed the fields and one record.
 
     
-```
+```json
 {
   "fields": [
     {
@@ -152,7 +152,7 @@ In this example, let's add a filter, by choosing a location of the trip. Again, 
 
 To run this query, write in the terminal the command: 
 
-```
+```bash
 grpcurl -d '{"endpoint": "trips_cache", "query": "{\"$limit\":1, \"$filter\": {\"pickup_location\": 211}}"}' \
     -plaintext localhost:50051 dozer.common.CommonGrpcService/query
 ```
@@ -161,7 +161,7 @@ grpcurl -d '{"endpoint": "trips_cache", "query": "{\"$limit\":1, \"$filter\": {\
 It will be displayed a single entry, which is similar to this one:
 
     
-```
+```json
 {
   "fields": [
     {
@@ -243,7 +243,7 @@ In this example, let's show only 3 entries, by making a curl command. It has the
 
 In the terminal, you can try to give this command:
 
-```
+```bash
 curl -X POST  http://localhost:8080/trips/query \
   --header 'Content-Type: application/json' \
   --data-raw '{"$limit":3}'
@@ -251,7 +251,7 @@ curl -X POST  http://localhost:8080/trips/query \
 
 The result is some data similar to this one:
 
-```
+```json
 [{"pickup_location":43,"dropoff_location":230,"total_trips":1045,"min_trip_time":122,"max_trip_time":2713,"__dozer_record_id":3597,"__dozer_record_version":45},
 {"pickup_location":161,"dropoff_location":1,"total_trips":1091,"min_trip_time":1437,"max_trip_time":11061,"__dozer_record_id":3369,"__dozer_record_version":91},
 {"pickup_location":143,"dropoff_location":132,"total_trips":1022,"min_trip_time":1641,"max_trip_time":7694,"__dozer_record_id":3711,"__dozer_record_version":22}]
@@ -269,7 +269,7 @@ Now let's add a filter, choosing a min_trip_time equals 150. The parameters in t
 
 In the terminal, write the command:
 
-```
+```bash
 curl -X POST  http://localhost:8080/trips/query \
   --header 'Content-Type: application/json' \
   --data-raw '{"$filter": {"min_trip_time": 150}, "$limit":3}'
@@ -277,11 +277,10 @@ curl -X POST  http://localhost:8080/trips/query \
   
  The result displayed are three records, similar to these:
  
- ```
+ ```json
 [{"pickup_location":211,"dropoff_location":113,"total_trips":2247,"min_trip_time":150,"max_trip_time":5187,"__dozer_record_id":1715,"__dozer_record_version":1247},
 {"pickup_location":179,"dropoff_location":146,"total_trips":1306,"min_trip_time":150,"max_trip_time":3160,"__dozer_record_id":2934,"__dozer_record_version":306},
 {"pickup_location":135,"dropoff_location":95,"total_trips":3442,"min_trip_time":150,"max_trip_time":5706,"__dozer_record_id":676,"__dozer_record_version":2442}]
- 
  ```
 
  
@@ -301,4 +300,3 @@ The response will be the full documentation that Dozer generates and which might
 
 
 
-###### tags: `Dozer` `query` `curl` `grpcurl` `API`
