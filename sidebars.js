@@ -75,13 +75,48 @@ const sidebars = {
           defaultStyle: false,
           className: 'sidebar-item-group',
           customProps: {
-            id: 'dozer-core',
+            id: 'data-sources',
           },
         },
         'configuration/sources/postgres',
         'configuration/sources/snowflake',
-        'configuration/sources/amazon-s3',
-        'configuration/sources/deltalake',
+        
+        {
+          type: 'category',
+          label: 'Object Stores',
+          link: {
+            type: 'doc',
+            id: 'configuration/sources/object-stores',
+          },
+          items: [
+            {
+              type: 'html',
+              value: 'STORAGE TYPES',
+              defaultStyle: false,
+              className: 'sidebar-item-group',
+              customProps: {
+                id: 'object-stores',
+              },
+            },
+            'configuration/sources/object-stores/types/aws-s3',
+            'configuration/sources/object-stores/types/google-cloud-storage',
+            'configuration/sources/object-stores/types/azure-blob-storage',
+            {
+              type: 'html',
+              value: 'FILE FORMATS',
+              defaultStyle: false,
+              className: 'sidebar-item-group',
+              customProps: {
+                id: 'file-formats',
+              },
+            },
+            'configuration/sources/object-stores/formats/csv',
+            'configuration/sources/object-stores/formats/parquet',
+            'configuration/sources/object-stores/formats/deltalake',
+          ]
+        },
+
+
         'configuration/sources/ethereum',
         'configuration/sources/grpc',
       ]
