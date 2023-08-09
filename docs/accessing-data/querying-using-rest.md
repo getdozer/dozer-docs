@@ -61,7 +61,7 @@ curl -X POST  http://localhost:8080/trips/query \
 
 Alternatively, you can import all the above curl requests to Postman.
 
-![](../img/postman_rest_api.png)
+![](./img/postman_rest_api.png)
 
 ## 📚 Get Open API Documentation
 

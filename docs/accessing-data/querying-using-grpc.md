@@ -213,7 +213,7 @@ It will be displayed a single entry, which is similar to this one:
 
 Alternatively, you can use Postman to view gRPC APIs with full reflection support. 
 
-![](../img/postman_query_grpc.png)
+![](./img/postman_query_grpc.png)
 
 
 ## 📚 Get Open API Documentation
