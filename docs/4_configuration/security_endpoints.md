@@ -63,7 +63,7 @@ Rpc failed with status code 7, error message:
 To generate a master JWT token, run the following command
 
 ```bash
-dozer api generate-token
+dozer security generate-token
 ```
 
 It generates the master token, and writes it to stdout.
