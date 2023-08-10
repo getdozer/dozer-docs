@@ -1,40 +1,48 @@
-# Querying Data
+# Querying Data using gRPC APIs
 
 
-In the previous steps, you already connected with data sources. Now let's learn how to query the data using gRPC APIs.
+In the previous steps, you already connected with data sources. Now let's learn how to query the data using gRPC APIs. We will use  `dozer.common.CommonGrpcService` in the next sessions, in making a query in Dozer. This service takes query parameters, described in details in next session. 
 
-## 🔎 Querying Data using gRPC APIs
-
-Dozer automatically produces gRPC APIs in two formats.
-
-* **Common Query Format**: This format serves using common `Record` and `FieldDefinition` format with full type support. 
-* **Typed Query Format**: It generates code for endpoint and provides statically typed APIs for `Endpoint`.
 
 > *__NOTE__: this format of query requires the module grpcurl. You can install it  from its version in [grpcurl repository](https://github.com/fullstorydev/grpcurl).*
 
 
-## List the gRPC services
 
-First, let's check all the gRPC services, by using the command:
+---
+
+## Parameters
 
 
-`grpcurl -plaintext localhost:50051 `
 
-In terminal, will be displayed the full list, which is similar to this one:
+| Parameter | Description |
+| -------- | -------- |
+| **count**     | Counts the number of entries in the endpoint.     |
+| **query**   | Defines specific content or actions, based on the data being passed.    |
 
+
+
+---
+
+
+## count Parameter
+
+### Description
+
+The *count* parameter of the Common Query Format counts the number of entries that match the specified endpoint. The count parameter can be useful when specifying data collections or for getting statistical information. 
+
+### Behavior
+
+* It appends at the end of the `dozer.common.CommonGrpcService` .
+* Returns the result in the JSON format, like this:
+```json
+{
+  "count": " "
+}
 ```
-listdozer.auth.AuthGrpcService
-dozer.common.CommonGrpcService
-dozer.generated.trips_cache.TripsCaches
-dozer.health.HealthGrpcService
-grpc.reflection.v1alpha.ServerReflection
-```
 
 
-We will use  `dozer.common.CommonGrpcService` in the next sessions, in making a query in Dozer.
 
-
-### Example 1: count in Common Query Format
+**Example: count in Common Query Format**
 
 In our dataset, one of the endpoints we have is called `trips_cache`. Let's count all the number of entries in this endpoint. The query has the parameters:
 * the endpoint, for example `trips_cache`, 
@@ -56,7 +64,53 @@ you will get the number of entries, which in this case is 3782.
 }
 ```
 
-### Example 2: query in Common Query Format
+
+
+---
+
+## query Parameter
+
+### Description
+The *query* parameter is defined by a set of body parameters attached to the gRPC call. Each of the components of the query is a body parameter, that help define specific content or actions based on the data being passed.
+
+### Behavior
+
+* It appends at the end of the `dozer.common.CommonGrpcService` .
+* Returns the response in the JSON format, like this:
+```json
+{
+  "fields": [
+    {
+      "typ": " ",
+      "name": " ",
+      "nullable": "true/false"
+    }
+  ],
+  "records": [
+    {
+      "id": " ",
+      "record": {
+        "values":
+        "version":
+      }
+    }
+  ]
+}
+```
+
+### Parameters
+
+`$limit` *integer*  *Optional*
+The number limit specifies the number of resources that a single response contains.
+  
+`$filter` *string*  *Optional*
+Field and value to filter items in a resource collection to return a subset of resources in the response.
+
+`$order_by` *string*  *Optional*
+Field by which will be ordered the result in the response.
+
+
+**Example: query in Common Query Format**
 
 In this example, let's get the fields and a record in the endpoint `trips_cache`. We will format the query according the Common Query Format. The parameters in this query are:
 
@@ -131,7 +185,7 @@ It will be displayed a single entry, which is similar to this example. Note, the
 }
 ```
 
-### Example 3: query with filter in Common Query Format
+**Example: query with filter in Common Query Format**
 
 In this example, let's add a filter, by choosing a location of the trip. Again, we choose to show only one record.
 
@@ -208,21 +262,14 @@ It will be displayed a single entry, which is similar to this one:
 }
 ```
 
+
+---
+
+
 ## Use gRPC API in Postman 
 
 
 Alternatively, you can use Postman to view gRPC APIs with full reflection support. 
 
 ![](./img/postman_query_grpc.png)
-
-
-## 📚 Get Open API Documentation
-
-In case you need the API documentation, Dozer provides it by using this command:
-
-`curl -X POST  http://localhost:8080/trips/oapi`
-
-The response will be the full documentation that Dozer generates and which might help in showing all the endpoints and parameters of the REST API.
-
-
 
