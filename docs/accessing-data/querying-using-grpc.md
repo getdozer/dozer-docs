@@ -266,10 +266,11 @@ It will be displayed a single entry, which is similar to this one:
 ---
 
 
-## Use gRPC API in Postman 
+## Use Postman to test gRPC queries.
 
+Postman is a scalable API testing tool, which you can use to view gRPC APIs with full reflection support. 
+In Postman, create a new gRPC request. Enter the host and the port of your API, similar to this example.
 
-Alternatively, you can use Postman to view gRPC APIs with full reflection support. 
+![](./img/Postman_gRPC_Query.png)
 
-![](./img/postman_query_grpc.png)
 

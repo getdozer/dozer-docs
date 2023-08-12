@@ -139,10 +139,9 @@ The *oapi* parameter shows the API Documentation, and Dozer provides it by makin
 
 The response will be the full documentation that Dozer generates and which might help in showing all the endpoints and parameters of the REST API.
 
- 
-## Test API using Postman
+## Use Postman to test the REST API
 
-Alternatively, you can import all the above curl requests to Postman.
+Postman is a scalable API testing tool, which you can use to view gRPC APIs with full reflection support. 
+In Postman, create a new POST request, and choose the host and the port of your API. In the right pane, you can see the cURL command for the query you are making. See the figure of the example of making a query using REST API.
 
-![](./img/postman_rest_api.png)
-
+![](./img/Postman_CURLQuery.png)

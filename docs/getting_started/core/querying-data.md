@@ -67,7 +67,27 @@ you will get the number of entries, which in this case is 3782.
 }
 ```
 
-You can refer to the documentation of [Making a Query using gRPC APIs](/docs/accessing-data/querying-using-grpc.md).
+## Test the gRPC query using Postman
+
+Postman is scalable API testing tool, which you can use to view gRPC APIs with full reflection support. Follow these steps to make a query using gRPC:
+
+**Open Postman tool**
+In your Postman workspace, Choose New -> gRPC Request.
+
+**Choose the URL**
+Choose localhost:50051 in URLs textbox, and one of the parameters in the next tab.
+
+**Invoke**
+In the Response area, you can see the result of the gRPC Request.
+
+In this example, we invoke a count gRPC call to get the total number of entries.
+
+![](./img/Postman_gRPC_Query.png)
+
+
+More details about making a query using gRPC APIs, you can refer to the documentation of [Making a Query using gRPC APIs](/docs/accessing-data/querying-using-grpc.md).
+
+
 
 
 ## Querying Data using REST APIs
@@ -140,4 +160,27 @@ curl -X POST  http://localhost:8080/trips/oapi
 The response will be the full documentation that Dozer generates and which might help in showing all the endpoints and parameters of the REST API.
 
 
-You can refer to the documentation of [Making a Query using REST APIs](/docs/accessing-data/querying-using-rest.md).
+## Test the REST API and make query using Postman
+
+To test your REST API using Postman, follow these steps:
+
+**Open Postman**
+In your Postman workspace, in the list of requests, choose POST request. Also, you can test different types of requests, but let's first try this example.
+
+**Choose the URL**
+Choose localhost:8080 in URLs textbox.
+
+**Choose the parameter**
+You can choose one of the parameters, such as *count*, *query* or *oapi*. In this example, let's try the oapi parameter. 
+
+**Press Send Button**
+See the results in Body, also the cURL command in right pane of Postman.
+
+In the figure below, which is an example of a query call in Postman.
+
+![](./img/Postman_CURLQuery.png)
+
+
+More details about making a query using gRPC APIs, you can refer to the documentation of [Making a Query using gRPC APIs](/docs/accessing-data/querying-using-grpc.md).
+
+
