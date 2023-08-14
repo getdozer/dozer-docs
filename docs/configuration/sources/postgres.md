@@ -2,14 +2,29 @@
 
 Dozer PostgreSQL connector serves as an essential link for real-time data replication from a PostgreSQL database to Dozer. Upon its initial start, the connector begins by taking a snapshot of the existing data in specified tables. This process provides a foundation from which further data changes can be efficiently managed. After snapshotting, the connector taps into PostgreSQL's logical replication by connecting to a designated replication slot, monitoring for data changes in real-time. Any changes occurring in the PostgreSQL database are detected and instantly sent to Dozer, ensuring a continuous stream of updated data. The specific tables to observe are customizable within the connector configuration, ensuring a targeted and resource-optimized data-handling process.
 
+## Bullet Points
 
-## Bullet Points 
-
-* PostgreSQL works well to integrate real time data with query optimisation and indexing.
-* Postgres is pretty scalable to cater to different sizes of data, along with number of concurent users.
-* Postgres support strong data integrity protocol by adhering to ACID, meaning trasactions are reliably processed and in insolation with one another, to prevent corruptions and deadlocks.
-* Support for varied data types, along with user-defined data types.
-
+* Description:
+  1. postgresql support fetching data from multiple tables
+  2. scalable database
+* Features:
+  1. SSL Mode
+  2. queryString/url
+* example config
+  1. simple local postgres
+  2. cloud base postgres
+  3. postgres with ssl_mode
+* Parameters
+  1. user
+  2. password
+  3. host
+  4. port
+  5. database
+  6. SSLMode
+  7. queryString
+* Samples
+  1. Local Sample using docker
+  2. Supabase sample
 ## Configuration
 
 The following configuration block can be used in `dozer-config.yaml` to define a new PostgreSQL connection:
