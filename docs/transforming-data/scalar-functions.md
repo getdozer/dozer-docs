@@ -1,4 +1,22 @@
-# Basic Functions and Operators
+# Primitives Scalar Functions
+
+## Numeric
+
+### `ABS()`
+Calculates the absolute value of of a number
+
+#### Syntax
+```sql
+ABS(expr) 
+```
+#### Arguments
+| Name     | Type         | Description              |
+|----------|--------------|--------------------------|
+| `expr`  | [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric)    | An expression returning a [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) type |
+
+#### Returns
+The absolute number as a [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) value
+
 
 ## Functions
 

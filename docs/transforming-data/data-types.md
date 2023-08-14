@@ -31,9 +31,9 @@ Any textual type, referred as `TEXTUAL` in the rest of the documentation
 | `CHAR[]`    | Array of `CHAR` type                                                           | `CHAR[]('value1', 'value2')`                          |
 | `BPCHAR[]`  | Array of `BPCHAR` type                                                         | `BPCHAR[]('value1', 'value2')`                        |
 
-### Date / Time Types (`DATE/TIME`)
+### Date / Time Types (`DATETIME`)
 
-Any date and time related type, referred as `DATE/TIME` in the rest of the documentation
+Any date and time related type, referred as `DATETIME` in the rest of the documentation
 
 | Type        | Descritpion                                                               | Example                                        |
 |-------------|---------------------------------------------------------------------------|------------------------------------------------|
