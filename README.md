@@ -53,4 +53,4 @@ Please refer to [Contributing](https://getdozer.io/docs/contributing/overview) f
 
 ### Deployment
 
-Please open a PR from a fork and once the PR is merged to main, documentation is automatically deployed.
+Please open a PR from a fork and once the PR is merged to main, documentation is automatically deployed..
