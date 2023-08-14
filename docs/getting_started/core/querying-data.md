@@ -1,31 +1,20 @@
 # Querying Data
 
-
-In the previous steps, you already connected with data sources. Now let's learn how to query the data. Dozer provides several ways to make queries, and we'll go over them here.
-
-## Making a query
-
-In each case, we will use the example provided in the [sample configuration](https://getdozer.io/docs/configuration). 
-Dozer provides two different ways to make a query:
-* Using gRPC APIs
-* Using REST APIs
-
-Let's explore in details each of them.
+Dozer supports querying data in both gRPC and REST formats. Let's explore in details each of them.
 
 ## Querying Data using gRPC APIs
 
 Dozer automatically produces gRPC APIs in two formats.
 
-* **Common Query Format**: This format serves using common `Record` and `FieldDefinition` format with full type support. 
-* **Typed Query Format**: It generates code for endpoint and provides statically typed APIs for `Endpoint`.
+* **Common Query Format**: This format serves data representing it as a generic record.
+* **Typed Query Format**: This format generatea a full Protobuf type definition of the types exposed. Protobuf definitions are automatically generated fro the SQL in `dozer-config.yaml`.
 
-> *__NOTE__: this format of query requires the module grpcurl. You can install it  from its version in [grpcurl repository](https://github.com/fullstorydev/grpcurl).*
+> *__NOTE__: querying gRPC APIs requires `grpcurl`. You can install it  from this [repository](https://github.com/fullstorydev/grpcurl).*
 
 
-## List the gRPC services
+### Listing the gRPC services
 
-First, let's check all the gRPC services, by using the command:
-
+Dozer uses gRPC server reflection to expose services. Run the following command to list all gRPC services available:
 
 ```bash
 grpcurl -plaintext localhost:50051
