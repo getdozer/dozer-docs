@@ -2,7 +2,16 @@
 
 Dozer PostgreSQL connector serves as an essential link for real-time data replication from a PostgreSQL database to Dozer. Upon its initial start, the connector begins by taking a snapshot of the existing data in specified tables. This process provides a foundation from which further data changes can be efficiently managed. After snapshotting, the connector taps into PostgreSQL's logical replication by connecting to a designated replication slot, monitoring for data changes in real-time. Any changes occurring in the PostgreSQL database are detected and instantly sent to Dozer, ensuring a continuous stream of updated data. The specific tables to observe are customizable within the connector configuration, ensuring a targeted and resource-optimized data-handling process.
 
+
+## Bullet Points 
+
+* PostgreSQL works well to integrate real time data with query optimisation and indexing.
+* Postgres is pretty scalable to cater to different sizes of data, along with number of concurent users.
+* Postgres support strong data integrity protocol by adhering to ACID, meaning trasactions are reliably processed and in insolation with one another, to prevent corruptions and deadlocks.
+* Support for varied data types, along with user-defined data types.
+
 ## Configuration
+
 The following configuration block can be used in `dozer-config.yaml` to define a new PostgreSQL connection:
 
 ```yaml
@@ -18,18 +27,16 @@ connections:
 
 ### Parameters
 
-| **Parameter Name** | **Type** | **Description** | 
-|--------------------|----------|-----------------|
-| `user` | String | The username required for authenticating the user's access to the PostgreSQL instance. |
-| `password` | String | The password corresponding to the above username, required for secure authentication to the PostgreSQL instance. |
-| `host` | String or IP address | The host address of the PostgreSQL instance. It could be an IP address or a valid hostname. |
-| `port` | Integer | The specific port on which the PostgreSQL service is running. |
-| `database` | String | The specific database within the PostgreSQL instance to which the connector needs to establish a connection. |
-| `SSLMode` | String | The choice of SSL TCP/IP connection negotiation priority with the server can be configured with three available options: "require," "prefer," or "disable." These options allow you to define how the SSL connection will be established between the client and the server. |
-| `queryString` | String | The "connection_url" or Postgres connection string takes precedence over all other configurations in Dozer when connecting to the database. running. |
+| **Parameter Name** | **Type**       | **Description**                                                                                                                                                                                                                                                       |
+| ------------------------ | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`                 | String               | The username required for authenticating the user's access to the PostgreSQL instance.                                                                                                                                                                                      |
+| `password`             | String               | The password corresponding to the above username, required for secure authentication to the PostgreSQL instance.                                                                                                                                                            |
+| `host`                 | String or IP address | The host address of the PostgreSQL instance. It could be an IP address or a valid hostname.                                                                                                                                                                                 |
+| `port`                 | Integer              | The specific port on which the PostgreSQL service is running.                                                                                                                                                                                                               |
+| `database`             | String               | The specific database within the PostgreSQL instance to which the connector needs to establish a connection.                                                                                                                                                                |
+| `SSLMode`              | String               | The choice of SSL TCP/IP connection negotiation priority with the server can be configured with three available options: "require," "prefer," or "disable." These options allow you to define how the SSL connection will be established between the client and the server. |
+| `queryString`          | String               | The "connection_url" or Postgres connection string takes precedence over all other configurations in Dozer when connecting to the database. running.                                                                                                                        |
 
 ## Testing it out
 
 To test a PostgreSQL sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/postgres).
-
-
