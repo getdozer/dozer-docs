@@ -2,8 +2,28 @@
 
 Dozer's Snowflake connector integration utilizes Snowflake's Table Streams for real-time data integration and synchronization. Dozer captures and processes data changes from Snowflake tables using Table Streams, ensuring instant updates without constant polling or manual synchronization.
 
-## Bullet Points
+## Points
 
+* Description:
+  * Snowflake connector uses polling to fetch data from snowflake
+* Features:
+  1. Schema
+  2. role
+* Example Config:
+  1. snowflake config
+  2. supabase snowflake config 
+* Parameters:
+  1. server
+  2. port
+  3. user
+  4. password
+  5. datanase
+  6. schema
+  7. warehouse
+  8. driver
+  9. role
+* Samples:
+  1. Github sample
 ## Configuration
 
 The following configuration block can be used in `dozer-config.yaml` to define a new Snowflake connection:
