@@ -1,29 +1,8 @@
-# Overview
+# Getting Started
 
+Dozer is a Data Product backend that embeds a streaming SQL engine, a low-latency data cache and generates gRPC and REST APIs that can be easily integrated in frontend applications.
 
-Dozer is a Data API backend that embeds a streaming SQL engine, a low-latency data cache and generates gRPC and REST APIs that can be easily integrated in frontend applications.
-
-**Core Features**
-
-- **Simple to Use**:
-Dozer automatically generates a gRPC and REST APIs from your data sources. All you need is to write a YAML file with your data source configuration and the APIs you want to deploy. 
-
-- **Combine data from multiple sources in real-time**:
-As new data flows in, Dozer incrementally computes aggregations and joins, offering a far superior query experience than a traditional database. Dozer can in real-time join data coming from multiple data sources powering advanced use cases. 
-
-
-## Making a query
-
-In each case, we will use the example provided in the [sample configuration](https://getdozer.io/docs/configuration). 
-Dozer provides two different ways to make a query:
-* Using gRPC APIs
-* Using REST APIs
-
-
-
-#  Quick Start
-
-Now, it's time to start using Dozer. You can get started in one of two ways: Dozer Core and Dozer Cloud.
+Dozer is available in two flavours: an Open Source Core version and a Cloud version. In these tutorial we will show you how to build and deploy a Dozer application step by step.
 
 ### Dozer Core
 
@@ -36,6 +15,6 @@ Now, it's time to start using Dozer. You can get started in one of two ways: Doz
 
 ### Dozer Cloud
 
-- [Dozer Cloud Installation](./getting_started/cloud/installation.md)
+- Coming Soon
 
 
