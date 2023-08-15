@@ -34,8 +34,43 @@ The spec of the configuration file must use these conventions.
 
 ## Optional Application Properties
 
-| Property                 | Type    | Example                          | Remarks |
-|--------------------------|---------|----------------------------------|---------|
-| **`home_dir`**           | String  | `home_dir: 8589934592`           |         |
-| **`cache_dir`**          | String  | `cache_dir: 8589934592`          |         |
-| **`cache_max_map_size`** | Integer | `cache_max_map_size: 8589934592` |         |
+### **`app_buffer_size`**
+
+| Details              | Type    | Default Value | Example                  |
+|----------------------|---------|---------------|--------------------------|
+| Pipeline buffer size | Integer | 20000         | `app_buffer_size: 50000` |
+
+### **`commit_size`**
+
+| Details     | Type    | Default Value | Example            |
+|-------------|---------|---------------|--------------------|
+| Commit size | Integer | 10000         | `commit_size: 100` |
+
+### **`commit_timeout`**
+
+| Details                        | Type    | Default Value | Example                |
+|--------------------------------|---------|---------------|------------------------|
+| Commit timeout in milliseconds | Integer | 50            | `commit_timeout: 1000` |
+
+[//]: # ()
+[//]: # (| Property                            | Type    | Example                                   | Remarks                                                                     |)
+
+[//]: # (|-------------------------------------|---------|-------------------------------------------|-----------------------------------------------------------------------------|)
+
+[//]: # (| **`commit_size`**                   | Integer | `commit_size: 100`                        | Commit size `[default: 10000]`                                              |)
+
+[//]: # (| **`commit_timeout`**                | String  | `commit_timeout: 1000`                    | Commit timeout `[default: 50]`                                              |)
+
+[//]: # (| **`log_entry_max_size`**            | String  | `log_entry_max_size: 100000`              | Max number of operations in one log entry `[default: 100000]`               |)
+
+[//]: # (| **`log_max_num_immutable_entries`** | String  | `log_max_num_immutable_entries: ./.dozer` | `[default: 100]`                                                            |)
+
+[//]: # (| **`log_storage`**                   | String  | `log_storage: ./.dozer`                   | The storage to use for the log                                              |)
+
+[//]: # (| **`error_threshold`**               | String  | `error_threshold: ./.dozer`               | How many errors we can tolerate before bringing down the app `[default: 0]` |)
+
+[//]: # (| **`home_dir`**                      | String  | `home_dir: ./.dozer`                      |                                                                             |)
+
+[//]: # (| **`cache_dir`**                     | String  | `cache_dir: 8589934592`                   |                                                                             |)
+
+[//]: # (| **`cache_max_map_size`**            | Integer | `cache_max_map_size: 8589934592`          |                                                                             |)
