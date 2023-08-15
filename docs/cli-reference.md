@@ -12,15 +12,27 @@ Use `dozer help`, `dozer -h` or `dozer --help` to view a list of available comma
 
 ### Dozer Initialization
 If you like to initialize dozer application, dozer will create `dozer-config.yaml` in the workspace with pre-populated configuration template.
+
+:::info command
 ```bash
 dozer init
 ```
+:::
+
+> ```bash
+> question: App name (quick-start-app): 
+> question: Home directory (./.dozer): 
+> question: Connection Type - one of: [P]ostgres, [E]thereum, [S]nowflake (Postgres): 
+> question: Config path (./dozer-config.yaml): 
+> ```
 
 ### Dozer Live
-Run following command to edit code for your dozer application. 
+Run following command to edit code for your dozer application.
+:::info command
 ```bash
 dozer live
 ```
+:::
 
 > ```bash
 > .____   ___ __________ ____
@@ -36,39 +48,105 @@ dozer live
 
 ### Run Dozer App
 If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
+:::info command
 ```bash
 dozer run app
 ```
+:::
 
 ### Run Dozer Api
 If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
+:::info command
 ```bash
 dozer run api
 ```
+:::
 
 ### Dozer Build
 Run following command to initialize and lock the schema definitions. Once initialized, schemas cannot be changed.
+:::info command
 ```bash
 dozer build
 ```
+:::
+
+> ```bash
+>  INFO Initiating app: ..
+>  ...
+>  INFO Created new build v0001
+> ```
 
 ### Dozer Clean
 Run following command to clean home directory which has its data under `.dozer/` in your workspace.
+:::info command
 ```bash
 dozer clean
 ```
+:::
 
 ### Dozer Connectors
 If you want to view available connectors for your application, run following command to get token.
+:::info command
 ```bash
 dozer connectors
 ```
+:::
+
+> ```bash
+> +------------+-------+----------------------------------------------------------+
+> | Connection | Table | Columns                                                  |
+> +------------+-------+----------------------------------------------------------+
+> | s3         | trips | +-----------------------+-----------+----------+-------+ |
+> |            |       | | Field                 | Type      | Nullable | PK    | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | VendorID              | Int       | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | tpep_pickup_datetime  | Timestamp | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | tpep_dropoff_datetime | Timestamp | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | passenger_count       | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | trip_distance         | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | RatecodeID            | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | store_and_fwd_flag    | String    | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | PULocationID          | Int       | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | DOLocationID          | Int       | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | payment_type          | Int       | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | fare_amount           | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | extra                 | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | mta_tax               | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | tip_amount            | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | tolls_amount          | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | improvement_surcharge | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | total_amount          | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | congestion_surcharge  | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> |            |       | | airport_fee           | Float     | true     | false | |
+> |            |       | +-----------------------+-----------+----------+-------+ |
+> +------------+-------+----------------------------------------------------------+
+> ```
 
 ### Dozer Security
 If you want to utilize api security features, run following command to generate the token
+:::info command
 ```bash
 dozer security generate-token
 ```
+:::
 
 and make sure you add following part in the dozer configuration file.
 ```yaml
@@ -82,15 +160,19 @@ api:
 
 ### Run Dozer
 If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
+:::info command
 ```bash
 dozer
 ```
+:::
 
 ### Dozer Cloud
 Run following command to deploy your dozer applications to the dozer cloud.
+:::info command
 ```bash
 dozer cloud
 ```
+:::
 
 #### Cloud Specific Options
 
