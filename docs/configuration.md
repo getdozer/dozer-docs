@@ -17,13 +17,17 @@ The file format is based on the YAML spec. The file must be on the root director
 ### Conventions
 The spec of the configuration file must use these conventions.
 
-- Use `[]` to indicate an empty list
-- Use `null` to indicate a null value
-- Use `true` and `false` as only options on boolean fields
+- Use **`[]`** to indicate an empty list
+- Use **`null`** to indicate a null value
+- Use **`true`** and **`false`** as only options on boolean fields
 
 ## Parent Level Properties
 
-- `app_name` 
-- `connections`
-- `sources`
-- `endpoints`
+| Property          | Type   | Mandatory | Example                                                                      |
+|-------------------|--------|-----------|------------------------------------------------------------------------------|
+| **`app_name`**    | String | true      | `app_name: dozer-application`                                                |
+| **`connections`** | Array  | true      | `connections: ` <br/>&nbsp;&nbsp;&nbsp;&nbsp;`- config: !Postgres` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`user: "{{PG_USER}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`password: "{{PG_PASSWORD}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`host: "{{PG_HOST}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`port: 5432`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`database: "{{PG_DB}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`name: pg` |
+| **`sources`**     | Array  | false     | example                                                                      |
+| **`sql`**         | String | false     | `sql: SELECT * FROM trips`                                                   |
+| **`endpoints`**   | Array  | true      | example                                                                      |
+
