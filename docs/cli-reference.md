@@ -8,7 +8,7 @@ dozer [options] <command> <subcommand> [parameters]
 Use `dozer help`, `dozer -h` or `dozer --help` to view a list of available commands. Use `dozer <command> help`, `dozer <command> -h` or `dozer <command> --help` for information on a specific command with available subcommands. The synopsis for each command shows its parameters and their usage. Optional parameters are shown in square brackets.
 
 
-## Basic Commands
+## Development Commands
 
 ### Dozer Initialization
 If you like to initialize dozer application, dozer will create `dozer-config.yaml` in the workspace with pre-populated configuration template.
@@ -34,20 +34,13 @@ dozer live
 > INFO Starting live server
 > ```
 
-### Dozer Run
-#### Run Dozer
-If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
-```bash
-dozer
-```
-
-#### Run Dozer App
+### Run Dozer App
 If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
 ```bash
 dozer run app
 ```
 
-#### Run Dozer Api
+### Run Dozer Api
 If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
 ```bash
 dozer run api
@@ -84,6 +77,15 @@ api:
     !Jwt
 ```
 
+
+## Cloud Deployment Commands
+
+### Run Dozer
+If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
+```bash
+dozer
+```
+
 ### Dozer Cloud
 Run following command to deploy your dozer applications to the dozer cloud.
 ```bash
@@ -95,11 +97,11 @@ dozer cloud
 > `--target-url (string)`, `-t (string)`
 > 
 > Provide target url for cloud deployment.
-> 
+
 > `--app-id (string)`, `-a (string)`
 > 
 > Provide the unique app id for your application.
-> 
+
 > `--profile (string)`, `p`
 > 
 > Provide user profile to cloud login for deployment.
@@ -109,15 +111,16 @@ dozer cloud
 > `--config-path (string)`, `-c (string)`
 > 
 > Provide dozer configuration YAML file with given PATH.
-> 
+
 > `--config-overrides (string)`
 > 
-> Override dozer configuration with string in YAML format.
-> 
+> Override dozer configuration with string. The part before = is a JSON pointer, and the part after = should be a valid JSON string. If the JSON pointer points to an existing config value, the JSON value will be replaced.
+> e.g. `dozer --config-overrides /app/commit_size=100`
+
 > `--version`, `-V`
 > 
 > Print Dozer CLI version. Current lastest is `v0.1.33`.
-> 
+
 > `--help`, `-h`
 > 
 > Print help on command or subcommand.
