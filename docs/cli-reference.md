@@ -46,19 +46,11 @@ dozer live
 > INFO Starting live server
 > ```
 
-### Run Dozer App
-If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
+### Run Dozer
+If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
 :::info command
 ```bash
-dozer run app
-```
-:::
-
-### Run Dozer Api
-If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
-:::info command
-```bash
-dozer run api
+dozer
 ```
 :::
 
@@ -158,11 +150,19 @@ api:
 
 ## Cloud Deployment Commands
 
-### Run Dozer
-If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
+### Run Dozer App
+If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
 :::info command
 ```bash
-dozer
+dozer run app
+```
+:::
+
+### Run Dozer Api
+If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
+:::info command
+```bash
+dozer run api
 ```
 :::
 

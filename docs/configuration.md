@@ -21,7 +21,7 @@ The spec of the configuration file must use these conventions.
 - Use **`null`** to indicate a null value
 - Use **`true`** and **`false`** as only options on boolean fields
 
-## Parent Level Properties
+## Main Properties
 
 | Property          | Type   | Mandatory | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |-------------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -31,3 +31,11 @@ The spec of the configuration file must use these conventions.
 | **`sql`**         | String | false     | `sql: SELECT * FROM trips`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **`endpoints`**   | Array  | true      | `endpoints: `<br/>&nbsp;&nbsp;&nbsp;&nbsp;`- name: trips` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`path: /trips` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`table_name: trips`                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
+
+## Optional Application Properties
+
+| Property                 | Type    | Example                          | Remarks |
+|--------------------------|---------|----------------------------------|---------|
+| **`home_dir`**           | String  | `home_dir: 8589934592`           |         |
+| **`cache_dir`**          | String  | `cache_dir: 8589934592`          |         |
+| **`cache_max_map_size`** | Integer | `cache_max_map_size: 8589934592` |         |
