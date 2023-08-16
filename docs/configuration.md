@@ -95,7 +95,8 @@ You can also save your sql separately in form of `*.sql` file under `./queries` 
 
 ## API Endpoints
 
-Configure the Store/API nodes to expose gRPC and REST APIs for data access. Define the endpoints and routes that users or downstream systems will use to query and retrieve data.
+Configure the API endpoints to expose gRPC and REST APIs for data access. Define the endpoints and path that users or downstream systems will use to query and retrieve data.
+
 
 ## Global settings (Optional)
 
