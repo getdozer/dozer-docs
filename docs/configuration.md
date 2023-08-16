@@ -56,7 +56,42 @@ And gather the necessary connection details for each data source. These details 
 ## SQL Transformations
 
 Define the data transformation rules you want to apply to the ingested data. 
-These SQLs might involve joining tables, aggregating data, or applying filters.
+
+```bash
+sql: SELECT * INTO result FROM trips;
+```
+
+These SQLs might involve joining tables, aggregating data, or applying filters. Find more details about available SQL functions to be found [here](/docs/transforming-data).
+
+```bash
+sql: | # make sql section multi-line
+  SELECT 
+    id, first_name, last_name, number, age
+  INTO result # required to expose transformed result
+  FROM users
+  WHERE age > 20;
+```
+
+Every SQL transformation statement should have `INTO` clause to be exported as a transformed result.
+You can add multiple SQL transformation statements under `sql` section and also can be exposed as separate transformed result with unique `INTO` clauses.
+
+```bash
+sql: |
+  # exposing result_1
+  SELECT * 
+  INTO result_1 
+  FROM trips
+  INNER JOIN users
+    ON users.id = trips.customer_id;
+
+  # exposing result_2
+  SELECT 
+    id, first_name, last_name, number, age
+  INTO result_2
+  FROM users
+    WHERE age > 20;
+```
+You can also save your sql separately in form of `*.sql` file under `./queries` folder. Here is the [sample `basic.sql` file](@site/static/docs/basic.sql).
 
 ## API Endpoints
 
