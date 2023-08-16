@@ -148,6 +148,12 @@ Configure the API endpoints to expose gRPC and REST APIs for data access. Define
 
 ```bash
 endpoints:
+  # exposing api directly from source
+  - name: trips
+    path: /trips
+    table_name: trips
+
+  # exposing sql transformed result
   - name: result
     path: /result
     table_name: result
