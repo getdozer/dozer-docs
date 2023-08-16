@@ -7,17 +7,14 @@ dozer [options] <command> <subcommand> [parameters]
 ```
 Use `dozer help`, `dozer -h` or `dozer --help` to view a list of available commands. Use `dozer <command> help`, `dozer <command> -h` or `dozer <command> --help` for information on a specific command with available subcommands. The synopsis for each command shows its parameters and their usage. Optional parameters are shown in square brackets.
 
+## Development Flow
 
-## Development Commands
+![Dozer CLI Flow](@site/static/docs/cli.svg)
 
-### Dozer Initialization
+## Local Development
+
+### `dozer init`
 If you like to initialize dozer application, dozer will create `dozer-config.yaml` in the workspace with pre-populated configuration template.
-
-:::info command
-```bash
-dozer init
-```
-:::
 
 > ```bash
 > question: App name (quick-start-app): 
@@ -26,13 +23,8 @@ dozer init
 > question: Config path (./dozer-config.yaml): 
 > ```
 
-### Dozer Live
+### `dozer live`
 Run following command to edit code for your dozer application.
-:::info command
-```bash
-dozer live
-```
-:::
 
 > ```bash
 > .____   ___ __________ ____
@@ -41,26 +33,21 @@ dozer live
 > | |_| | |_| / /_| |___|  _ <
 > |____/ \___/____|_____|_| \_\
 > 
-> Dozer Version: 0.1.33
-> 
 > INFO Starting live server
 > ```
 
-### Run Dozer
+### `dozer`
 If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
-:::info command
 ```bash
 dozer
+# or 
+# dozer -c <custom-dozer-config-path>
 ```
-:::
 
-### Dozer Build
+## Self-Hosted Deployment
+
+### `dozer build`
 Run following command to initialize and lock the schema definitions. Once initialized, schemas cannot be changed.
-:::info command
-```bash
-dozer build
-```
-:::
 
 > ```bash
 >  INFO Initiating app: ..
@@ -68,21 +55,61 @@ dozer build
 >  INFO Created new build v0001
 > ```
 
-### Dozer Clean
-Run following command to clean home directory which has its data under `.dozer/` in your workspace.
-:::info command
-```bash
-dozer clean
-```
-:::
+### `dozer run app`
+If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
 
-### Dozer Connectors
+### `dozer run api`
+If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
+
+
+## Dozer Cloud Deployment
+You can list out available commands by running `dozer cloud -h`
+
+### `dozer cloud login`
+Login to Dozer Cloud service.
+
+> ```bash
+> .____   ___ __________ ____
+> |  _ \ / _ \__  / ____|  _ \
+> | | | | | | |/ /|  _| | |_) |
+> | |_| | |_| / /_| |___|  _ <
+> |____/ \___/____|_____|_| \_\
+> 
+>  INFO Organisation and client details can be created in https://dashboard.dev.getdozer.io/login
+> 
+> Login success !
+> ```
+
+### `dozer cloud deploy`
+Run following command to deploy your dozer applications to the dozer cloud.
+
+### Cloud Specific Options
+
+> `--target-url (string)`, `-t (string)`
+> 
+> Provide target url for cloud deployment.
+
+> `--app-id (string)`, `-a (string)`
+> 
+> Provide the unique app id for your application.
+
+> `--profile (string)`, `p`
+> 
+> Provide user profile to cloud login for deployment.
+
+> `--ignore-pipe`
+> 
+> Use this option to avoid EOF while parsing a value in the config.
+
+## Utility Commands
+
+### Local
+
+#### `dozer clean`
+Run following command to clean home directory which has its data under `.dozer/` in your workspace.
+
+#### `dozer connectors`
 If you want to view available connectors for your application, run following command to get token.
-:::info command
-```bash
-dozer connectors
-```
-:::
 
 > ```bash
 > +------------+-------+----------------------------------------------------------+
@@ -132,61 +159,54 @@ dozer connectors
 > +------------+-------+----------------------------------------------------------+
 > ```
 
-### Dozer Security
-If you want to utilize api security features, run following command to generate the token
-:::info command
-```bash
-dozer security generate-token
-```
-:::
-
-and make sure you add following part in the dozer configuration file.
+#### `dozer security generate-token`
+If you want to utilize api security features, run following command to generate the token. Make sure you add following part in the dozer configuration file.
 ```yaml
 api:
   api_security:
     !Jwt
 ```
 
+### Cloud
 
-## Cloud Deployment Commands
+#### `dozer cloud delete`
+Stop and delete application from Dozer Cloud. Make sure you have your id recorded under `dozer-config.cloud.yaml`.
 
-### Run Dozer App
-If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
-:::info command
-```bash
-dozer run app
-```
-:::
-
-### Run Dozer Api
-If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
-:::info command
-```bash
-dozer run api
-```
-:::
-
-### Dozer Cloud
-Run following command to deploy your dozer applications to the dozer cloud.
-:::info command
-```bash
-dozer cloud
-```
-:::
-
-#### Cloud Specific Options
-
-> `--target-url (string)`, `-t (string)`
+> ```bash
+> .____   ___ __________ ____
+> |  _ \ / _ \__  / ____|  _ \
+> | | | | | | |/ /|  _| | |_) |
+> | |_| | |_| / /_| |___|  _ <
+> |____/ \___/____|_____|_| \_\
 > 
-> Provide target url for cloud deployment.
+>  INFO Connecting to cloud service "https://api.dev.getdozer.io"
+>  ✅ [1] Application stopped
+>  ✅ [2] Deleted ******-****-****-****-**************
+> ```
 
-> `--app-id (string)`, `-a (string)`
-> 
-> Provide the unique app id for your application.
+#### `dozer cloud status`
+Get status of running application in Dozer Cloud.
 
-> `--profile (string)`, `p`
-> 
-> Provide user profile to cloud login for deployment.
+#### `dozer cloud monitor`
+Monitor processed data amount in Dozer Cloud.
+
+#### `dozer cloud logs`
+Inspect application logs.
+
+#### `dozer cloud version`
+Dozer application version management.
+
+#### `dozer cloud set-app`
+Set application, which will be used for all commands.
+
+#### `dozer cloud list`
+List all dozer application in Dozer Cloud.
+
+#### `dozer cloud api`
+Dozer API server management.
+
+#### `dozer cloud secrets`
+Dozer app secrets management.
 
 ## Global Options
 

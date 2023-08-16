@@ -1,1 +1,3 @@
-# Ethereum Ledger
+# Ethereum
+
+## Configuration

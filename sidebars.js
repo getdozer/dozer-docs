@@ -57,7 +57,6 @@ const sidebars = {
     },
 
     'cli-reference',
-
     {
       type: 'category',
       label: 'Configuration',
@@ -66,9 +65,6 @@ const sidebars = {
         id: 'configuration',
       },
       items: [
-        'configuration/configuring-sources',
-        'configuration/configuring-transformations',
-        'configuration/configuring-endpoints',
         {
           type: 'html',
           value: 'DATA SOURCES',
@@ -80,6 +76,7 @@ const sidebars = {
         },
         'configuration/sources/postgres',
         'configuration/sources/snowflake',
+        'configuration/sources/kafka',
         
         {
           type: 'category',
@@ -99,8 +96,8 @@ const sidebars = {
               },
             },
             'configuration/sources/object-stores/types/aws-s3',
-            'configuration/sources/object-stores/types/google-cloud-storage',
-            'configuration/sources/object-stores/types/azure-blob-storage',
+            // 'configuration/sources/object-stores/types/google-cloud-storage',
+            // 'configuration/sources/object-stores/types/azure-blob-storage',
             {
               type: 'html',
               value: 'FILE FORMATS',
