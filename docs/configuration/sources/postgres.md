@@ -20,11 +20,10 @@ connections:
 connections:
   - name: pagila_conn
     config: !Postgres
-      user: postgres
-      password: postgres
-      host: localhost
-      port: 5433
-      database: film
+      # connection_url can be used instead of above config
+      connection_url: postgresql://postgres:postgres@localhost:5433/film
+      # ssl_mode with disable, prefer and require (optional)
+      ssl_mode: require
 ```
 
 ### Parameters
