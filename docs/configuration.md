@@ -44,6 +44,24 @@ Followings are dozer supported connectors and detailed example configurations ar
 - [AWS S3](/docs/configuration/sources/object-stores/types/aws-s3#configuration)
 - Local Object Store ([csv](/docs/configuration/sources/object-stores/formats/csv#configuration), [parquet](/docs/configuration/sources/object-stores/formats/parquet#configuration))
 
+You can configure your connectors like below, in an array manner.
+
+```bash
+connections:
+  - name: pagila_conn
+    config: !Postgres
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5433
+      database: film
+      
+  - name: kafka_store
+    config: !Kafka
+      broker: localhost:19092
+      schema_registry_url: http://localhost:18081
+```
+
 And gather the necessary connection details for each data source. These details typically include:
 - Database hostname or endpoint
 - Port number
@@ -52,6 +70,31 @@ And gather the necessary connection details for each data source. These details 
 - Authentication method (if applicable)
 - Data warehouse or storage service credentials (if applicable)
 - API keys or tokens (if applicable)
+
+Sources are tables to fetch from each connector you defined above and can be defined like below in an array manner as well. This allows each dozer application can connect from various connectors and mix & match with data from different tables.
+
+```bash
+sources:
+  - name: trips
+    table_name: trips
+    connection: pagila_conn
+    
+  - name: transactions
+    table_name: transactions
+    connection: kafka_store
+```
+
+You can also specify on the list of specific columns you want to fetch from the source table like below. This will ignore all other columns in the table to be available for use in dozer application. 
+```bash
+sources:
+  - name: transactions
+    table_name: transactions
+    connection: kafka_store
+    # specific columns to fetch (optional)
+    columns:
+      - txn_id
+      - description
+```
 
 ## SQL Transformations
 
@@ -90,6 +133,12 @@ sql: |
   INTO result_2
   FROM users
     WHERE age > 20;
+    
+  # exposing result_3
+  SELECT COUNT(*)
+  INTO result_3
+  FROM trips
+  GROUP BY region;
 ```
 You can also save your sql separately in form of `*.sql` file under `./queries` folder. Here is the [sample `basic.sql` file](@site/static/docs/basic.sql).
 
@@ -97,6 +146,22 @@ You can also save your sql separately in form of `*.sql` file under `./queries` 
 
 Configure the API endpoints to expose gRPC and REST APIs for data access. Define the endpoints and path that users or downstream systems will use to query and retrieve data.
 
+```bash
+endpoints:
+  - name: result
+    path: /result
+    table_name: result
+    
+  - name: result_3
+    path: /result_3
+    table_name: result_3
+    # index keys from sql GROUP BY column keys
+    index:
+      primary:
+        - region
+```
+
+You can introduce indexes such as `primary` keys. These keys are coming from the pre-defined `GROUP BY` column key that you wrote under `sql` block.
 
 ## Global settings (Optional)
 
