@@ -20,6 +20,7 @@ const sidebars = {
   tutorialSidebar: [
     'dozer',
     'architecture',
+    'installation',
     {
       type: 'category',
       label: 'Getting Started',
@@ -38,22 +39,20 @@ const sidebars = {
             id: 'dozer-core',
           },
         },
-        'getting_started/core/installation',
         'getting_started/core/connecting-to-sources',
         'getting_started/core/adding-transformations',
         'getting_started/core/querying-data',
-        'getting_started/core/monitoring-your-application',
-        'getting_started/core/learn-more',
-        {
-          type: 'html',
-          value: 'DOZER CLOUD',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-cloud',
-          },
-        },
-        'getting_started/cloud/installation',
+        'getting_started/core/monitoring-your-application'
+        // {
+        //   type: 'html',
+        //   value: 'DOZER CLOUD',
+        //   defaultStyle: false,
+        //   className: 'sidebar-item-group',
+        //   customProps: {
+        //     id: 'dozer-cloud',
+        //   },
+        // },
+        // 'getting_started/cloud/installation',
       ]
     },
 
@@ -117,15 +116,7 @@ const sidebars = {
             'configuration/sources/grpc',
           ],
         },
-        // {
-        //   type: 'html',
-        //   value: 'DATA SOURCES',
-        //   defaultStyle: false,
-        //   className: 'sidebar-item-group',
-        //   customProps: {
-        //     id: 'data-sources',
-        //   },
-        // },
+      
       ]
     },
 
@@ -170,82 +161,7 @@ const sidebars = {
       items: []
     }
 
-    // {
-    //   type: 'category',
-    //   label: 'Introduction',
-    //   link: {
-    //     type: 'doc', 
-    //     id: 'dozer/dozer',
-    //   },
-    //   items: [
-    //     {
-    //       type: 'html',
-    //       value: 'DOZER CLOUD',
-    //       defaultStyle: false,
-    //       className: 'sidebar-item-group',
-    //     },
-    //     'dozer/architecture',
-    //     {
-    //       type: 'html',
-    //       value: 'DOZER CORE',
-    //       defaultStyle: false,
-    //       className: 'sidebar-item-group',
-    //     },
-    //     'dozer/comparision',
-    //   ],
-    // },
-    // 'installation',
-    // 'getting_started',
-    // {
-    //   type: 'category',
-    //   label: 'Configuration',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'configuration/overview', 
-    //   },
-    //   items: [
-    //     'configuration/connectors',
-    //     'configuration/endpoints',
-    //     'configuration/security',
-    //   ],
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Queries',
-    //   link: {
-    //     type: 'generated-index',
-    //     slug: '/querying',
-    //   },
-    //   items: [
-    //     'querying/grpc',
-    //     'querying/rest',
-    //   ]
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Dozer SQL',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'sql/introduction',
-    //   },
-    //   items: [
-    //     'sql/functions_and_operators',
-    //     'sql/data_types',
-    //   ]
-    // },
-    // 'data_types',
-    // {
-    //   type: 'category',
-    //   label: 'Contributing',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'contributing/overview', 
-    //   },
-    //   items: [
-    //     'contributing/settingup',
-    //     'contributing/connector',
-    //   ],
-    // },
+   
   ],
 };
 
