@@ -27,6 +27,7 @@ const sidebars = {
         type: 'doc',
         id: 'getting_started',
       },
+      collapsed: false,
       items: [
         {
           type: 'html',
