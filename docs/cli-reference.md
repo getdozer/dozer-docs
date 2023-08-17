@@ -13,93 +13,65 @@ Use `dozer help`, `dozer -h` or `dozer --help` to view a list of available comma
 
 ## Local Development
 
-### `dozer init`
-If you like to initialize dozer application, dozer will create `dozer-config.yaml` in the workspace with pre-populated configuration template.
+#### `dozer init`
+If you'd like to initialize a new dozer application, dozer will create `dozer-config.yaml` in the workspace with a pre-populated configuration template.
 
-> ```bash
-> question: App name (quick-start-app): 
-> question: Home directory (./.dozer): 
-> question: Connection Type - one of: [P]ostgres, [E]thereum, [S]nowflake (Postgres): 
-> question: Config path (./dozer-config.yaml): 
-> ```
-
-### `dozer live`
-Run following command to edit code for your dozer application.
-
-> ```bash
-> .____   ___ __________ ____
-> |  _ \ / _ \__  / ____|  _ \
-> | | | | | | |/ /|  _| | |_) |
-> | |_| | |_| / /_| |___|  _ <
-> |____/ \___/____|_____|_| \_\
-> 
-> INFO Starting live server
-> ```
-
-### `dozer`
-If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services. `app` is the processing pipeline transforming the data, while `api` is the Api server that serves gRPC and REST requests.
 ```bash
-dozer
-# or 
-# dozer -c <custom-dozer-config-path>
+question: App name (quick-start-app): 
+question: Home directory (./.dozer): 
+question: Connection Type - one of: [P]ostgres, [E]thereum, [S]nowflake (Postgres): 
+question: Config path (./dozer-config.yaml): 
 ```
+
+#### `dozer live`
+This is an experimental feature that initializes an in-browseer development / debugging environment which can be used to intercatively test your application.
+
+
+#### `dozer`
+Dozer operates through two primary runtimes:
+- `app`: This functions as a real-time data pipeline, transforming data and forwarding it to the store.
+- `api`: This is an API server that interfaces with the store, providing both gRPC and REST API services.
+
+By default, executing the `dozer` command without any additional parameters initiates both the `app` and `api` within the same process. This mode is particularly useful for local testing of a complete Dozer application. Unless specified, this default run will search for and use the `dozer-config.yaml` located in the current directory. If you need to utilize a different configuration file, run the command as `dozer -c path/to/config/file.yaml`.
 
 ## Self-Hosted Deployment
 
-### `dozer build`
+#### `dozer build`
 Run following command to initialize and lock the schema definitions. Once initialized, schemas cannot be changed.
 
-> ```bash
->  INFO Initiating app: ..
->  ...
->  INFO Created new build v0001
-> ```
-
-### `dozer run app`
+#### `dozer run app`
 If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
 
-### `dozer run api`
+#### `dozer run api`
 If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service. For more details on self-hosting, deployment details can be found [here](/docs/deployment).
 
 
 ## Dozer Cloud Deployment
 You can list out available commands by running `dozer cloud -h`
 
-### `dozer cloud login`
+#### `dozer cloud login`
 Login to Dozer Cloud service.
 
-> ```bash
-> .____   ___ __________ ____
-> |  _ \ / _ \__  / ____|  _ \
-> | | | | | | |/ /|  _| | |_) |
-> | |_| | |_| / /_| |___|  _ <
-> |____/ \___/____|_____|_| \_\
-> 
->  INFO Organisation and client details can be created in https://dashboard.dev.getdozer.io/login
-> 
-> Login success !
-> ```
-
-### `dozer cloud deploy`
+#### `dozer cloud deploy`
 Run following command to deploy your dozer applications to the dozer cloud.
 
 ### Cloud Specific Options
 
-> `--target-url (string)`, `-t (string)`
-> 
-> Provide target url for cloud deployment.
+`--target-url (string)`, `-t (string)`
+ 
+Provide target url for cloud deployment.
 
-> `--app-id (string)`, `-a (string)`
-> 
-> Provide the unique app id for your application.
+`--app-id (string)`, `-a (string)`
 
-> `--profile (string)`, `p`
-> 
-> Provide user profile to cloud login for deployment.
+Provide the unique app id for your application.
 
-> `--ignore-pipe`
-> 
-> Use this option to avoid EOF while parsing a value in the config.
+`--profile (string)`, `p`
+ 
+Provide user profile to cloud login for deployment.
+
+`--ignore-pipe`
+ 
+Use this option to avoid EOF while parsing a value in the config.
 
 ## Utility Commands
 
@@ -210,19 +182,19 @@ Dozer app secrets management.
 
 ## Global Options
 
-> `--config-path (string)`, `-c (string)`
-> 
-> Provide dozer configuration YAML file with given PATH.
+`--config-path (string)`, `-c (string)`
+ 
+Provide dozer configuration YAML file with given PATH.
 
-> `--config-overrides (string)`
-> 
-> Override dozer configuration with string. The part before = is a JSON pointer, and the part after = should be a valid JSON string. If the JSON pointer points to an existing config value, the JSON value will be replaced.
-> e.g. `dozer --config-overrides /app/commit_size=100`
+`--config-overrides (string)`
+ 
+Override dozer configuration with string. The part before = is a JSON pointer, and the part after = should be a valid JSON string. If the JSON pointer points to an existing config value, the JSON value will be replaced.
+ e.g. `dozer --config-overrides /app/commit_size=100`
 
-> `--version`, `-V`
-> 
-> Print Dozer CLI version. Current lastest is `v0.1.33`.
+`--version`, `-V`
+ 
+Print Dozer CLI version. Current lastest is `v0.1.33`.
 
-> `--help`, `-h`
-> 
-> Print help on command or subcommand.
+`--help`, `-h`
+ 
+Print help on command or subcommand.
