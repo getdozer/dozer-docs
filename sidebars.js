@@ -64,7 +64,6 @@ const sidebars = {
         type: 'doc',
         id: 'configuration',
       },
-      collapsed: false,
       items: [
         {
           type: 'category',
@@ -73,7 +72,6 @@ const sidebars = {
             type: "generated-index",
             title: "Data Sources"
           },
-          collapsed: false,
           items: [
             'configuration/sources/postgres',
             'configuration/sources/snowflake',
