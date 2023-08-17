@@ -26,6 +26,7 @@ The file format is based on the YAML spec. The file must be on the root director
 
 ## Data Sources
 
+`connections` are the details around what database that you are going to connect your dozer application with. Meanwhile `sources` are details on the tables that you are fetching from that connections you defined.
 Dozer supported connectors and detailed example configurations are available [here](/docs/category/data-sources). As an example, you can configure your connectors like below, in an array manner.
 
 ```bash
@@ -80,7 +81,7 @@ sources:
 
 ## SQL Transformations
 
-Define the data transformation rules you want to apply to the ingested data. 
+Define the data transformation rules you want to apply to the ingested data. Every SQL transformation statement should have `INTO` clause to be exported as a transformed result.
 
 ```bash
 sql: SELECT * INTO result FROM trips;
@@ -97,7 +98,6 @@ sql: | # make sql section multi-line
   WHERE age > 20;
 ```
 
-Every SQL transformation statement should have `INTO` clause to be exported as a transformed result.
 You can add multiple SQL transformation statements under `sql` section and also can be exposed as separate transformed result with unique `INTO` clauses.
 
 ```bash

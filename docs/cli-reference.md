@@ -37,7 +37,7 @@ Run following command to edit code for your dozer application.
 > ```
 
 ### `dozer`
-If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services.
+If you run Dozer CLI with no command are passed like below, dozer will bring up both `app` and `api` services. `app` is the processing pipeline transforming the data, while `api` is the Api server that serves gRPC and REST requests.
 ```bash
 dozer
 # or 
@@ -59,7 +59,7 @@ Run following command to initialize and lock the schema definitions. Once initia
 If you run Dozer CLI with `run` command with `app` subcommand like below, dozer will bring up app service.
 
 ### `dozer run api`
-If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service.
+If you run Dozer CLI with `run` command with `api` subcommand like below, dozer will bring up api service. For more details on self-hosting, deployment details can be found [here](/docs/deployment).
 
 
 ## Dozer Cloud Deployment
@@ -160,7 +160,7 @@ If you want to view available connectors for your application, run following com
 > ```
 
 #### `dozer security generate-token`
-If you want to utilize api security features, run following command to generate the token. Make sure you add following part in the dozer configuration file.
+If you want to utilize api security features, run following command to generate the token. Make sure you add following part in the dozer configuration file. For more details on how to configure authentication, details can be found [here](/docs/accessing-data/authorization).
 ```yaml
 api:
   api_security:
