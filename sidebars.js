@@ -137,7 +137,12 @@ const sidebars = {
         id: 'transforming-data',
       },
       items: [
-        'transforming-data/data-types'
+        'transforming-data/data-types',
+        'transforming-data/operators',
+        'transforming-data/scalar-functions',
+        'transforming-data/aggregation-functions',
+        'transforming-data/geospatial',
+        'transforming-data/json',
       ]
     },
 
