@@ -1,1 +1,0 @@
-# Configuring API Endpoints
