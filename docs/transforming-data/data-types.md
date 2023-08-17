@@ -2,7 +2,7 @@
 
 The following data types are natively supported by Dozer.
 
-## Primitive Types
+## Primitive Types (`PRIMITIVE`)
 
 ### Numeric Types (`NUMERIC`)
 
@@ -10,7 +10,7 @@ Any numeric type, referred as `NUMERIC` in the rest of the documentation
 
 | Type        | Descritpion                                                                                                                                            | Example             |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| `UINT`      | Unsigned 64-bit integer                                                                                                                                | `-1`                |
+| `UINT`    | Unsigned 64-bit integer                                                                                                                                | `-1`                |
 | `INT`       | Signed 64-bit integer                                                                                                                                  | `1`                 |
 | `FLOAT`     | 64-bit floating point number                                                                                                                           | `2.567`             |
 | `DECIMAL`   | A Decimal number implementation suitable for financial calculations that require significant integral and fractional digits with no round-off errors.  | `DECIMAL(10.90001)` |
@@ -26,10 +26,6 @@ Any textual type, referred as `TEXTUAL` in the rest of the documentation
 | `VARCHAR`   | Variable length string                                                         | `'value1'`                                            |
 | `CHAR`      | Fixed length string                                                            | `'value1'`                                            |
 | `BPCHAR`    | Blank-padded character                                                         | `'value1'`                                            |
-| `TEXT[]`    | Array of `TEXT` type                                                           | `TEXT[]('value1', 'value2')`                          |
-| `VARCHAR[]` | Array of `VARCHAR` type                                                        | `VARCHAR[]('value1', 'value2')`                       |
-| `CHAR[]`    | Array of `CHAR` type                                                           | `CHAR[]('value1', 'value2')`                          |
-| `BPCHAR[]`  | Array of `BPCHAR` type                                                         | `BPCHAR[]('value1', 'value2')`                        |
 
 ### Date / Time Types (`DATETIME`)
 
@@ -39,6 +35,20 @@ Any date and time related type, referred as `DATETIME` in the rest of the docume
 |-------------|---------------------------------------------------------------------------|------------------------------------------------|
 | `TIMESTAMP` | A date time with supports for timezones, represented using RFC3339 format | `TIMESTAMP('2016-09-01T10:11:12.123456-0500')` |
 | `DATE`      | A simple date, respresented using RFC3339 format                          | `DATE('2016-09-01')`                           |
+
+## Array Types (`ARRAY`)
+
+### Textual Array Types (`TEXTUAL-ARRAY`)
+
+Any textual type, referred as `TEXTUAL` in the rest of the documentation
+
+| Type        | Description                                                                    | Example                                               |
+|-------------|--------------------------------------------------------------------------------|-------------------------------------------------------|
+| `TEXT[]`    | Array of `TEXT` type                                                           | `TEXT[]('value1', 'value2')`                          |
+| `VARCHAR[]` | Array of `VARCHAR` type                                                        | `VARCHAR[]('value1', 'value2')`                       |
+| `CHAR[]`    | Array of `CHAR` type                                                           | `CHAR[]('value1', 'value2')`                          |
+| `BPCHAR[]`  | Array of `BPCHAR` type                                                         | `BPCHAR[]('value1', 'value2')`                        |
+
 
 ### Other
 
