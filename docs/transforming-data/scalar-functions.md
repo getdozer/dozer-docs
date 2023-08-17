@@ -18,17 +18,46 @@ ABS(expr)
 The absolute number as a [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) value
 
 
-## Functions
+### `ROUND()`
+Rounds a number with a specified number of decimals
 
-### Numeric
+#### Syntax
+```sql
+ROUND(expr, decimals) 
+```
+#### Arguments
+| Name     | Type                   | Description              |
+|----------|------------------------|--------------------------|
+| `expr`   | `FLOAT` or `DECIMAL`   | An expression returning a `FLOAT` or `DECIMAL` value |
+| `decimals`| `UINT`  | Number of decimals |
 
-| Function      | Input Type           | Return Type          | Description                                       |
-|---------------|----------------------|----------------------|---------------------------------------------------|
-| `ABS(V)`      | `NUMERIC`            | `NUMERIC`            | Calculates the absolute value of `V`              |
-| `ROUND(V, D)` | `FLOAT` or `DECIMAL` | `FLOAT` or `DECIMAL` | Rounds a number `V` with `D` number with decimals |
+#### Returns
+The rounded number as a `FLOAT` or `DECIMAL`, depending on the input type
 
 
-### String
+
+## Textual
+
+### `TRIM()`
+Trims one or multiple characters from a `TEXTUAL`
+
+#### Syntax
+```sql
+TRIM([[LEADING or TRAILING or BOTH] char FROM] expr)
+```
+#### Arguments
+| Name     | Type                   | Description              |
+|----------|------------------------|--------------------------|
+| `expr`   | `FLOAT` or `DECIMAL`   | An expression returning a `FLOAT` or `DECIMAL` value |
+| `decimals`| `UINT`  | Number of decimals |
+
+#### Returns
+The rounded number as a `FLOAT` or `DECIMAL`, depending on the input type
+
+
+
+
+
 
 | Function                                                | Input Type                                 | Return Type        | Desctiption                                                                                                                                                                                                                                                    |
 |---------------------------------------------------------|--------------------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
