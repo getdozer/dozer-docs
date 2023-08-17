@@ -75,6 +75,8 @@ const sidebars = {
           collapsed: false,
           items: [
             'configuration/sources/postgres',
+            'configuration/sources/mongodb',
+            'configuration/sources/mysql',
             'configuration/sources/snowflake',
             'configuration/sources/kafka',
 
