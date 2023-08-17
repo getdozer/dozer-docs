@@ -24,27 +24,9 @@ The file format is based on the YAML spec. The file must be on the root director
 | **`sql`**         | String | false     | `sql: SELECT * FROM trips`<br/>more example available [here](#sql-transformations)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | **`endpoints`**   | Array  | true      | `endpoints: `<br/>&nbsp;&nbsp;&nbsp;&nbsp;`- name: trips` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`path: /trips` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`table_name: trips`<br/>more example available [here](#api-endpoints)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-### Conventions
-The spec of the configuration file must use these conventions.
-
-- Use **`[]`** to indicate an empty list
-- Use **`null`** to indicate a null value
-- Use **`true`** and **`false`** as only options on boolean fields
-
-
 ## Data Sources
 
-Followings are dozer supported connectors and detailed example configurations are available:
-- [Postgres](/docs/configuration/sources/postgres#configuration)
-- [Snowflake](/docs/configuration/sources/snowflake#configuration)
-- [Ethereum](/docs/configuration/sources/ethereum#configuration)
-- [Kafka](/docs/configuration/sources/kafka#configuration)
-- [gRPC](/docs/configuration/sources/grpc#configuration)
-- [Delta Lake](/docs/configuration/sources/object-stores/formats/deltalake#configuration)
-- [AWS S3](/docs/configuration/sources/object-stores/types/aws-s3#configuration)
-- Local Object Store ([csv](/docs/configuration/sources/object-stores/formats/csv#configuration), [parquet](/docs/configuration/sources/object-stores/formats/parquet#configuration))
-
-You can configure your connectors like below, in an array manner.
+Dozer supported connectors and detailed example configurations are available [here](/docs/category/data-sources). As an example, you can configure your connectors like below, in an array manner.
 
 ```bash
 connections:
@@ -168,8 +150,23 @@ endpoints:
 ```
 
 You can introduce indexes such as `primary` keys. These keys are coming from the pre-defined `GROUP BY` column key that you wrote under `sql` block.
+On top of this, you can also introduce configurable `secondary` and `full text` indexes as well as below.
 
-## Global settings (Optional)
+```yaml
+endpoints:
+  - name: trips
+    path: /trips
+    table_name: trips
+    index:
+      secondary:
+        create:
+          - index: !SortedInverted
+              fields:
+                - hvfhs_license_num
+                - trip_miles
+```
+
+## Global settings
 
 | Property                               | Details                                                      | Type    | Default Value | Example                              |
 |----------------------------------------|--------------------------------------------------------------|---------|---------------|--------------------------------------|

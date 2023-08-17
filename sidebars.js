@@ -64,58 +64,68 @@ const sidebars = {
         type: 'doc',
         id: 'configuration',
       },
+      collapsed: false,
       items: [
         {
-          type: 'html',
-          value: 'DATA SOURCES',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'data-sources',
-          },
-        },
-        'configuration/sources/postgres',
-        'configuration/sources/snowflake',
-        'configuration/sources/kafka',
-        
-        {
           type: 'category',
-          label: 'Object Stores',
+          label: 'Data Sources',
           link: {
-            type: 'doc',
-            id: 'configuration/sources/object-stores',
+            type: "generated-index",
+            title: "Data Sources"
           },
+          collapsed: false,
           items: [
+            'configuration/sources/postgres',
+            'configuration/sources/snowflake',
+            'configuration/sources/kafka',
+
             {
-              type: 'html',
-              value: 'STORAGE TYPES',
-              defaultStyle: false,
-              className: 'sidebar-item-group',
-              customProps: {
-                id: 'object-stores',
+              type: 'category',
+              label: 'Object Stores',
+              link: {
+                type: 'doc',
+                id: 'configuration/sources/object-stores',
               },
+              items: [
+                {
+                  type: 'html',
+                  value: 'STORAGE TYPES',
+                  defaultStyle: false,
+                  className: 'sidebar-item-group',
+                  customProps: {
+                    id: 'object-stores',
+                  },
+                },
+                'configuration/sources/object-stores/types/aws-s3',
+                // 'configuration/sources/object-stores/types/google-cloud-storage',
+                // 'configuration/sources/object-stores/types/azure-blob-storage',
+                {
+                  type: 'html',
+                  value: 'FILE FORMATS',
+                  defaultStyle: false,
+                  className: 'sidebar-item-group',
+                  customProps: {
+                    id: 'file-formats',
+                  },
+                },
+                'configuration/sources/object-stores/formats/csv',
+                'configuration/sources/object-stores/formats/parquet',
+                'configuration/sources/object-stores/formats/deltalake',
+              ]
             },
-            'configuration/sources/object-stores/types/aws-s3',
-            // 'configuration/sources/object-stores/types/google-cloud-storage',
-            // 'configuration/sources/object-stores/types/azure-blob-storage',
-            {
-              type: 'html',
-              value: 'FILE FORMATS',
-              defaultStyle: false,
-              className: 'sidebar-item-group',
-              customProps: {
-                id: 'file-formats',
-              },
-            },
-            'configuration/sources/object-stores/formats/csv',
-            'configuration/sources/object-stores/formats/parquet',
-            'configuration/sources/object-stores/formats/deltalake',
-          ]
+            'configuration/sources/ethereum',
+            'configuration/sources/grpc',
+          ],
         },
-
-
-        'configuration/sources/ethereum',
-        'configuration/sources/grpc',
+        // {
+        //   type: 'html',
+        //   value: 'DATA SOURCES',
+        //   defaultStyle: false,
+        //   className: 'sidebar-item-group',
+        //   customProps: {
+        //     id: 'data-sources',
+        //   },
+        // },
       ]
     },
 
@@ -144,6 +154,15 @@ const sidebars = {
         'accessing-data/querying-using-rest',
         'accessing-data/authorization'
       ]
+    },
+    {
+      type: 'category',
+      label: 'Deployment',
+      link: {
+        type: 'doc',
+        id: 'deployment',
+      },
+      items: []
     }
 
     // {
