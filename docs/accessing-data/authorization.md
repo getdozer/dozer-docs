@@ -10,7 +10,7 @@ Authorization: Bearer <token>
 
 Let's follow the step-by-step guide, and add safeguards to your application from unauthorized access, ensuring data integrity and user trust.
 
-## Level 1 Authorization
+## Master-Level Authorization
 
 To Generate and export a master token for authentication, first, make sure you add following part in the dozer configuration file.
 ```yaml
@@ -43,7 +43,7 @@ INFO 127.0.0.1 "GET /trips HTTP/1.1" 200 24000 "-" "curl/7.81.0" 0.000458
 
 > __Note__: always ensure that your MASTER_TOKEN is kept secure. Do not commit this information to your version control system.
 
-## Level 2 Authorization
+## User-Level Authorization
 Level 2 auth will allow you to generate token with smaller scope to narrow down the data accessibility.
 
 To Generate and export a level 2 master token for authentication, make sure you add following part in the dozer configuration file with random secret value.
