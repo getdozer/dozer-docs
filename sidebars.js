@@ -57,69 +57,60 @@ const sidebars = {
     },
 
     'cli-reference',
+    'configuration',
+
     {
       type: 'category',
-      label: 'Configuration',
+      label: 'Data Sources',
       link: {
-        type: 'doc',
-        id: 'configuration',
+        type: "generated-index",
+        title: "Data Sources"
       },
+      collapsed: false,
       items: [
+        'configuration/sources/postgres',
+        'configuration/sources/mongodb',
+        'configuration/sources/mysql',
+        'configuration/sources/snowflake',
+        'configuration/sources/kafka',
+
         {
           type: 'category',
-          label: 'Data Sources',
+          label: 'Object Stores',
           link: {
-            type: "generated-index",
-            title: "Data Sources"
+            type: 'doc',
+            id: 'configuration/sources/object-stores',
           },
-          collapsed: false,
           items: [
-            'configuration/sources/postgres',
-            'configuration/sources/mongodb',
-            'configuration/sources/mysql',
-            'configuration/sources/snowflake',
-            'configuration/sources/kafka',
-
             {
-              type: 'category',
-              label: 'Object Stores',
-              link: {
-                type: 'doc',
-                id: 'configuration/sources/object-stores',
+              type: 'html',
+              value: 'STORAGE TYPES',
+              defaultStyle: false,
+              className: 'sidebar-item-group',
+              customProps: {
+                id: 'object-stores',
               },
-              items: [
-                {
-                  type: 'html',
-                  value: 'STORAGE TYPES',
-                  defaultStyle: false,
-                  className: 'sidebar-item-group',
-                  customProps: {
-                    id: 'object-stores',
-                  },
-                },
-                'configuration/sources/object-stores/types/aws-s3',
-                // 'configuration/sources/object-stores/types/google-cloud-storage',
-                // 'configuration/sources/object-stores/types/azure-blob-storage',
-                {
-                  type: 'html',
-                  value: 'FILE FORMATS',
-                  defaultStyle: false,
-                  className: 'sidebar-item-group',
-                  customProps: {
-                    id: 'file-formats',
-                  },
-                },
-                'configuration/sources/object-stores/formats/csv',
-                'configuration/sources/object-stores/formats/parquet',
-                'configuration/sources/object-stores/formats/deltalake',
-              ]
             },
-            'configuration/sources/ethereum',
-            'configuration/sources/grpc',
-          ],
+            'configuration/sources/object-stores/types/aws-s3',
+            // 'configuration/sources/object-stores/types/google-cloud-storage',
+            // 'configuration/sources/object-stores/types/azure-blob-storage',
+            {
+              type: 'html',
+              value: 'FILE FORMATS',
+              defaultStyle: false,
+              className: 'sidebar-item-group',
+              customProps: {
+                id: 'file-formats',
+              },
+            },
+            'configuration/sources/object-stores/formats/csv',
+            'configuration/sources/object-stores/formats/parquet',
+            'configuration/sources/object-stores/formats/deltalake',
+          ]
         },
-      
-      ]
+        'configuration/sources/ethereum',
+        'configuration/sources/grpc',
+      ],
     },
 
     {
