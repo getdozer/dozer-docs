@@ -14,6 +14,7 @@ The Local Storage connector is used to connect to a local file system, and use i
 
 #### Configuration
 
+To use Local Storage connector the config parameter of the connection must be set to `!LocalStorage`.
 The following configuration block can be used in `dozer-config.yaml` to define a new local storage connection:
 
 ```yaml
@@ -34,6 +35,7 @@ connections:
 
 ### AWS S3
 
+To use the AWS S3 connector the config parameter of the connection must be set to `!S3Storage`.
 The AWS S3 connector is used to connect to an S3 bucket, and use it as a source for data ingestion.
 
 #### Configuration

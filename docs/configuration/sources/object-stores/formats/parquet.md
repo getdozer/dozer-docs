@@ -4,6 +4,8 @@ Apache Parquet is a columnar storage file format available to any project in the
 
 ## Configuration
 
+The following configuration block can be used in `dozer-config.yaml`, as a table parameter of an Object Store connector, to define a new table using Parquet files:
+
 ```yaml
 -  !Table
     name: trips
@@ -15,7 +17,7 @@ Apache Parquet is a columnar storage file format available to any project in the
 ```
 
 
-#### Parameters
+## Parameters
 
 * **path**: the path to the folder containing the Parquet files.
 * **extension** (optional): the extension of the Parquet files.

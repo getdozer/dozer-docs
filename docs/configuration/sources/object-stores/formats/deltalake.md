@@ -5,6 +5,8 @@ Delta Lake is an open-source storage layer that brings ACID (Atomicity, Consiste
 
 ## Configuration
 
+The following configuration block can be used in `dozer-config.yaml`, as a table parameter of an Object Store connector, to define a new table using Delta files:
+
 ```yaml
 - !Table
   name: delta
@@ -13,6 +15,6 @@ Delta Lake is an open-source storage layer that brings ACID (Atomicity, Consiste
 ```
 
 
-#### Parameters
+## Parameters
 
 * **path**: the path to the Delta table folder.

@@ -4,6 +4,8 @@ CSV (Comma Separated Values) is a simple file format used to store tabular data,
 
 ## Configuration
 
+The following configuration block can be used in `dozer-config.yaml`, as a table parameter of an Object Store connector, to define a new table using CSV files:
+
 ```yaml
 -  !Table
     name: zones
@@ -18,7 +20,7 @@ CSV (Comma Separated Values) is a simple file format used to store tabular data,
         # ingestion_type: append-only
  -->
 
-#### Parameters
+## Parameters
 
 * **path**: the path to the CSV file.
 * **extension**: the extension of the CSV file.
