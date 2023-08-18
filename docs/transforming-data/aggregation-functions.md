@@ -50,21 +50,30 @@ The highest [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) or 
 
 
 ### `MAX_VALUE()`
-Where `expr_1` is the value or column to apply `MAX()` to, while `expr_2` is the value to return.
+Calculates the maximum value based on the evaluation of the `eval_expr`. If `eval_expr` results in the maximum value among its peers, the function returns the corresponding `return_expr`.
 
 #### Syntax
 ```sql
-MAX_VALUE(expr_1, expr_2)
+MAX_VALUE(eval_expr, return_expr) 
 ```
 
-#### Arguments
-| Name     | Type | Description                                                                   |
-|----------|------|-------------------------------------------------------------------------------|
-| `expr_1` | ANY  | An expression or column name from which the maximum value is to be determined |
-| `expr_2` | ANY  | An expression or column name where the value is to be returned                |
+#### Arguments  
+| Name          | Type        | Description  |
+|---------------|-------------|--------------|
+| `eval_expr`     | [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) or [`DATETIME`](/transforming-data/data-types#date--time-types-datetime)  | The expression that is evaluated to determine the maximum value. |
+| `return_expr`   | ANY  | The value to be returned when `eval_expr` achieves the minimum value. |
 
-#### Returns
-The corresponding `expr_2` value tied to the highest `expr_1` value from the specified column. If there are no non-NULL values in the column or set, the function returns NULL.
+#### Returns  
+The value of `return_expr` when `eval_expr` is the maximum. The data type of the returned value depends on the type of `return_expr`.
+
+#### Example
+Suppose we have a table `sales` with two columns, `product_id` and `units_sold`. If we want to find out which product has the most units sold, and return its product ID:
+
+```sql
+SELECT MAX_VALUE(units_sold, product_id) FROM sales;
+```
+
+In this example, the function evaluates each row's `units_sold` value. Once it identifies the row with the most units sold, it will return the corresponding `product_id`.
 
 ### `MIN()`
 Calculates the minimum value in a column.
@@ -83,22 +92,30 @@ The lowest [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) or [
  value from the specified column. If there are no non-NULL values in the column or set, the function returns NULL.
 
 ### `MIN_VALUE()`
-Where `expr_1` is the value or column to apply `MIN()` to, while `expr_2` is the value to return.
+Calculates the minimum value based on the evaluation of the `eval_expr`. If `eval_expr` results in the minimum value among its peers, the function returns the corresponding `return_expr`.
 
 #### Syntax
 ```sql
-MIN_VALUE(expr_1, expr_2)
+MIN_VALUE(eval_expr, return_expr) 
 ```
 
-#### Arguments
-| Name     | Type | Description                                                                   |
-|----------|------|-------------------------------------------------------------------------------|
-| `expr_1` | ANY  | An expression or column name from which the minimum value is to be determined |
-| `expr_2` | ANY  | An expression or column name where the value is to be returned                |
+#### Arguments  
+| Name          | Type        | Description  |
+|---------------|-------------|--------------|
+| `eval_expr`     | [`NUMERIC`](/transforming-data/data-types#numeric-types-numeric) or [`DATETIME`](/transforming-data/data-types#date--time-types-datetime)  | The expression that is evaluated to determine the minimum value. |
+| `return_expr`   | ANY  | The value to be returned when `eval_expr` achieves the minimum value. |
 
-#### Returns
-The corresponding `expr_2` value tied to the lowest `expr_1` value from the specified column. If there are no non-NULL values in the column or set, the function returns NULL.
+#### Returns  
+The value of `return_expr` when `eval_expr` is the minimum. The data type of the returned value depends on the type of `return_expr`.
 
+#### Example
+Suppose we have a table `sales` with two columns, `product_id` and `units_sold`. If we want to find out which product has the least units sold, and return its product ID:
+
+```sql
+SELECT MIN_VALUE(units_sold, product_id) FROM sales;
+```
+
+In this example, the function evaluates each row's `units_sold` value. Once it identifies the row with the least units sold, it will return the corresponding `product_id`.
 
 ### `SUM()`
 Calculates the cumulative sum of a numeric column.
