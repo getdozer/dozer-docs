@@ -6,7 +6,42 @@ The configuration of the Object Store Connector includes various parameters rela
 
 ## Storage Types
 
+The Object Store connector supports the following storage types: Local Storage and AWS S3. Setting the `config` parameter to the corresponding storage type will allow you to connect to the storage system of your choice.
+
+### Local Storage
+
+The Local Storage connector is used to connect to a local file system, and use it as a source for data ingestion, like any other Object Store.
+
+#### Configuration
+
+To use Local Storage connector the config parameter of the connection must be set to `!LocalStorage`.
+The following configuration block can be used in `dozer-config.yaml` to define a new local storage connection:
+
+```yaml
+connections:
+  - name: local_dataset
+    config: !LocalStorage
+      details:
+        path: /tmp/data
+      tables:
+        ...
+    
+```
+
+#### Parameters
+
+* **path**: the path to the local storage folder.
+* **tables**: a list of tables to be ingested from the local storage. see Formats section for more details.
+
 ### AWS S3
+
+To use the AWS S3 connector the config parameter of the connection must be set to `!S3Storage`.
+The AWS S3 connector is used to connect to an S3 bucket, and use it as a source for data ingestion.
+
+#### Configuration
+
+The following configuration block can be used in `dozer-config.yaml` to define a new S3 connection:
+
 ```yaml
 connections:
   - name: s3
@@ -20,17 +55,45 @@ connections:
         ...
 ```
 
+#### Parameters
+
+* **access_key_id**: the access key id of the AWS account.
+* **secret_access_key**: the secret access key of the AWS account.
+* **region**: the region of the S3 bucket.
+* **bucket_name**: the name of the S3 bucket.
+* **tables**: a list of tables to be ingested from the local storage. see Formats section for more details.
+
+
+<!-- 
 ### Google Cloud Storage
+
+
+#### Configuration
 ```yaml
 connections:
   - name: GCS
     config: !GCPStorage
       details:
-        project_id: {{GCP_PROJECT_ID}}
+        account: {{SERVICE_ACCOUNT_PATH}}
         bucket: {{GCP_BUCKET_NAME}}
       tables:
         ...
 ```
 
-
 ### Azure Blob Storage
+
+#### Configuration
+
+```yaml
+connections:
+  - name: sample_connector
+    config: !AzureStorage
+      details:
+        connection_string: {{AZURE_CONNECTION_STRING}}
+        container_name: {{AZURE_CONTAINER_NAME}}
+      tables:
+        ...
+```
+-->
+
+
