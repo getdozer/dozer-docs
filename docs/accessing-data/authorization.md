@@ -10,7 +10,7 @@ Authorization: Bearer <token>
 
 Let's follow the step-by-step guide, and add safeguards to your application from unauthorized access, ensuring data integrity and user trust.
 
-## Add Authorization
+## Level 1 Authorization
 
 To Generate and export a master token for authentication, first, make sure you add following part in the dozer configuration file.
 ```yaml
@@ -30,7 +30,7 @@ export MASTER_TOKEN=<your_token_here>
 ```
 
 Once you have saved the token, you can pass in the Authorization header the generated token. 
-Let's refer to the example of NY Taxi dataset. The cURL command is:
+The example cURL command to test out is followed.
 
 ```bash
 curl --location --request GET --header 'Authorization: Bearer MASTER_TOKEN' 'localhost:8080/trips'
@@ -41,7 +41,32 @@ In the terminal, where the dozer API is running, you will get an information sim
 INFO 127.0.0.1 "GET /trips HTTP/1.1" 200 24000 "-" "curl/7.81.0" 0.000458    
 ```
 
-
-
 > __Note__: always ensure that your MASTER_TOKEN is kept secure. Do not commit this information to your version control system.
 
+## Level 2 Authorization
+Level 2 auth will allow you to generate token with smaller scope to narrow down the data accessibility.
+
+To Generate and export a level 2 master token for authentication, make sure you add following part in the dozer configuration file with random secret value.
+```yaml
+api:
+  api_security:
+    !Jwt COv9gMj9L12CDFT2zI5o
+```
+
+And run following command to generate master key.
+```bash
+dozer security generate-token
+```
+
+To test out level 2 master token, run following command which is a POST request with attached filter.
+```bash
+curl --location 'http://localhost:8080/auth/token' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <MASTER_TOKEN>' \
+--data '{"Custom":{"myfilms":{"$filter":{ "film_id": 646},"fields":[]}}}'
+```
+
+output should be like following
+```json
+{"token":"<MASTER_TOKEN>"}
+```
