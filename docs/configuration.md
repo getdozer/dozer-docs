@@ -1,35 +1,29 @@
 # Configuration
+Dozer relies on a YAML configuration structure delineated in `dozer-config.yaml`. This file serves as the backbone for specifying connectors, data sources, SQL transformations, API endpoints, and other critical characteristics of your application.
 
-## Dozer Configuration YAML
+### Location and Naming
+`dozer-config.yaml` must reside in the root directory of a Dozer application. Alternative filenames can be utilized but must be declared using the `-c` or `--config-path` option when executing the `dozer` command.
 
-Dozer uses the YAML syntax for configuration. The `dozer-config.yaml`
-file created when you run `dozer init` is a YAML configuration file in the root directory of a project which lets you define connectors, sources, sql, endpoints, and other properties for the dozer application and the packages and functions within it.
+### Key Properties
 
-The structure of the information in `dozer-config.yaml` is aligned with the structure of your application.
+| Property    | Mandatory | Description                                                                                                     |
+|-------------|-----------|-----------------------------------------------------------------------------------------------------------------|
+| `app_name`  | Yes       | Sets the unique name of the Dozer application.                                                                  |
+| [`connections`](#connections) | Yes    | Details the array of various database connections.                                                              |
+| [`sources`](#sources)   | Yes        | Denotes tables and associated data streams from the designated connections.                                      |
+| [`sql`](#sql-transformations)       | No        | Describes the SQL transformations applied to the sourced data.                                                   |
+| [`endpoints`](#api-endpoints) | Yes       | Establishes API endpoints, determining how data access and queries are managed.                                  |
 
-### Format
-The file format is based on the YAML spec. The file must be on the root directory of the repository unless you specify the configuration location path with `-c` or `--config-path` option in your command, and be named as:
+For an in-depth breakdown of each property, consult the associated sections.
 
-- `dozer-config.yaml` (default)
-- `dozer-config.yml`
-- or any other names are fine, but you need to you specify the path including file name with `-c` or `--config-path` option in your command
-
-### Main Properties
-
-| Property          | Type   | Mandatory | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|-------------------|--------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`app_name`**    | String | true      | `app_name: dozer-application`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **`connections`** | Array  | true      | `connections: ` <br/>&nbsp;&nbsp;&nbsp;&nbsp;`- config: !Postgres` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`user: "{{PG_USER}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`password: "{{PG_PASSWORD}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`host: "{{PG_HOST}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`port: 5432`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`database: "{{PG_DB}}"`<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`name: pg`<br/>more example available [here](#data-sources) |
-| **`sources`**     | Array  | false     | `sources: ` <br/>&nbsp;&nbsp;&nbsp;&nbsp;`- name: zones` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`table_name: zones` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`connection: pg`<br/>more example available [here](#data-sources)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **`sql`**         | String | false     | `sql: SELECT * FROM trips`<br/>more example available [here](#sql-transformations)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| **`endpoints`**   | Array  | true      | `endpoints: `<br/>&nbsp;&nbsp;&nbsp;&nbsp;`- name: trips` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`path: /trips` <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`table_name: trips`<br/>more example available [here](#api-endpoints)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ## Data Sources
 
-`connections` are the details around what database that you are going to connect your dozer application with. Meanwhile `sources` are details on the tables that you are fetching from that connections you defined.
-Dozer supported connectors and detailed example configurations are available [here](/docs/category/data-sources). As an example, you can configure your connectors like below, in an array manner.
+### Connections
 
-```bash
+`connections` define the databases or services Dozer will interface with. Each connection is represented as an array item and details the kind of database or service being connected to.
+
+```yaml
 connections:
   - name: pagila_conn
     config: !Postgres
@@ -45,18 +39,20 @@ connections:
       schema_registry_url: http://localhost:18081
 ```
 
-And gather the necessary connection details for each data source. These details typically include:
-- Database hostname or endpoint
-- Port number
-- Database name
-- Username and password
-- Authentication method (if applicable)
-- Data warehouse or storage service credentials (if applicable)
-- API keys or tokens (if applicable)
+Each connection typically requires the following details:
+- Database hostname or endpoint.
+- Port number.
+- Database name.
+- User credentials: username and password.
+- Specific details depending on the service type (e.g., schema registry for Kafka).
 
-Sources are tables to fetch from each connector you defined above and can be defined like below in an array manner as well. This allows each dozer application can connect from various connectors and mix & match with data from different tables.
+For a comprehensive list of supported connectors and their configurations, refer to [Dozer's supported connectors documentation](/data-sources).
 
-```bash
+### Sources
+
+`sources` represent the specific tables or data points you wish to fetch from the established connections. Like connections, sources are also represented in an array format.
+
+```yaml
 sources:
   - name: trips
     table_name: trips
@@ -67,75 +63,88 @@ sources:
     connection: kafka_store
 ```
 
-You can also specify on the list of specific columns you want to fetch from the source table like below. This will ignore all other columns in the table to be available for use in dozer application. 
-```bash
+For more refined data extraction, you can also specify the columns you wish to fetch from a source. This makes it possible to tailor data intake to only the necessary fields, optimizing the efficiency of your Dozer application.
+
+```yaml
 sources:
   - name: transactions
     table_name: transactions
     connection: kafka_store
-    # specific columns to fetch (optional)
-    columns:
+    columns: # Optional
       - txn_id
       - description
 ```
-
 ## SQL Transformations
+To cater to intricate data transformation requirements, the Dozer configuration supports complex SQL statements. For a better understanding, consider the following guidelines:
 
-Define the data transformation rules you want to apply to the ingested data. Every SQL transformation statement should have `INTO` clause to be exported as a transformed result.
+### Multi-Line SQL Statements:
+When your transformation logic spans multiple lines, utilize the pipe (`|`) symbol for clarity:
 
-```bash
-sql: SELECT * INTO result FROM trips;
-```
-
-These SQLs might involve joining tables, aggregating data, or applying filters. Find more details about available SQL functions to be found [here](/docs/transforming-data).
-
-```bash
-sql: | # make sql section multi-line
+```yaml
+sql: |
   SELECT 
     id, first_name, last_name, number, age
-  INTO result # required to expose transformed result
+  INTO result
   FROM users
   WHERE age > 20;
 ```
 
-You can add multiple SQL transformation statements under `sql` section and also can be exposed as separate transformed result with unique `INTO` clauses.
+### Combining Multiple Transformations:
+Under the `sql` key, you can sequence various transformation statements, each exposing its own distinct result via individual `INTO` clauses:
 
-```bash
+```yaml
 sql: |
-  # exposing result_1
   SELECT * 
   INTO result_1 
   FROM trips
-  INNER JOIN users
-    ON users.id = trips.customer_id;
+  JOIN users ON users.id = trips.customer_id;
 
-  # exposing result_2
   SELECT 
     id, first_name, last_name, number, age
   INTO result_2
   FROM users
-    WHERE age > 20;
-    
-  # exposing result_3
+  WHERE age > 20;
+
   SELECT COUNT(*)
   INTO result_3
   FROM trips
   GROUP BY region;
 ```
-You can also save your sql separately in form of `*.sql` file under `./queries` folder. Here is the [sample `basic.sql` file](@site/static/docs/basic.sql).
+
+For additional details and available SQL functions, consult the [SQL Functions Guide](/transforming-data).
+
+### External SQL Files
+
+For better organization, especially when dealing with a multitude of complex transformations, it's possible to save your SQL transformations in separate files. Simply place these `*.sql` files under the `./queries` directory.
+
+For instance, if you have a transformation stored in `basic.sql`:
+
+```sql
+-- File: ./queries/basic.sql
+
+SELECT 
+  region, COUNT(*)
+INTO regional_counts
+FROM trips
+GROUP BY region;
+```
+Dozer will automatically recognize and load all SQL files in this directory, integrating their results into the overall data pipeline.
 
 ## API Endpoints
+API endpoints in Dozer allow you to expose both gRPC and REST APIs for seamless data access. In this section, you can define the endpoint names, paths, and associate them with data sources or transformed results.
 
-Configure the API endpoints to expose gRPC and REST APIs for data access. Define the endpoints and path that users or downstream systems will use to query and retrieve data.
+### Basic Endpoint Configuration
 
-```bash
+Endpoints can be tied directly to a source or to an SQL-transformed result. Here are some examples:
+
+```yaml
 endpoints:
-  # exposing api directly from source
+  # Exposing API directly from a source
   - name: trips
     path: /trips
     table_name: trips
 
-  # exposing sql transformed result
+  # Exposing SQL-transformed results
   - name: result
     path: /result
     table_name: result
@@ -143,14 +152,28 @@ endpoints:
   - name: result_3
     path: /result_3
     table_name: result_3
-    # index keys from sql GROUP BY column keys
+```
+
+### Indexes
+
+Indexes help optimize the speed and efficiency of queries. You can define primary, secondary, or full-text indexes based on your needs.
+
+#### Primary Indexes
+You can explicitly define primary indexes for your tables. However, it's important to note that when your SQL transformations include a `GROUP BY` clause, primary indexes are automatically set based on the field names within that `GROUP BY` clause. This ensures optimal querying performance on aggregated data.
+
+```yaml
+endpoints:
+  - name: result_3
+    path: /result_3
+    table_name: result_3
     index:
       primary:
         - region
 ```
 
-You can introduce indexes such as `primary` keys. These keys are coming from the pre-defined `GROUP BY` column key that you wrote under `sql` block.
-On top of this, you can also introduce configurable `secondary` and `full text` indexes as well as below.
+#### Secondary and Full-Text Indexes
+
+For more complex querying capabilities, consider adding secondary or full-text indexes:
 
 ```yaml
 endpoints:
@@ -166,7 +189,18 @@ endpoints:
                 - trip_miles
 ```
 
+When structuring your indexes, always consider your application's querying needs and performance requirements.
+
 ## Global settings
+These settings can be specified at the root of the `dozer-config.yaml` file to define global configurations for your Dozer application.
+
+#### Example
+```yaml
+app_buffer_size: 50000
+commit_size: 100
+home_dir: ./.dozer_custom
+...
+```
 
 | Property                               | Details                                                                                  | Type                       | Default Value                   | Example                              |
 |----------------------------------------|------------------------------------------------------------------------------------------|----------------------------|---------------------------------|--------------------------------------|
