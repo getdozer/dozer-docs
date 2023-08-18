@@ -22,35 +22,53 @@ JSON_QUERY(expression [,path])`
 The function returns the `JSON` sub-object from the `expression` based on the specified `path`. If the target of the JSON path is a scalar value, the function returns a JSON string representation of that value.  Default path for the query function is $ which translates into the the original input JSON.
 
 #### Example
-Given the following JSON
+Given a record containing a JSON column named `library`
+
 ```json
 {
-  "test_jsonb": {"bar": {"1": 1, "2": 2, "3": 3}, "baz": null, "foo": [1, 2, 3]},
-  "test_json": [{"digit": 30, "letter": "A"}, {"digit": 31, "letter": "B"}]
+  "library": {
+    "fiction": [
+      {"title": "To Kill a Mockingbird", "author": "Harper Lee"},
+      {"title": "1984", "author": "George Orwell"},
+      {"title": "The Great Gatsby", "author": "F. Scott Fitzgerald"}
+    ],
+    "non_fiction": [
+      {"title": "Sapiens", "author": "Yuval Noah Harari"},
+      {"title": "Educated", "author": "Tara Westover"}
+    ]
+  }
 }
 ```
-The query below
+
+if you wanted to extract just the titles of all fiction books, you can use the SQL statement below
+
 ```sql
 select
-  JSON_QUERY(test_json,'$[*].digit') AS all_digits
-into test_uuid_res
-from test_uuid;
+  JSON_QUERY(library, '$.fiction[*].title') AS fiction_titles
+into result_table
+from library_data;
 ```
-would return the following result
+
+which would produce the result
 ```json
-"all_digits": {
+"fiction_titles": {
     "list_value": {
         "values": [
             {
-                "number_value": 30
+                "string_value": "To Kill a Mockingbird"
             },
             {
-                "number_value": 31
+                "string_value": "1984"
+            },
+            {
+                "string_value": "The Great Gatsby"
             }
         ]
     }
 }
 ```
+
+This example provides a clearer use case, which is extracting the titles of fiction books from a library data set.
 
 
 ### JSON_VALUE()
@@ -71,124 +89,31 @@ JSON_VALUE(expression, path)
 A scalar value extracted from the `expression` based on the given `path`. If the specified JSON path doesn't locate any data, the function returns NULL. If the target of the JSON path is a non-scalar value (e.g., an array or object), an error is raised.
 
 #### Example
-Given the following JSON
+Given a record containing a JSON column named `library`
+
 ```json
 {
-  "test_jsonb": {"bar": {"1": 1, "2": 2, "3": 3}, "baz": null, "foo": [1, 2, 3]},
-  "test_json": [{"digit": 30, "letter": "A"}, {"digit": 31, "letter": "B"}]
-}
-```
-The query below
-```sql
-select
-    JSON_QUERY(test_jsonb,'$.bar') AS bar,
-    JSON_VALUE(test_jsonb,'$.baz') AS baz,
-    JSON_QUERY(test_jsonb,'$.foo') AS foo,
-    JSON_VALUE(test_json,'$[0].letter') AS first_letter,
-    JSON_QUERY(test_json) AS all
-  into test_uuid_test
-  from test_uuid;
-```
-would return the following result
-```json
-"bar": {
-    "struct_value": {
-        "fields": [
-            {
-                "key": "1",
-                "value": {
-                    "number_value": 1
-                }
-            },
-            {
-                "key": "2",
-                "value": {
-                    "number_value": 2
-                }
-            },
-            {
-                "key": "3",
-                "value": {
-                    "number_value": 3
-                }
-            }
-        ]
-    }
-},
-"baz": {
-    "null_value": "NULL_VALUE"
-},
-"foo": {
-    "list_value": {
-        "values": [
-            {
-                "number_value": 1
-            },
-            {
-                "number_value": 2
-            },
-            {
-                "number_value": 3
-            }
-        ]
-    }
-},
-"first_letter": {
-    "list_value": {
-        "values": [
-            {
-                "string_value": "A"
-            }
-        ]
-    }
-},
-"all": {
-    "list_value": {
-        "values": [
-            {
-                "list_value": {
-                    "values": [
-                        {
-                            "struct_value": {
-                                "fields": [
-                                    {
-                                        "key": "letter",
-                                        "value": {
-                                            "string_value": "A"
-                                        }
-                                    },
-                                    {
-                                        "key": "digit",
-                                        "value": {
-                                            "number_value": 30
-                                        }
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            "struct_value": {
-                                "fields": [
-                                    {
-                                        "key": "letter",
-                                        "value": {
-                                            "string_value": "B"
-                                        }
-                                    },
-                                    {
-                                        "key": "digit",
-                                        "value": {
-                                            "number_value": 31
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    }
+  "library": {
+    "fiction": [
+      {"title": "To Kill a Mockingbird", "author": "Harper Lee"},
+      {"title": "1984", "author": "George Orwell"},
+      {"title": "The Great Gatsby", "author": "F. Scott Fitzgerald"}
+    ],
+    "non_fiction": [
+      {"title": "Sapiens", "author": "Yuval Noah Harari"},
+      {"title": "Educated", "author": "Tara Westover"}
+    ]
+  }
 }
 ```
 
+If you wanted to extract the author of the first fiction book, you can use the SQL statement below
+```sql
+select
+  JSON_VALUE(library, '$.fiction[0].author') AS first_fiction_author
+from library_data;
+```
+which would produce the result, with `first_fiction_author` as a `STRING` type
+```
+first_fiction_author: "Harper Lee"
+```
