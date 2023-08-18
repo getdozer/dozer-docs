@@ -66,7 +66,8 @@ curl --location 'http://localhost:8080/auth/token' \
 --data '{"Custom":{"myfilms":{"$filter":{ "film_id": 646},"fields":[]}}}'
 ```
 
-output should be like following
+output should be like following. When using that new level 2 token to access data api, the result will be covering smaller in scope depending on the filter scope we define for token level 2.
+
 ```json
-{"token":"<MASTER_TOKEN>"}
+{"token":"<NEW_TOKEN>"}
 ```
