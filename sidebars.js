@@ -127,6 +127,7 @@ const sidebars = {
         'transforming-data/aggregation-functions',
         'transforming-data/geospatial',
         'transforming-data/json',
+        'transforming-data/windowing'
       ]
     },
 
