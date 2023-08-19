@@ -1,4 +1,4 @@
-# Windowing Functionalities
+# Time Windowing Functionalities
 
 ## Introduction
 

@@ -140,7 +140,10 @@ const sidebars = {
         id: 'accessing-data',
       },
       items: [
-        'accessing-data/querying-data',
+        'accessing-data/rest',
+        'accessing-data/typed-grpc',
+        'accessing-data/untyped-grpc',
+        'accessing-data/query-format',
         'accessing-data/authorization'
       ]
     },
