@@ -5,19 +5,23 @@ The Dozer query system uses a JSON-based language. Below, you'll find a comprehe
 
 This is the main structure used to build your query. It consists of:
 
-- `filter` (optional): Used to specify the filter conditions.
+- `filter`: Used to specify the filter conditions.
 - `order_by`: Details how results should be ordered.
-- `limit` (optional): Limits the number of results returned.
+- `limit`: Limits the number of results returned.
 - `skip`: Specifies the number of results to skip or provides a point to start after.
+- `after`: Begins retrieval after a certain `__dozer_record_id`
 
 #### Example:
 
 ```json
 {
-    "filter": {/* FilterExpression */},
-    "order_by": {/* SortOptions */},
+    "filter": {"age": {"$gt": 21}},
+    "order_by": {
+        "field_name": "field_name",
+        "direction": "asc"
+    },
     "limit": 10,
-    "skip": {/* Skip */}
+    "skip": 20
 }
 ```
 
@@ -84,30 +88,34 @@ This structure is used to define the order of the results:
 
 ### Skip
 
-Defines the number of results to skip or a point to start after:
+The `skip` attribute lets you bypass a certain number of records before starting the data retrieval. It's useful for pagination scenarios or when you want to ignore a specified amount of leading records.
 
-- `Skip`: Skips a defined number of results.
-- `After`: Begins results after a certain point.
-
-#### Example:
-
+Example:
 ```json
 {
-    "skip": {
-        "Skip": 5
-    }
+    "$limit": 3, 
+    "$filter": {"PULocationID": 211}, 
+    "$skip": 5
 }
 ```
 
-or
+In this example, the first 5 records are skipped, and the data retrieval starts from the 6th record.
 
+### After
+
+The `after` attribute is used to begin retrieving records after a specified `__dozer_record_id`. This is especially useful when you want to retrieve records after a known point in your dataset, potentially due to past queries or logical segmentation of data.
+
+Example:
 ```json
 {
-    "skip": {
-        "After": 100
-    }
+    "$limit": 3, 
+    "$filter": {"PULocationID": 211}, 
+    "$after": 145
 }
 ```
+
+In this example, records retrieval starts after the record with `__dozer_record_id` of 145.
+
 
 ### Operators
 
