@@ -43,5 +43,20 @@ curl -X POST http://localhost:8080/trips/query \
   --header 'Content-Type: application/json' \
   --data '{"$limit":1, "$filter": {"PULocationID": 211}}'
 ```
-
 For a comprehensive understanding of the query's structure, refer to our [Query Format](query-format) documentation. Ensure your query adheres to the guidelines provided on that page.
+
+## Generate OpenAPI Definition
+Generates an OpenAPI definition for a specific store
+
+#### Endpoint 
+`/store-name/oapi`
+
+#### Method
+`POST`
+
+#### Example
+
+```bash
+curl -X POST http://localhost:8080/trips/oapi
+```
+
