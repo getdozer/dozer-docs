@@ -28,7 +28,7 @@ const sidebars = {
         type: 'doc',
         id: 'getting_started',
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         {
           type: 'html',
@@ -57,7 +57,23 @@ const sidebars = {
     },
 
     'cli-reference',
-    'configuration',
+
+    {
+      type: 'category',
+      label: 'Configuration',
+      link: {
+        type: 'doc',
+        id: 'configuration',
+      },
+      collapsed: true,
+      items: [
+        'configuration/data-sources',
+        'configuration/transformations',
+        'configuration/api-endpoints',
+        'configuration/global-settings'
+      ]
+    },
+
 
     {
       type: 'category',
@@ -66,7 +82,7 @@ const sidebars = {
         type: "generated-index",
         title: "Data Sources"
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         'sources/postgres',
         'sources/mongodb',
