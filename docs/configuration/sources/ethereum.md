@@ -59,4 +59,26 @@ connections:
     name: eth_conn
 ```
 
-For complete example on how to use the Ethereum connector refer to [Ethereum Sample](https://github.com/getdozer/dozer-samples/tree/main/connectors/ethereum) for an end-to-end example on how to setup and use the Ethereum connector
+
+
+## Parameters
+
+| Parameter<br />Name | Type   | Description                                                         |
+| ------------------- | ------ | ------------------------------------------------------------------- |
+| `provider`        | String | The Ethereum provider to use. It can be either `Trace` or `Log` |
+| `wss_url`         | String | The WSS URL of the Ethereum node.                                   |
+| `https_url`       | String | The HTTPS URL of the Ethereum node.                                 |
+| `from_block`      | Number | The block number to start from.                                     |
+| `to_block`        | Number | The block number to end at.                                         |
+| `batch_size`      | Number | The batch size to use when fetching data.                           |
+| `contracts`       | Array  | The list of contracts to parse.                                     |
+| `filter`          | Object | The filter to use when fetching data.                               |
+| `addresses`       | Array  | The list of addresses to filter by.                                 |
+| `topics`          | Array  | The list of topics to filter by.                                    |
+| `abi`             | String | The ABI of the contract to parse.                                   |
+| `name`            | String | The name of the contract to parse.                                  |
+| `address`         | String | The address of the contract to parse.                               |
+
+### Sample
+
+For complete example on how to use the Ethereum connector refer to [Ethereum Sample](https://github.com/getdozer/dozer-samples/tree/main/connectors/ethereum) for an end-to-end example on how to setup and use the Ethereum connector.
