@@ -12,7 +12,7 @@
 | [Google Cloud Storage(CSV, Parquet)](#google-cloud-storage) |    Alpha    | Object Storage |      Source       | Polling   | Data Fusion     |
 | [Ethereum](#ethereum)                                       | Available ✅ | Blockchain     | Logs/Contract ABI | Real Time | Direct          |
 | [Kafka Stream](#kafka-stream)                                                      | Available ✅  |          |  Schema Registry  | Real Time | Debezium        |
-| MySQL                                                       | In Roadmap  | Relational     |      Source       | Real Time | Debezium        |
+| [MySQL](#mysql)                                             | Available ✅ | Relational     |      Source       | Real Time | Direct        |
 | Google Sheets                                               | In Roadmap  | Applications   |      Source       |           |                 |
 | Excel                                                       | In Roadmap  | Applications   |      Source       |           |                 |
 | Airtable                                                    | In Roadmap  | Applications   |      Source       |           |                 |
@@ -148,6 +148,24 @@ If you are not using a schema registry, we expect key and value as strings in th
 
 For a complete example of how to use the Kafka connector with Dozer, please refer to the [Kafka sample app](https://github.com/getdozer/dozer-samples/tree/main/connectors/kafka) in the [`dozer-samples`](https://github.com/getdozer/dozer-samples) repository. This sample app provides a detailed example of how to set up and use the Kafka connector in a real-world scenario.
 
+## MySQL
+
+To use a MySQL connector, a server URL is needed. This URL contains the server location, authentication credentials, database name, and optional parameters.
+
+For example
+
+```yaml
+connections:
+  - config: !MySQL
+      url: mysql://root:mysql@localhost:3306/orders
+    name: orders
+```
+
+This configuration declares a MySQL connector which will ingest data from a MySQL database named `orders` in a server located at `localhost:3306`, while authenticating as the user `root` with password `mysql`.
+
+The connection URL may optionally contain additional connection parameters in the form of URL query parameters; for example, `mysql://root:mysql@localhost:3306/orders?require_ssl=true`. The list of supported connection parameters includes `require_ssl: bool` (defaults to `false`), `verify_ca: bool` (defaults to `true`), `verify_identity: bool` (defaults to `true`). For a reference of all supported parameters and their descriptions, checkout [mysql_async::Opts](https://docs.rs/mysql_async/latest/mysql_async/struct.Opts.html).
+
+A complete example of how to use the MySQL connector with Dozer can be found at the [MySQL sample app](https://github.com/getdozer/dozer-samples/tree/main/connectors/mysql) in the [`dozer-samples`](https://github.com/getdozer/dozer-samples) repository. This sample app provides a detailed example of how to set up and use the MySQL connector in a real-world scenario.
 
 
 
