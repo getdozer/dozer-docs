@@ -68,18 +68,18 @@ const sidebars = {
       },
       collapsed: false,
       items: [
-        'configuration/sources/postgres',
-        'configuration/sources/mongodb',
-        'configuration/sources/mysql',
-        'configuration/sources/snowflake',
-        'configuration/sources/kafka',
+        'sources/postgres',
+        'sources/mongodb',
+        'sources/mysql',
+        'sources/snowflake',
+        'sources/kafka',
 
         {
           type: 'category',
           label: 'Object Stores',
           link: {
             type: 'doc',
-            id: 'configuration/sources/object-stores',
+            id: 'sources/object-stores',
           },
           items: [
             {
@@ -91,7 +91,7 @@ const sidebars = {
                 id: 'object-stores',
               },
             },
-            'configuration/sources/object-stores/types/aws-s3',
+            'sources/object-stores/types/aws-s3',
             // 'configuration/sources/object-stores/types/google-cloud-storage',
             // 'configuration/sources/object-stores/types/azure-blob-storage',
             {
@@ -103,13 +103,13 @@ const sidebars = {
                 id: 'file-formats',
               },
             },
-            'configuration/sources/object-stores/formats/csv',
-            'configuration/sources/object-stores/formats/parquet',
-            'configuration/sources/object-stores/formats/deltalake',
+            'sources/object-stores/formats/csv',
+            'sources/object-stores/formats/parquet',
+            'sources/object-stores/formats/deltalake',
           ]
         },
-        'configuration/sources/ethereum',
-        'configuration/sources/grpc',
+        'sources/ethereum',
+        'sources/grpc',
       ],
     },
 
