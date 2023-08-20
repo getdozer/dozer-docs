@@ -1,6 +1,6 @@
 # Time Windowing Functionalities
 
-## Introduction
+## Time Windows and TTL
 
 Streaming data systems allow users to perform real-time analytics on vast streams of incoming data. One of the fundamental concepts in streaming analytics is the idea of "windowing" – processing the incoming data within certain time-based (or count-based) segments.
 
@@ -26,7 +26,7 @@ Imagine we are working with a stream of real-time sales transactions for an onli
 ```sql
 SELECT t.product_id, SUM(t.amount) as total_sales, t.window_start as start, t.window_end AS end
 INTO sales_summary
-FROM TUMBLE(transactions, transaction_time, '5 MINUTES', '2 MINUTES') t;
+FROM TTL(TUMBLE(transactions, transaction_time, '5 MINUTES'), transaction_time, '2 MINUTES') t;
 ```
 
 #### Windowed Aggregation Behavior
@@ -51,7 +51,7 @@ The `TUMBLE()` function in Dozer is used to establish fixed, non-overlapping tim
 
 #### Syntax
 ```sql
-TUMBLE(source, timestamp_exp, window_size, TTL)
+TUMBLE(source, timestamp_exp, window_size)
 ```
 
 #### Arguments
@@ -61,7 +61,6 @@ TUMBLE(source, timestamp_exp, window_size, TTL)
 | `source`          | Table/Statement| The source table or statement from which the streaming data is read.                                                                                                |
 | `timestamp_exp` | `TIMESTAMP`         | The expression representing the timestamp in the data which helps in determining the placement of records within windows.                                                |
 | `window_size`     | Duration       | The duration of each tumbling window.                                                                                                                               |
-| `TTL`             | Duration       | Time-To-Live: The duration post which the aggregated data of the window is evicted from memory. Each incoming record refreshes this duration for the particular window.|
 
 #### Returns
 A set of records, each associated with a specific window. Every record will have a `window_start` and `window_end` timestamp that defines its window boundaries.
@@ -74,7 +73,7 @@ The `HOP()` function in Dozer facilitates windowing operations over streaming da
 
 #### Syntax
 ```sql
-HOP(source, timestamp_exp, window_size, hop_size, TTL)
+HOP(source, timestamp_exp, window_size, hop_size)
 ```
 
 #### Arguments
@@ -85,7 +84,6 @@ HOP(source, timestamp_exp, window_size, hop_size, TTL)
 | `timestamp_exp` | `TIMESTAMP`         | The expression representing the timestamp in the data, used to determine the placement of records within windows.     |
 | `window_size`     | Duration       | The duration of each hopping window.                                                                            |
 | `hop_size`        | Duration       | The interval at which a new hopping window starts. It determines the overlap between windows.                    |
-| `TTL`             | Duration       | Time-To-Live: Duration after which the aggregated data of the window is evicted from memory. Each incoming record that fits within a window's boundaries resets this duration for that window.|
 
 #### Returns
 A set of records, each linked with a specific window. Every record will include a `window_start` and `window_end` timestamp that marks its window's boundaries.
