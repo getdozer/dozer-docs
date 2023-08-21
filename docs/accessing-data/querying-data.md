@@ -1,6 +1,64 @@
 # Querying Data
+Dozer provides APIs accessible via REST and gRPC protocols, catering to varied application architectures.
 
----
+#### Key Endpoints
+
+| Endpoint   | Description                                                       | Protocol Options |
+|------------|-------------------------------------------------------------------|------------------|
+| `count`    | Returns the total number of records in a store.                   | REST, gRPC       |
+| `query`    | Allows specific data retrieval based on user-defined criteria.    | REST, gRPC       |
+
+## Count Endpoint
+The `count` endpoint offers the total number of records present in a specified store. The parameter that needs to be provided to the endpoint is the store's name.
+
+### REST
+
+#### Endpoint 
+`/store-name/count`
+
+#### Method  
+`POST`
+
+#### Headers 
+- `Content-Type: application/json`
+
+#### Parameters
+- `store-name`: The name of the store you want to query.
+
+#### Example Request
+```bash
+curl -X POST http://localhost:8080/trips/count \
+  --header 'Content-Type: application/json'
+```
+
+#### gRPC
+
+**Service:**  
+`dozer.generated.store-name.StoreName`
+
+**Method:**  
+`/StoreName/count`
+
+**Parameter:**  
+- `StoreName`: The name of the store you want to query (formatted in PascalCase).
+
+##### Listing gRPC Endpoints:
+To list available gRPC endpoints, use:
+```bash
+grpcurl -plaintext localhost:50051 list
+```
+
+**Example Request:**
+```bash
+grpcurl -plaintext localhost:50051 dozer.generated.trips.Trips/count
+```
+
+Replace `store-name` and `StoreName` with the desired store's name for your query. In the provided examples, "trips" is the store name.
+
+
+
+
+
 
 ## Parameters
 

@@ -28,7 +28,7 @@ const sidebars = {
         type: 'doc',
         id: 'getting_started',
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         {
           type: 'html',
@@ -57,7 +57,23 @@ const sidebars = {
     },
 
     'cli-reference',
-    'configuration',
+
+    {
+      type: 'category',
+      label: 'Configuration',
+      link: {
+        type: 'doc',
+        id: 'configuration',
+      },
+      collapsed: true,
+      items: [
+        'configuration/data-sources',
+        'configuration/transformations',
+        'configuration/api-endpoints',
+        'configuration/global-settings'
+      ]
+    },
+
 
     {
       type: 'category',
@@ -66,20 +82,20 @@ const sidebars = {
         type: "generated-index",
         title: "Data Sources"
       },
-      collapsed: false,
+      collapsed: true,
       items: [
-        'configuration/sources/postgres',
-        'configuration/sources/mongodb',
-        'configuration/sources/mysql',
-        'configuration/sources/snowflake',
-        'configuration/sources/kafka',
+        'sources/postgres',
+        'sources/mongodb',
+        'sources/mysql',
+        'sources/snowflake',
+        'sources/kafka',
 
         {
           type: 'category',
           label: 'Object Stores',
           link: {
             type: 'doc',
-            id: 'configuration/sources/object-stores',
+            id: 'sources/object-stores',
           },
           items: [
             {
@@ -91,7 +107,7 @@ const sidebars = {
                 id: 'object-stores',
               },
             },
-            'configuration/sources/object-stores/types/aws-s3',
+            'sources/object-stores/types/aws-s3',
             // 'configuration/sources/object-stores/types/google-cloud-storage',
             // 'configuration/sources/object-stores/types/azure-blob-storage',
             {
@@ -103,13 +119,13 @@ const sidebars = {
                 id: 'file-formats',
               },
             },
-            'configuration/sources/object-stores/formats/csv',
-            'configuration/sources/object-stores/formats/parquet',
-            'configuration/sources/object-stores/formats/deltalake',
+            'sources/object-stores/formats/csv',
+            'sources/object-stores/formats/parquet',
+            'sources/object-stores/formats/deltalake',
           ]
         },
-        'configuration/sources/ethereum',
-        'configuration/sources/grpc',
+        'sources/ethereum',
+        'sources/grpc',
       ],
     },
 
@@ -127,6 +143,7 @@ const sidebars = {
         'transforming-data/aggregation-functions',
         'transforming-data/geospatial',
         'transforming-data/json',
+        'transforming-data/windowing'
       ]
     },
 
@@ -139,7 +156,10 @@ const sidebars = {
         id: 'accessing-data',
       },
       items: [
-        'accessing-data/querying-data',
+        'accessing-data/rest',
+        'accessing-data/typed-grpc',
+        'accessing-data/untyped-grpc',
+        'accessing-data/query-format',
         'accessing-data/authorization'
       ]
     },
