@@ -15,8 +15,9 @@ sql: |
     INNER JOIN zones do_zones ON trips.DOLocationID = do_zones.LocationID
     GROUP BY PULocationID, DOLocationID;
 ```
-
-> The SQL you specify in the .yaml file does not run in the source database. Data is processed in real-time as it comes into Dozer by Dozer's internal streaming SQL engine.
+::::note
+The SQL you specify in the .yaml file does not run in the source database. Data is processed in real-time as it comes into Dozer by Dozer's internal streaming SQL engine.
+::::
 
 To expose the result of this query as an API we will also need to add an additional endpoint:
 

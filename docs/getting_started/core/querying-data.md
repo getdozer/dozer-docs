@@ -9,8 +9,9 @@ Dozer automatically produces gRPC APIs in two formats.
 * **Common Format**: This format serves data representing it as a generic record.
 * **Typed Format**: This format generatea a full Protobuf type definition of the types exposed. Protobuf definitions are automatically generated from the SQL specified in `dozer-config.yaml`.
 
-> *__NOTE__: querying gRPC APIs requires `grpcurl`. You can install it  from this [repository](https://github.com/fullstorydev/grpcurl).*
-
+::::tip
+Following the examples below requires `grpcurl`. You can install it  from this [repository](https://github.com/fullstorydev/grpcurl).
+::::
 
 ### Listing the gRPC services
 

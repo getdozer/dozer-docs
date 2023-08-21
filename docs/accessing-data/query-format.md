@@ -32,7 +32,6 @@ Filters allow you to refine the data you retrieve from the dataset. They are com
 #### Simple Filters:
 For filtering a specific field to a value, you can directly assign the value to the field. By default, this implies an equality (`$eq`) comparison.
 
-Example:
 ```json
 {
     "$filter": {"PULocationID": 211}
@@ -42,7 +41,6 @@ Example:
 #### Using Operators:
 You can employ operators for more complex comparisons. The operator will be defined as a key inside the field you're looking to filter.
 
-Example:
 ```json
 {
     "$filter": {"age": {"$gt": 21}}
@@ -51,8 +49,6 @@ Example:
 
 #### Compound Filters (`And`):
 To combine multiple filters, you can use the `$and` operator, which accepts an array of filter conditions. All conditions inside the array must be true for the filter to match a record.
-
-Examples:
 
 Using implicit equality:
 ```json
@@ -75,8 +71,6 @@ This structure is used to define the order of the results:
 - `field_name`: Name of the field to sort by.
 - `direction`: Either `asc` for ascending or `desc` for descending.
 
-#### Example:
-
 ```json
 {
     "order_by": {
@@ -90,7 +84,6 @@ This structure is used to define the order of the results:
 
 The `skip` attribute lets you bypass a certain number of records before starting the data retrieval. It's useful for pagination scenarios or when you want to ignore a specified amount of leading records.
 
-Example:
 ```json
 {
     "$limit": 3, 
@@ -105,7 +98,6 @@ In this example, the first 5 records are skipped, and the data retrieval starts 
 
 The `after` attribute is used to begin retrieving records after a specified `__dozer_record_id`. This is especially useful when you want to retrieve records after a known point in your dataset, potentially due to past queries or logical segmentation of data.
 
-Example:
 ```json
 {
     "$limit": 3, 
