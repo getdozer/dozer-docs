@@ -1,10 +1,10 @@
 # Configuration
 Dozer relies on a YAML configuration structure delineated in `dozer-config.yaml`. This file serves as the backbone for specifying connectors, data sources, SQL transformations, API endpoints, and other critical characteristics of your application.
 
-### Location and Naming
+## Location and Naming
 `dozer-config.yaml` must reside in the root directory of a Dozer application. Alternative filenames can be utilized but must be declared using the `-c` or `--config-path` option when executing the `dozer` command.
 
-### Key Properties
+## Key Properties
 
 | Property    | Mandatory | Description                                                                                                     |
 |-------------|-----------|-----------------------------------------------------------------------------------------------------------------|

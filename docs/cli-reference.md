@@ -1,4 +1,4 @@
-# CLI Reference
+# CLI Development Flow
 Dozer Command Line Interface is a unified tool and exposes commands for publishing and managing your applications, as well as lower level tools to interact with each component of your application. This reference guides you through getting started with the CLI.
 
 ## Synopsis
