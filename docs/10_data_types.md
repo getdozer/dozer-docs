@@ -10,8 +10,8 @@ Any numeric type, referred as `NUMERIC` in the rest of the documentation
 
 | Type        | Descritpion                                                                                                                                            | Example             |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| `UINT`      | Unsigned 64-bit integer                                                                                                                                | `-1`                |
-| `INT`       | Signed 64-bit integer                                                                                                                                  | `1`                 |
+| `UINT`      | Unsigned 64-bit integer                                                                                                                                | `1`                |
+| `INT`       | Signed 64-bit integer                                                                                                                                  | `-1`                 |
 | `FLOAT`     | 64-bit floating point number                                                                                                                           | `2.567`             |
 | `DECIMAL`   | A Decimal number implementation suitable for financial calculations that require significant integral and fractional digits with no round-off errors.  | `DECIMAL(10.90001)` |
 
