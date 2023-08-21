@@ -8,13 +8,15 @@ To install the Dozer UI Lite and to start monitoring your applications locally, 
 Download ***dozer-ui-lite***, by running following commands.
 ```bash
 # MacOS
-curl -sLO https://raw.githubusercontent.com/getdozer/dozer-docs/main/static/examples/3_ui_lite/dozer-ui-lite.tar.gz
+curl -sLO \
+  https://raw.githubusercontent.com/getdozer/dozer-docs/main/static/examples/3_ui_lite/dozer-ui-lite.tar.gz
 tar -zxvf dozer-ui-lite.tar.gz
 cd dozer-ui-lite
 ```
 ```bash
 # Ubuntu
-curl -sLO https://raw.githubusercontent.com/getdozer/dozer-docs/main/static/examples/3_ui_lite/dozer-ui-lite-linux.tar.gz
+curl -sLO \
+  https://raw.githubusercontent.com/getdozer/dozer-docs/main/static/examples/3_ui_lite/dozer-ui-lite-linux.tar.gz
 tar -zxvf dozer-ui-lite.tar.gz
 cd dozer-ui-lite
 ```

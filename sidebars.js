@@ -79,8 +79,8 @@ const sidebars = {
       type: 'category',
       label: 'Data Sources',
       link: {
-        type: "generated-index",
-        title: "Data Sources"
+        type: 'doc',
+        id: 'configuration/sources/sources',
       },
       collapsed: true,
       items: [

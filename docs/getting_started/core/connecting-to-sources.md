@@ -35,7 +35,9 @@ endpoints:
 Now download some sample trip data and copy it to the `data/trips` directory:
 
 ```bash 
-curl --create-dirs -o data/trips/yellow_tripdata_2023-01.parquet https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
+curl --create-dirs \
+  -o data/trips/yellow_tripdata_2023-01.parquet \
+  https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
 ```
 
 Finally start `dozer` with the command:
@@ -55,7 +57,9 @@ You should be seeing a screen like the following
 This means Dozer is succesfully running. To validate that, you can run a simple REST query:
 
 ```bash
-curl -X POST  http://localhost:8080/trips/query --header 'Content-Type: application/json' --data-raw '{"$limit":3}'
+curl -X POST  http://localhost:8080/trips/query \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"$limit":3}'
 ```
 
 This will retrieve the first 3 records from the `trips` collection.

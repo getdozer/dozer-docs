@@ -41,15 +41,17 @@ We will be using the `dozer.common.CommonGrpcService` to query our data:
 Use the `count` command to count the total number of records stored:
 
 ```bash
-grpcurl -d '{"endpoint": "avg_fares"}' -plaintext localhost:50051 \
-    dozer.common.CommonGrpcService/count
+grpcurl -d \
+  '{"endpoint": "avg_fares"}' -plaintext localhost:50051 \
+  dozer.common.CommonGrpcService/count
 ```
 
 Use the `query` command to retrieve some records:
 
 ```bash
-grpcurl -d '{"endpoint": "avg_fares", "query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
-    -plaintext localhost:50051 dozer.common.CommonGrpcService/query
+grpcurl -d \
+  '{"endpoint": "avg_fares", "query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
+  -plaintext localhost:50051 dozer.common.CommonGrpcService/query
 ```
 
 ### Using the Typed Format
@@ -57,8 +59,9 @@ grpcurl -d '{"endpoint": "avg_fares", "query": "{\"$limit\":1, \"$filter\": {\"P
 To query data using the gRPC typed format use the following command:
 
 ```bash
-grpcurl -d '{"query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
-    -plaintext localhost:50051 dozer.generated.avg_fares.AvgFares/query
+grpcurl -d \
+  '{"query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
+  -plaintext localhost:50051 dozer.generated.avg_fares.AvgFares/query
 ```
 
 ## Querying data using REST APIs
