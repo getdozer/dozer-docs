@@ -1,4 +1,7 @@
 # Deployment
+In Dozer's architecture, there are two core components: the **app** module, responsible for data source connections and data processing, and the **API** module, which manages data storage in a low-latency store and handles API interactions. During development, these modules coexist in a singular process. However, for production deployment, it's best practice to decouple them, ensuring independent lifecycle management. This decoupling allows for, say, alterations in data processing logic in the **app** module without perturbing the uptime or performance of the **API** module.
+
+
 
 To different deployment types are available for your dozer application. All deployment types' basis is your dozer application's `dozer-config.yaml`.
 
