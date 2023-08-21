@@ -7,7 +7,7 @@ Dozer automatically produces REST APIs including documentation support.
 
 
 ## Sample Queries
-For this example lets use the [sample configuration](/docs/configuration) provided here. In this example, we are provindg 
+For this example, lets use the [sample configuration](/docs/configuration) provided here.
 
 
 ### REST APIs
