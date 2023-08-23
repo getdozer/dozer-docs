@@ -65,7 +65,7 @@ The `query` method of the Common Service enables querying across different store
 
 #### Parameters  
 - `endpoint`: The name of the store you're aiming to query.
-- `query`: The conditions and parameters for data retrieval in JSON format.
+- `query`: The conditions and parameters for data retrieval in JSON format, following Dozer's [Query Format](query-format)
 
 #### Example Request
 ```bash
@@ -74,8 +74,10 @@ grpcurl -d '{"endpoint": "trips", "query": "{\"$limit\":1, \"$filter\": {\"PULoc
 ```
 Ensure your query adheres to the guidelines provided in the [Query Format](query-format) page.
 
+Of course! Here's the documentation using a tabular representation:
+
 ## Listening for Store Change Events 
-The `OnEvent` method in the common gRPC protocol allows users to establish a gRPC stream to monitor real-time modifications, such as inserts, updates, and deletes, in a specified store. This is based on certain filter criteria. 
+The `OnEvent` method facilitates users in establishing a gRPC stream to monitor real-time store modifications. The method allows simultaneous subscriptions to multiple endpoints.
 
 #### Service  
 `dozer.common.CommonGrpcService`
@@ -83,14 +85,20 @@ The `OnEvent` method in the common gRPC protocol allows users to establish a gRP
 #### Method  
 `OnEvent`
 
-#### Parameters  
-- `endpoint`: The name of the store you're establishing a stream for.
-- `filter`: A JSON string specifying the conditions for the events you wish to listen to.
+### Parameters
+
+- `endpoints`: A map with key-value pairs. The key is the name of the endpoint to monitor, and the value is the corresponding `EventFilter`.
+
+#### EventFilter
+
+- `type`: The event type to subscribe to: `ALL`, `INSERT_ONLY`, `UPDATE_ONLY`, `DELETE_ONLY`.
+- `filter`: A JSON filter string indicating the specific conditions provided in the Dozer [Query Format](query-format)
 
 #### Example Request
+
 ```bash
-grpcurl -d '{"endpoint": "trips", "filter": "{\"PULocationID\": 211}"}' \
+grpcurl -d '{"endpoints": {"trips": {"type": "ALL", "filter": "{\"PULocationID\": 211}"}}}' \
     -plaintext localhost:50051 dozer.common.CommonGrpcService/OnEvent
 ```
 
-In the provided example, the "trips" endpoint is being monitored. This method offers a dynamic way of listening to changes across various stores using a universal gRPC service.
+The example showcases setting up a stream to listen for all event types on the "trips" endpoint where `PULocationID` equals `211`. The enhanced `OnEvent` provides users with a comprehensive approach to efficiently monitor various stores via a single gRPC service.

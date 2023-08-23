@@ -4,7 +4,7 @@
 The `count` endpoint offers the total number of records present in a specified store. The parameter that needs to be provided to the endpoint is the store's name.
 
 #### Endpoint
-`/store-name/count`
+`/<store-name>/count`
 
 #### Method
 `POST`
@@ -12,8 +12,8 @@ The `count` endpoint offers the total number of records present in a specified s
 #### Headers
 - `Content-Type: application/json`
 
-#### Parameter  
-- `store-name`: The name of the store you want to query.
+#### Path Parameters
+- `<store-name>`: The name of the store you want to count.
 
 #### Example Request
 ```bash
@@ -25,7 +25,7 @@ curl -X POST http://localhost:8080/trips/count \
 The `query` endpoint allows users to retrieve specific records from a store based on defined conditions.
 
 #### Endpoint
-`/store-name/query`
+`/<store-name>/query`
 
 #### Method
 `POST`
@@ -33,9 +33,11 @@ The `query` endpoint allows users to retrieve specific records from a store base
 #### Headers
 - `Content-Type: application/json`
 
-#### Parameters
-- `store-name`: The name of the store you wish to query.
-- `body`: A JSON object detailing your query conditions.
+#### Path Parameters
+- `<store-name>`: The name of the store you wish to query.
+
+#### Request Body
+A JSON object detailing your query conditions using Dozer's [Query Format](query-format).
 
 #### Example Request
 ```bash
@@ -49,7 +51,10 @@ For a comprehensive understanding of the query's structure, refer to our [Query 
 Generates an OpenAPI definition for a specific store
 
 #### Endpoint 
-`/store-name/oapi`
+`/<store-name>/oapi`
+
+#### Path Parameters
+- `<store-name>`: The name of the store you wish to get the OAPI definitions for.
 
 #### Method
 `POST`

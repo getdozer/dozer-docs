@@ -13,6 +13,8 @@ Dozer relies on a YAML configuration structure delineated in `dozer-config.yaml`
 | [`sources`](#sources)   | Yes        | Denotes tables and associated data streams from the designated connections.                                      |
 | [`sql`](#sql-transformations)       | No        | Describes the SQL transformations applied to the sourced data.                                                   |
 | [`endpoints`](#api-endpoints) | Yes       | Establishes API endpoints, determining how data access and queries are managed.                                  |
+| [`settings > app`](#app-settings) | No       | All APP related settings                                  |
+| [`settings > api`](#api-settings) | No       | All API related settings                                  |
 
 For an in-depth breakdown of each property, consult the associated sections.
 

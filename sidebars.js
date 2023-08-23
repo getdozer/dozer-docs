@@ -70,7 +70,8 @@ const sidebars = {
         'configuration/data-sources',
         'configuration/transformations',
         'configuration/api-endpoints',
-        'configuration/global-settings'
+        'configuration/app-settings',
+        'configuration/api-settings',
       ]
     },
 

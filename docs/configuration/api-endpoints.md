@@ -1,4 +1,4 @@
-# API Endpoints
+# Endpoints
 API endpoints in Dozer allow you to expose both gRPC and REST APIs for seamless data access. In this section, you can define the endpoint names, paths, and associate them with data sources or transformed results.
 
 ## Basic Endpoint Configuration
