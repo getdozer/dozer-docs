@@ -1,0 +1,86 @@
+# Installation
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide will walk you through the steps to install Dozer on different platforms. 
+
+## MacOS (Monterey 12 and above)
+Install Dozer with a simple Homebrew command:
+
+```bash
+brew tap getdozer/dozer
+brew install dozer
+```
+
+::::tip
+You can test the succesful installation of Dozer with the command `dozer -V`
+::::
+
+
+## Ubuntu (20.04 and above)
+
+### Installing Prerequisites
+Ubuntu 20.04 ships with protobuf-compiler v3.6.1.3, which isn't compatible with Dozer. Upgrade to a newer version using:
+
+<Tabs groupId="platform">
+  <TabItem value="amd64" label="amd64">
+
+```bash
+curl -sLO https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-x86_64.zip
+unzip protoc-22.2-linux-x86_64.zip -d $HOME/.local
+export PATH="$PATH:$HOME/.local/bin"
+```
+
+  </TabItem>
+  <TabItem value="aarch" label="aarch">
+
+```bash
+curl -sLO https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-aarch_64.zip
+unzip protoc-22.2-linux-aarch_64.zip -d $HOME/.local
+export PATH="$PATH:$HOME/.local/bin"
+```
+
+  </TabItem>
+</Tabs>
+
+### Installing Dozer
+
+<Tabs groupId="platform">
+  <TabItem value="amd64" label="amd64">
+
+```bash
+curl -sLO https://github.com/getdozer/dozer/releases/latest/download/dozer-linux-amd64.deb 
+sudo dpkg -i dozer-linux-amd64.deb
+```
+
+  </TabItem>
+  <TabItem value="aarch" label="aarch">
+
+```bash
+curl -sLO https://github.com/getdozer/dozer/releases/latest/download/dozer-linux-aarch64.deb
+sudo dpkg -i dozer-linux-aarch64.deb
+```
+
+  </TabItem>
+</Tabs>
+
+::::tip
+You can test the succesful installation of Dozer with the command `dozer -V`
+::::
+
+
+## Building from Source
+For those who prefer building from the source:
+
+::::note
+Ensure [Rust](https://www.rust-lang.org/tools/install) and [Protocol Buffers](https://protobuf.dev/downloads/) are set up on your system. Add Protocol Buffers to your system's path for seamless Dozer installation.
+::::
+
+```bash
+cargo install --git https://github.com/getdozer/dozer dozer-cli --locked
+```
+
+::::tip
+You can test the succesful installation of Dozer with the command `dozer -V`
+::::

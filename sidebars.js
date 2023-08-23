@@ -21,6 +21,7 @@ const sidebars = {
     'dozer',
     'architecture',
     'installation',
+
     {
       type: 'category',
       label: 'Getting Started',
