@@ -1,11 +1,8 @@
 # Common gRPC Protocol
-
+The `dozer.common.CommonGrpcService` serves as a universal gRPC service endpoint for all stores. Unlike individual store endpoints, this common service provides centralized methods to list available stores, retrieve their schemas, and conduct queries. 
 
 ## Discover Endpoints
 Allows users to retrieve a list of available endpoints, each one corresponding to a store.
-
-#### Service
-`dozer.common.CommonGrpcService`
 
 #### Method
 `getEndpoints`
@@ -18,9 +15,6 @@ grpcurl \
 
 ## Retrieve Store Schema
 Allows users to obtain the schema of a specific store, detailing the structure and data types of the fields within.
-
-#### Service
-`dozer.common.CommonGrpcService`
 
 #### Method
 `getFields`
@@ -39,9 +33,6 @@ grpcurl -d '{"endpoint": "trips"}' \
 
 ## Count Records
 The `count` endpoint offers the total number of records present in a specific store. The parameter that needs to be provided to the endpoint is the store's name.
-
-#### Service  
-`dozer.common.CommonGrpcService`
 
 #### Method  
 `count`
@@ -63,9 +54,6 @@ Replace `"trips"` in the payload with the desired store's name for your query.
 
 The `query` method of the Common Service enables querying across different stores without the requirement to know the specific type of the store. The conditions for data retrieval are defined in the query, conforming to the structure described in the [Query Format](query-format) page.
 
-#### Service  
-`dozer.common.CommonGrpcService`
-
 #### Method  
 `query`
 
@@ -86,13 +74,10 @@ Ensure your query adheres to the guidelines provided in the [Query Format](query
 ## Listening for Store Change Events 
 The `OnEvent` method facilitates users in establishing a gRPC stream to monitor real-time store modifications. The method allows simultaneous subscriptions to multiple endpoints.
 
-#### Service  
-`dozer.common.CommonGrpcService`
-
 #### Method  
 `OnEvent`
 
-### Parameters
+#### Parameters
 
 | Name        | Type                           | Description                                                                                                      |
 |-------------|--------------------------------|------------------------------------------------------------------------------------------------------------------|

@@ -5,11 +5,14 @@ The Dozer query system uses a JSON-based language. Below, you'll find a comprehe
 
 This is the main structure used to build your query. It consists of:
 
-- `filter`: Used to specify the filter conditions.
-- `order_by`: Details how results should be ordered.
-- `limit`: Limits the number of results returned.
-- `skip`: Specifies the number of results to skip or provides a point to start after.
-- `after`: Begins retrieval after a certain `__dozer_record_id`
+| Parameter      | Description                                                   |
+|----------------|---------------------------------------------------------------|
+| `filter`       | Used to specify the filter conditions.                        |
+| `order_by`     | Details how results should be ordered.                        |
+| `limit`        | Limits the number of results returned.                        |
+| `skip`         | Specifies the number of results to skip or provides a start point. |
+| `after`        | Begins retrieval after a certain `__dozer_record_id`.         |
+
 
 #### Example:
 
@@ -65,8 +68,11 @@ Using explicit operators:
 
 This structure is used to define the order of the results:
 
-- `field_name`: Name of the field to sort by.
-- `direction`: Either `asc` for ascending or `desc` for descending.
+| Name         | Type   | Description                                        |
+|--------------|--------|----------------------------------------------------|
+| `field_name` | String | Name of the field to sort by.                      |
+| `direction`  | Enum   | Either `asc` for ascending or `desc` for descending. |
+
 
 ```json
 {
@@ -107,14 +113,17 @@ In this example, records retrieval starts after the record with `__dozer_record_
 
 Operators are used within filter expressions to compare values:
 
-- `$lt`: Less Than
-- `$lte`: Less Than or Equal
-- `$eq`: Equal
-- `$gt`: Greater Than
-- `$gte`: Greater Than or Equal
-- `$contains`: Contains the specified value.
-- `$matches_any`: Matches any of the specified values.
-- `$matches_all`: Matches all of the specified values.
+| Operator       | Description                       |
+|----------------|-----------------------------------|
+| `$lt`          | Less Than                         |
+| `$lte`         | Less Than or Equal                |
+| `$eq`          | Equal                             |
+| `$gt`          | Greater Than                      |
+| `$gte`         | Greater Than or Equal             |
+| `$contains`    | Contains the specified value.     |
+| `$matches_any` | Matches any of the specified values. |
+| `$matches_all` | Matches all of the specified values. |
+
 
 #### Example:
 
