@@ -16,10 +16,7 @@ This is the main structure used to build your query. It consists of:
 ```json
 {
     "filter": {"age": {"$gt": 21}},
-    "order_by": {
-        "field_name": "field_name",
-        "direction": "asc"
-    },
+    "order_by": {"field_name": "asc"},
     "limit": 10,
     "skip": 20
 }
@@ -73,10 +70,7 @@ This structure is used to define the order of the results:
 
 ```json
 {
-    "order_by": {
-        "field_name": "field_name",
-        "direction": "asc"
-    }
+    "order_by": {"field_name" : "asc"}
 }
 ```
 
