@@ -26,7 +26,10 @@ Allows users to obtain the schema of a specific store, detailing the structure a
 `getFields`
 
 #### Parameters
-- `endpoint`: The name of the store you want to query.
+| Name      | Type   | Description                                |
+|-----------|--------|--------------------------------------------|
+| `endpoint`| String | The name of the store you want to retrieve the schema for   |
+
 
 #### Example Command
 ```bash
@@ -44,7 +47,10 @@ The `count` endpoint offers the total number of records present in a specific st
 `count`
 
 #### Parameters  
-- `endpoint`: The name of the store you want to query.
+| Name      | Type   | Description                                |
+|-----------|--------|--------------------------------------------|
+| `endpoint`| String | The name of the store you want to count   |
+
 
 #### Example Request
 ```bash
@@ -64,8 +70,11 @@ The `query` method of the Common Service enables querying across different store
 `query`
 
 #### Parameters  
-- `endpoint`: The name of the store you're aiming to query.
-- `query`: The conditions and parameters for data retrieval in JSON format, following Dozer's [Query Format](query-format)
+| Name      | Type   | Description                                                                                     |
+|-----------|--------|-------------------------------------------------------------------------------------------------|
+| `endpoint`| String | The name of the store you're aiming to query.                                                   |
+| `query`   | JSON | The conditions and parameters for data retrieval, following Dozer's [Query Format](query-format). |
+
 
 #### Example Request
 ```bash
@@ -73,8 +82,6 @@ grpcurl -d '{"endpoint": "trips", "query": "{\"$limit\":1, \"$filter\": {\"PULoc
     -plaintext localhost:50051 dozer.common.CommonGrpcService/query
 ```
 Ensure your query adheres to the guidelines provided in the [Query Format](query-format) page.
-
-Of course! Here's the documentation using a tabular representation:
 
 ## Listening for Store Change Events 
 The `OnEvent` method facilitates users in establishing a gRPC stream to monitor real-time store modifications. The method allows simultaneous subscriptions to multiple endpoints.
@@ -87,12 +94,17 @@ The `OnEvent` method facilitates users in establishing a gRPC stream to monitor 
 
 ### Parameters
 
-- `endpoints`: A map with key-value pairs. The key is the name of the endpoint to monitor, and the value is the corresponding `EventFilter`.
+| Name        | Type                           | Description                                                                                                      |
+|-------------|--------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `endpoints` | Map (String -> `EventFilter`)  | A map with key-value pairs. The key is the name of the endpoint to monitor, and the value is the corresponding `EventFilter`. |
+
 
 #### EventFilter
 
-- `type`: The event type to subscribe to: `ALL`, `INSERT_ONLY`, `UPDATE_ONLY`, `DELETE_ONLY`.
-- `filter`: A JSON filter string indicating the specific conditions provided in the Dozer [Query Format](query-format)
+| Name     | Type   | Description                                                                                                                   |
+|----------|--------|-------------------------------------------------------------------------------------------------------------------------------|
+| `type`   | Enum   | The event type to subscribe to: `ALL`, `INSERT_ONLY`, `UPDATE_ONLY`, `DELETE_ONLY`.                                           |
+| `filter` | JSON   | The criteria for the events you wish to listen to, using Dozer's [Query Format](query-format).                    |
 
 #### Example Request
 

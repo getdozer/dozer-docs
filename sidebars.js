@@ -158,8 +158,8 @@ const sidebars = {
       },
       items: [
         'accessing-data/rest',
-        'accessing-data/typed-grpc',
-        'accessing-data/untyped-grpc',
+        'accessing-data/typesafe-grpc',
+        'accessing-data/common-grpc',
         'accessing-data/query-format',
         'accessing-data/authorization'
       ]

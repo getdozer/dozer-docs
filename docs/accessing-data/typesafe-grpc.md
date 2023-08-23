@@ -1,4 +1,4 @@
-# Typed gRPC Protocol
+# Typesafe gRPC Protocol
 
 ## List Services
 The `list` capability uses gRPC server reflection to list all available services
@@ -19,9 +19,6 @@ The `count` endpoint offers the total number of records present in a specified s
 #### Method  
 `count`
 
-#### Parameter  
-- `<StoreName>`: The name of the store you want to query (formatted in PascalCase).
-
 #### Example Request
 ```bash
 grpcurl -plaintext localhost:50051 dozer.generated.trips.Trips/count
@@ -40,7 +37,10 @@ The `query` method facilitates the retrieval of records from a specified store b
 `query`
 
 #### Parameters  
-- `query`: The conditions and parameters for data retrieval in JSON format following Dozer's [Query Format](query-format)
+| Name   | Type        | Description                                                                                        |
+|--------|-------------|----------------------------------------------------------------------------------------------------|
+| `query`| JSON | The conditions and parameters for data retrieval in JSON format following Dozer's [Query Format](query-format). |
+
 
 #### Example Request
 ```bash
@@ -60,7 +60,11 @@ The `on_event` method within the typed gRPC service lets users establish a gRPC 
 `on_event`
 
 #### Parameters  
-- `filter`: A JSON string that specifies the criteria for the events you wish to listen to, using Dozer's [Query Format](query-format)
+
+| Name     | Type   | Description                                                                                                                   |
+|----------|--------|-------------------------------------------------------------------------------------------------------------------------------|
+| `type`   | Enum   | The event type to subscribe to: `ALL`, `INSERT_ONLY`, `UPDATE_ONLY`, `DELETE_ONLY`.                                           |
+| `filter` | JSON   | The criteria for the events you wish to listen to, using Dozer's [Query Format](query-format).                    |
 
 #### Example Request
 ```bash

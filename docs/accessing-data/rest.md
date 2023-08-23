@@ -9,11 +9,10 @@ The `count` endpoint offers the total number of records present in a specified s
 #### Method
 `POST`
 
-#### Headers
-- `Content-Type: application/json`
-
 #### Path Parameters
-- `<store-name>`: The name of the store you want to count.
+| Name          | Type   | Description                             |
+|---------------|--------|-----------------------------------------|
+| `<store-name>`| String | The name of the store you want to count|
 
 #### Example Request
 ```bash
@@ -30,11 +29,10 @@ The `query` endpoint allows users to retrieve specific records from a store base
 #### Method
 `POST`
 
-#### Headers
-- `Content-Type: application/json`
-
 #### Path Parameters
-- `<store-name>`: The name of the store you wish to query.
+| Name          | Type   | Description                             |
+|---------------|--------|-----------------------------------------|
+| `<store-name>`| String | The name of the store you want to query|
 
 #### Request Body
 A JSON object detailing your query conditions using Dozer's [Query Format](query-format).
@@ -54,7 +52,9 @@ Generates an OpenAPI definition for a specific store
 `/<store-name>/oapi`
 
 #### Path Parameters
-- `<store-name>`: The name of the store you wish to get the OAPI definitions for.
+| Name          | Type   | Description                             |
+|---------------|--------|-----------------------------------------|
+| `<store-name>`| String | The name of the store you want to get OpenAPI definitions for|
 
 #### Method
 `POST`
