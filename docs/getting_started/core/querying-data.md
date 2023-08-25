@@ -64,6 +64,10 @@ grpcurl -d '{"query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
 
 ## Querying data via REST APIs
 
+::::tip
+Following the examples below requires `curl`. You can install it  from this [repository](https://github.com/curl/curl).
+::::
+
 To query the same data using REST APIs, use the command:
 
 ```bash
