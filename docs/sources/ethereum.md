@@ -1,12 +1,9 @@
 # Ethereum
 
-Ethereum connector allows you to load data from Ethereum ledger, including logs, traces and parsed smart contract events.
+The Dozer Ethereum connector offers a versatile method to tap into the rich dataset of the Ethereum blockchain. With this connector, users can monitor and extract data across three distinct categories: Traces, Logs, and Smart Contracts.
 
-## Configuration
-
-To get started with the connector, the config parameter of the connection must be set to ``!Ethereum`` in ``dozer-config.yaml`` file
-
-### Trace
+## Traces 
+Traces provide a step-by-step account of all operations in a transaction, from gas usage to inter-contract calls. By monitoring traces, a user could analyze the flow of tokens in a multi-step transaction or detect interactions between different contracts within a single transaction.
 
 ```yaml
 app_name: dozer-eth-dashboard
@@ -19,8 +16,19 @@ connections:
         batch_size: 3
     name: eth_conn1
 ```
+### Parameters
 
-### Logs
+| Name           | Type    | Description                                                                                                                                                              |
+|----------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `provider`     | Enum    | Should be set to `Trace` for this configuration.                                                                                                                                                       |
+| `https_url`    | String  | URL of an Ethereum node that supports HTTPS RPC calls. Used for fetching trace data.                                                                                      |
+| `from_block`   | Integer | The starting block number from which to begin data ingestion.                                                                                                            |
+| `to_block`     | Integer | The block number until which data should be ingested. If not specified, ingestion is up to the latest block.                                                             |
+| `batch_size`   | Integer | Number of blocks to fetch in one batch.                                                                                                                                  |
+
+
+## Logs
+Logs are a lightweight means for smart contracts to signal that an event occurred. They provide filtered insights about specific actions on the blockchain without requiring a full analysis of every transaction. If you're interested in tracking when a certain NFT has been traded or when a particular user has staked tokens in a DeFi platform, monitoring logs for specific event signatures is a go-to method.
 
 ```yaml
   - config: !Ethereum
@@ -34,7 +42,20 @@ connections:
     name: eth_conn2
 ```
 
-### Smart Contract Parsing
+### Parameters
+| Name       | Type    | Description                                                                                                                                                              |
+|-----------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `provider`      | Enum    | Should be set to `Log` for this configuration.                                                                                                                                                       |
+| `wss_url`       | String  | WebSocket URL of the Ethereum node. Useful for subscribing to real-time updates.                                                                                          |
+| `filter`        | Object  | Container for filtering criteria for log data ingestion.                                                                                                                 |
+| ↳ `from_block`  | Integer | Starting block number for log filtering.                                                                                                                                  |
+| ↳ `to_block`    | Integer | Ending block number for log filtering.                                                                                                                                    |
+| ↳ `addresses`   | Array   | List of contract addresses to filter logs from.                                                                                                                           |
+| ↳ `topics`      | Array   | Array of order-dependent topics. Topics are Ethereum event signatures.                                                                                                     |
+
+
+## Smart Contracts
+This allows for real-time monitoring of specific contracts on the blockchain. By supplying the ABI and the contract's address, users can decode and understand all interactions with that contract. By monitoring its smart contract, you can gain insights into user deposits, withdrawals, swaps, and other interactions, making it easier to analyze the platform's adoption and usage rates.
 
 ```yaml
 - config: !Ethereum
@@ -59,26 +80,23 @@ connections:
     name: eth_conn
 ```
 
+### Parameters
+
+| Name           | Type    | Description                                                                                                                                                              |
+|---------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `provider`          | Enum    | Should be set to `Log` for this configuration, even when dealing with smart contracts.                                                                                                     |
+| `wss_url`           | String  | WebSocket URL of the Ethereum node. Useful for subscribing to real-time updates of contract interactions.                                                                 |
+| `contracts`         | Array   | List of smart contracts to monitor.                                                                                                                                      |
+| ↳ `name`            | String  | Identifier for the smart contract.                                                                                                                                         |
+| ↳ `address`         | String  | Ethereum address of the smart contract.                                                                                                                                    |
+| ↳ `abi`             | JSON    | Application Binary Interface (ABI) of the contract. Describes the functions & structures of the contract, enabling Dozer to decode contract interactions.                     |
+| `filter`            | Object  | Contains filtering criteria for smart contract interaction data ingestion.                                                                                                |
+| ↳ `from_block`      | Integer | Starting block number for smart contract filtering.                                                                                                                      |
+| ↳ `addresses`       | Array   | List of contract addresses to filter interactions from.                                                                                                                  |
+| ↳ `topics`          | Array   | Array of order-dependent topics. Topics are Ethereum event signatures related to smart contract events.                                                                   |
 
 
-## Parameters
 
-| Parameter<br />Name | Type   | Description                                                         |
-| ------------------- | ------ | ------------------------------------------------------------------- |
-| `provider`        | String | The Ethereum provider to use. It can be either `Trace` or `Log` |
-| `wss_url`         | String | The WSS URL of the Ethereum node.                                   |
-| `https_url`       | String | The HTTPS URL of the Ethereum node.                                 |
-| `from_block`      | Number | The block number to start from.                                     |
-| `to_block`        | Number | The block number to end at.                                         |
-| `batch_size`      | Number | The batch size to use when fetching data.                           |
-| `contracts`       | Array  | The list of contracts to parse.                                     |
-| `filter`          | Object | The filter to use when fetching data.                               |
-| `addresses`       | Array  | The list of addresses to filter by.                                 |
-| `topics`          | Array  | The list of topics to filter by.                                    |
-| `abi`             | String | The ABI of the contract to parse.                                   |
-| `name`            | String | The name of the contract to parse.                                  |
-| `address`         | String | The address of the contract to parse.                               |
-
-### Sample
+## Trying it out
 
 For complete example on how to use the Ethereum connector refer to [Ethereum Sample](https://github.com/getdozer/dozer-samples/tree/main/connectors/ethereum) for an end-to-end example on how to setup and use the Ethereum connector.
