@@ -71,8 +71,7 @@ const sidebars = {
         'configuration/data-sources',
         'configuration/transformations',
         'configuration/api-endpoints',
-        'configuration/app-settings',
-        'configuration/api-settings',
+        'configuration/global-settings',
       ]
     },
 
@@ -91,41 +90,7 @@ const sidebars = {
         'sources/mysql',
         'sources/snowflake',
         'sources/kafka',
-
-        {
-          type: 'category',
-          label: 'Object Stores',
-          link: {
-            type: 'doc',
-            id: 'sources/object-stores',
-          },
-          items: [
-            {
-              type: 'html',
-              value: 'STORAGE TYPES',
-              defaultStyle: false,
-              className: 'sidebar-item-group',
-              customProps: {
-                id: 'object-stores',
-              },
-            },
-            'sources/object-stores/types/aws-s3',
-            // 'configuration/sources/object-stores/types/google-cloud-storage',
-            // 'configuration/sources/object-stores/types/azure-blob-storage',
-            {
-              type: 'html',
-              value: 'FILE FORMATS',
-              defaultStyle: false,
-              className: 'sidebar-item-group',
-              customProps: {
-                id: 'file-formats',
-              },
-            },
-            'sources/object-stores/formats/csv',
-            'sources/object-stores/formats/parquet',
-            'sources/object-stores/formats/deltalake',
-          ]
-        },
+        'sources/object-stores',
         'sources/ethereum',
         'sources/grpc',
       ],
