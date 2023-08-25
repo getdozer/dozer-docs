@@ -96,3 +96,20 @@ Enables gRPC events streaming for all store insert, update and delete operations
 #### `authenticate_server_reflection`
 Enables authentication for gRPC server reflection. Defaults to `true`
 
+#### `enable_probabilistic_optimizations`
+Configurations to enable or disable probabilistic data structures to optimize memory usage at the potential expense of accuracy.
+
+```yaml
+flags:
+  enable_probabilistic_optimizations:
+    in_sets: true 
+    in_joins: true 
+    in_aggregations: true
+```
+
+- `in_sets`: Optimizes set operations (UNION, EXCEPT, INTERSECT) using probabilistic structures. Defaults to `false`.
+- `in_joins`: Optimizes JOIN operations using probabilistic structures. Defaults to `false`.
+- `in_aggregations`: Optimizes aggregations (SUM, COUNT, MIN, etc.) using probabilistic structures. Defaults to `false`.
+
+
+
