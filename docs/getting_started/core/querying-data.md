@@ -1,8 +1,8 @@
-# Querying Data
+# Querying Data via APIs
 
 Dozer supports querying data in both gRPC and REST formats. Let's explore in details each of them.
 
-## Querying Data using gRPC APIs
+## Querying Data via gRPC APIs
 
 Dozer automatically produces gRPC APIs in two formats.
 
@@ -62,7 +62,7 @@ grpcurl -d '{"query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
     -plaintext localhost:50051 dozer.generated.avg_fares.AvgFares/query
 ```
 
-## Querying data using REST APIs
+## Querying data via REST APIs
 
 To query the same data using REST APIs, use the command:
 
