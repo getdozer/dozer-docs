@@ -71,6 +71,7 @@ const sidebars = {
         'configuration/data-sources',
         'configuration/transformations',
         'configuration/api-endpoints',
+        'configuration/other',
         'configuration/global-settings',
       ]
     },

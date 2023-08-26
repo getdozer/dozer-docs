@@ -1,4 +1,4 @@
-# Global Application Parameters
+# Global Parameters and Flags
 
 ## Settings
 These settings can be specified at the root of the `dozer-config.yaml` file to define global configurations for your Dozer application.
@@ -11,67 +11,33 @@ home_dir: ./.dozer_custom
 ...
 ```
 
-#### `app_buffer_size`
-Pipeline buffer size
-- **Type**: Integer
-- **Default Value**: 20000
-- **Example**: `app_buffer_size: 50000`
-
-#### `commit_size`
-The maximum number of CDC events that can be sent by a source before triggering a commit
-- **Type**: Integer
-- **Default Value**: 10000
-- **Example**: `commit_size: 100`
-
-#### `commit_timeout`
-Commit timeout in milliseconds
-- **Type**: Integer
-- **Default Value**: 50
-- **Example**: `commit_timeout: 1000`
-
-#### `log_entry_max_size`
-Max number of operations in one log entry
-- **Type**: Integer
-- **Default Value**: 100000
-- **Example**: `log_entry_max_size: 100000`
-
-#### `log_max_num_immutable_entries`
-Max number of immutable entries
-- **Type**: Integer
-- **Default Value**: 100
-- **Example**: `log_max_num_immutable_entries: 100`
-
-#### `log_storage`
-The storage to use for the log
-- **Type**: LogStorage (Internal Type)
-- **Default Value**: Local Storage
-- **Example**: `log_storage: !S3`
-
-#### `error_threshold`
-How many errors we can tolerate before bringing down the app
-- **Type**: Integer
-- **Default Value**: 0
-- **Example**: `error_threshold: 10`
-
-#### `home_dir`
-Home directory of dozer application
-- **Type**: String
-- **Default Value**: `./.dozer`
-- **Example**: `home_dir: ./.dozer`
-
 #### `cache_dir`
-Cache directory of dozer application
-- **Type**: String
-- **Default Value**: `./.dozer/cache`
-- **Example**: `cache_dir: ./.dozer/cache`
+Determines the directory where Dozer will save its cache.  
+**Type**: String | **Default**: `./.dozer/cache`  
 
 #### `cache_max_map_size`
-Maximum map size that cache allows for pipeline processing
-- **Type**: Integer
-- **Default Value**: 1073741824 (1024 * 1024 * 1024)
-- **Example**: `cache_max_map_size: 8589934592`
+Optional setting denoting the maximum size, in bytes, of the cache lmdb map.  
+**Type**: Integer | **Default**: `1073741824`  
 
+#### `app_buffer_size`
+Optional parameter specifying the buffer size for Dozer's application processes.  
+**Type**: Integer | **Default**: `20000`  
 
+#### `commit_size`
+Optional parameter defining the maximum number of events that can be sent before triggering a commit.  
+**Type**: Integer | **Default**: `10000`  
+
+#### `commit_timeout`
+Optional parameter setting the timeout duration, in milliseconds, for commits.  
+**Type**: Integer | **Default**: `50`  
+
+#### `file_buffer_capacity`
+Optional parameter indicating the buffer capacity, in bytes, for the Log Writer.  
+**Type**: Integer | **Default**: `1073741824`  
+
+#### `err_threshold`
+Optional setting determining the error threshold. Exceeding this number would terminate the process.
+**Type**: Integer | **Default**: `0`  
 
 ## Flags
 These flgs can be specified at the root of the `dozer-config.yaml` under the `flags` section, to enable or disable spefic features or functionalities.

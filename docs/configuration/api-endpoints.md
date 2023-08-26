@@ -1,60 +1,74 @@
 # Endpoints
-API endpoints in Dozer allow you to expose both gRPC and REST APIs for seamless data access. In this section, you can define the endpoint names, paths, and associate them with data sources or transformed results.
-
-## Basic Endpoint Configuration
-
-Endpoints can be tied directly to a source or to an SQL-transformed result. Here are some examples:
+The endpoint configuration defines how Dozer should expose gRPC/REST endpoints. Each endpoint can be individually tailored to handle potential conflicts, routes, and indexing mechanisms.
 
 ```yaml
 endpoints:
-  # Exposing API directly from a source
-  - name: trips
+  - name: trips_cache  
     path: /trips
-    table_name: trips
-
-  # Exposing SQL-transformed results
-  - name: result
-    path: /result
-    table_name: result
-    
-  - name: result_3
-    path: /result_3
-    table_name: result_3
+    table_name: trips_cache
+    index:
+      ...
+    conflict_resolution: 
+      ...
 ```
+
+### Parameters
+| Name                  | Type         | Description                                                                                                                         |
+|-----------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `name`                | String       | The designated name of the endpoint.                                                                                                |
+| `path`                | String       | Determines the route or path for the REST endpoint.                                                                                 |
+| `table_name`          | String       | Identifies the name of the table in the source or in the SQL that this endpoint is set to expose.                                   |
+| `index`               | Object       | An optional section that describes the index configuration for this endpoint, specifying primary and secondary indexes and whether to skip default configurations.  |
+| `conflict_resolution` | Object       | An optional section that outlines the strategies to handle potential data conflicts for this endpoint.                              |
 
 ## Indexes
-
-Indexes help optimize the speed and efficiency of queries. You can define primary, secondary, or full-text indexes based on your needs.
-
-### Primary Indexes
-You can explicitly define primary indexes for your tables. However, it's important to note that when your SQL transformations include a `GROUP BY` clause, primary indexes are automatically set based on the field names within that `GROUP BY` clause. This ensures optimal querying performance on aggregated data.
+The `index` section of the endpoint configuration in Dozer determines how indexing is managed for the exposed endpoint. Appropriate indexing ensures quick data retrieval and can greatly improve query performance.
 
 ```yaml
-endpoints:
-  - name: result_3
-    path: /result_3
-    table_name: result_3
-    index:
-      primary:
-        - region
+index:
+  primary_key:
+    - pickup_location
+    - dropoff_location
+  secondary:
+    create:
+      - index: !SortedInverted
+          fields:
+            - hvfhs_license_num
+            - trip_miles
+  skip_default: 
 ```
 
-### Secondary and Full-Text Indexes
+### Parameters
+| Name                                | Type                      | Description                                                                                                            |
+|-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `primary_key`                        | List of Strings           | Defines the fields that compose the primary key for the endpoint. Essential for unique record identification.          |
+| `secondary.create`                   | List of Objects           | An array of secondary index configurations.                 |
+| ↳ `index`                            | Enum                      | Type of the secondary index. Examples: `!SortedInverted`, `!FullText`.                                                  |
+| ↳ `fields`                           | List of Strings           | The fields that are covered by this secondary index configuration.                                                      |
+| `skip_default`                       | Boolean                   | If set to true, instructs Dozer to bypass the default index configuration for the endpoint.  |
 
-For more complex querying capabilities, consider adding secondary or full-text indexes:
+
+## Conflicts Resolution
+The `conflict_resolution` section outlines the strategies to handle potential data conflicts within a Dozer endpoint. This section is optional.
 
 ```yaml
-endpoints:
-  - name: trips
-    path: /trips
-    table_name: trips
-    index:
-      secondary:
-        create:
-          - index: !SortedInverted
-              fields:
-                - hvfhs_license_num
-                - trip_miles
+conflict_resolution:
+  on_insert: !Update
+  on_update: !Upsert
+  on_delete: !Nothing
 ```
 
-When structuring your indexes, always consider your application's querying needs and performance requirements.
+### Parameters
+| Parameter   | Description                                                                                       | Options       |
+|-------------|---------------------------------------------------------------------------------------------------|---------------|
+| `on_insert` | Defines the action to be taken when a conflict arises during an insert operation.                  | `!Update`, `!Panic`, `!Nothing`  |
+| `on_update` | Specifies the action to be taken when a conflict is detected during an update operation.           | `!Upsert`, `!Panic`, `!Nothing`  |
+| `on_delete` | Designates the action to undertake when a conflict is perceived during a delete operation.         | `!Panic`, `!Nothing`             |
+
+- `!Update`: This will result in an update of the conflicting record.
+- `!Upsert`: If the record exists, it'll be updated; otherwise, a new record will be inserted.
+- `!Panic`: The operation will stop immediately, and an error will be flagged.
+- `!Nothing`: No action will be taken in response to the conflict.
+
+
+---
