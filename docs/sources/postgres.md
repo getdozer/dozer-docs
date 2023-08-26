@@ -2,7 +2,7 @@
 
 Dozer PostgreSQL connector serves as an essential link for real-time data replication from a PostgreSQL database to Dozer. Upon its initial start, the connector begins by taking a snapshot of the existing data in specified tables. This process provides a foundation from which further data changes can be efficiently managed. After snapshotting, the connector taps into PostgreSQL's logical replication by connecting to a designated replication slot, monitoring for data changes in real-time. Any changes occurring in the PostgreSQL database are detected and instantly sent to Dozer, ensuring a continuous stream of updated data. The specific tables to observe are customizable within the connector configuration, ensuring a targeted and resource-optimized data-handling process.
 
-## Configuration
+### Configuration
 The following configuration block can be used in `dozer-config.yaml` to define a new PostgreSQL connection:
 
 ```yaml
@@ -38,7 +38,7 @@ connections:
 | `SSLMode`          | String               | The choice of SSL TCP/IP connection negotiation priority with the server can be configured with three available options: "require," "prefer," or "disable." These options allow you to define how the SSL connection will be established between the client and the server. |
 | `connection_url`   | String               | Postgres connection string takes precedence over all other configurations in Dozer when connecting to the database. running.                                                                                                                                                |
 
-## Testing it out
+## Trying it out
 
 To test a PostgreSQL sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/postgres).
 

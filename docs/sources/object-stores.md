@@ -25,6 +25,7 @@ Here, `local_dataset` represents a connector for local storage. Within it, the `
 ### Local Storage
 The Local Storage connector is used to connect to a local file system, and use it as a source for data ingestion, like any other Object Store.
 
+#### Configuration
 ```yaml
 connections:
   - name: local_dataset
@@ -45,6 +46,7 @@ connections:
 ### AWS S3
 The AWS S3 connector is used to connect to an S3 bucket, and use it as a source for data ingestion.
 
+#### Configuration
 ```yaml
 connections:
   - name: local_dataset
@@ -70,6 +72,7 @@ connections:
 ### CSV
 The Dozer CSV reader operates in an "append" mode, continually monitoring a specified directory for new CSV files. Upon detecting new files, it triggers an automatic ingestion process. To enhance the ingestion control, there's a "marker file" mechanism. If this feature is active, a new CSV file will only be ingested if a corresponding marker file is also present in the directory. This ensures deliberate and controlled data ingestion.
 
+#### Configuration
 ```yaml
 -  !Table
     name: zones
@@ -92,6 +95,7 @@ The Dozer CSV reader operates in an "append" mode, continually monitoring a spec
 ### Parquet
 The Dozer Parquet reader operates in an "append" mode, continually monitoring a specified directory for new Parquet files. Upon detecting new files, it triggers an automatic ingestion process. To enhance the ingestion control, there's a "marker file" mechanism. If this feature is active, a new Parquet file will only be ingested if a corresponding marker file is also present in the directory. This ensures deliberate and controlled data ingestion.
 
+#### Configuration
 ```yaml
 -  !Table
     name: trips
@@ -108,6 +112,10 @@ The Dozer Parquet reader operates in an "append" mode, continually monitoring a 
 | `extension`        | String    | Optional. The extension of the Parquet files.                                                                                          |
 | `marker_file`      | Boolean   | Optional. Indicates whether to require marker files for ingestion. If `true`, only files with corresponding marker files are ingested.   |
 | `marker_extension` | String    | Optional. The extension of the marker files. Only relevant if `marker_file` is set to `true`.                                           |
+
+## Trying it out
+
+To test a MySQL sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/aws-s3).
 
 
 

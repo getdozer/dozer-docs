@@ -5,6 +5,7 @@ The Dozer Ethereum connector offers a versatile method to tap into the rich data
 ## Traces 
 Traces provide a step-by-step account of all operations in a transaction, from gas usage to inter-contract calls. By monitoring traces, a user could analyze the flow of tokens in a multi-step transaction or detect interactions between different contracts within a single transaction.
 
+### Configuration
 ```yaml
 app_name: dozer-eth-dashboard
 connections:
@@ -30,6 +31,7 @@ connections:
 ## Logs
 Logs are a lightweight means for smart contracts to signal that an event occurred. They provide filtered insights about specific actions on the blockchain without requiring a full analysis of every transaction. If you're interested in tracking when a certain NFT has been traded or when a particular user has staked tokens in a DeFi platform, monitoring logs for specific event signatures is a go-to method.
 
+### Configuration
 ```yaml
   - config: !Ethereum
       provider: !Log
@@ -57,6 +59,7 @@ Logs are a lightweight means for smart contracts to signal that an event occurre
 ## Smart Contracts
 This allows for real-time monitoring of specific contracts on the blockchain. By supplying the ABI and the contract's address, users can decode and understand all interactions with that contract. By monitoring its smart contract, you can gain insights into user deposits, withdrawals, swaps, and other interactions, making it easier to analyze the platform's adoption and usage rates.
 
+### Configuration
 ```yaml
 - config: !Ethereum
       provider: !Log
@@ -96,7 +99,5 @@ This allows for real-time monitoring of specific contracts on the blockchain. By
 | ↳ `topics`          | Array   | Array of order-dependent topics. Topics are Ethereum event signatures related to smart contract events.                                                                   |
 
 
-
 ## Trying it out
-
-For complete example on how to use the Ethereum connector refer to [Ethereum Sample](https://github.com/getdozer/dozer-samples/tree/main/connectors/ethereum) for an end-to-end example on how to setup and use the Ethereum connector.
+To test the Ethereum sample, clone the `dozer-samples` GitHub repo and follow the steps described [here](https://github.com/getdozer/dozer-samples/tree/main/connectors/ethereum).
