@@ -16,6 +16,7 @@ connections:
       database: film
 ```
 
+Alternatively, it's possible to specify a connection string:
 ```yaml
 connections:
   - name: pagila_conn

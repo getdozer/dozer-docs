@@ -11,6 +11,14 @@ home_dir: ./.dozer_custom
 ...
 ```
 
+#### `app_name`
+Determines the name of the Dozer application 
+**Type**: String 
+
+#### `app_name`
+Determines the version of the Dozer application 
+**Type**: Integer 
+
 #### `cache_dir`
 Determines the directory where Dozer will save its cache.  
 **Type**: String | **Default**: `./.dozer/cache`  

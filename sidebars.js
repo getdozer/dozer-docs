@@ -42,8 +42,7 @@ const sidebars = {
         },
         'getting_started/core/connecting-to-sources',
         'getting_started/core/adding-transformations',
-        'getting_started/core/querying-data',
-        'getting_started/core/monitoring-your-application'
+        'getting_started/core/querying-data'
         // {
         //   type: 'html',
         //   value: 'DOZER CLOUD',
@@ -72,7 +71,7 @@ const sidebars = {
         'configuration/transformations',
         'configuration/api-endpoints',
         'configuration/other',
-        'configuration/global-settings',
+        'configuration/flags',
       ]
     },
 
