@@ -39,14 +39,22 @@ index:
 ```
 
 ### Parameters
-| Name                                | Type                      | Description                                                                                                            |
-|-------------------------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------|
-| `primary_key`                        | List of Strings           | Defines the fields that compose the primary key for the endpoint. Essential for unique record identification.          |
-| `secondary.create`                   | List of Objects           | An array of secondary index configurations.                 |
-| ↳ `index`                            | Enum                      | Type of the secondary index. Examples: `!SortedInverted`, `!FullText`.                                                  |
-| ↳ `fields`                           | List of Strings           | The fields that are covered by this secondary index configuration.                                                      |
-| `skip_default`                       | Boolean                   | If set to true, instructs Dozer to bypass the default index configuration for the endpoint.  |
+| Name                                | Type                      | Description                                                                                                                                                    |
+|-------------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `primary_key`                        | List of Strings           | Defines the fields that compose the primary key for the endpoint. Essential for unique record identification.                                                |
+| `secondary.create`                   | List of Objects           | An array of secondary index configurations.                                                                                                                   |
+| ↳ `index`                            | Enum                      | Type of the secondary index. Examples: `!SortedInverted`, `!FullText`.                                                                                        |
+| ↳ `fields`                           | List of Strings           | Can only be used with `SortedInverted`. The list of fields to be indexed.                                                                                     |
+| ↳ `field`                            | String                    | Can only be used with `FullText`. The field to be indexed.                                                                                                    |
+| `skip_default`                       | List of Strings           | Skip the automatic secondary index creation for the listed fields. If not specified, Dozer creates `!SortedInverted` secondary index for every field.  |
 
+### `SortedInverted` secondary index
+
+The `SortedInverted` secondary index supports comparison filter operators, i.e., `$lt`, `$lte`, `$eq`, `$gt`, `$gte`. One index can contain multiple fields, so the filtering of multiple fields is accelerated.
+
+### `FullText` secondary index
+
+The `FullText` secondary index supports string filter operations, i.e., `$contains`, `matches_one`, `matches_any`. One index can only contain one field.
 
 ## Conflicts Resolution
 The `conflict_resolution` section outlines the strategies to handle potential data conflicts within a Dozer endpoint. This section is optional.
@@ -68,7 +76,7 @@ conflict_resolution:
 - `!Update`: This will result in an update of the conflicting record.
 - `!Upsert`: If the record exists, it'll be updated; otherwise, a new record will be inserted.
 - `!Panic`: The operation will stop immediately, and an error will be flagged.
-- `!Nothing`: No action will be taken in response to the conflict.
+- `!Nothing`: The operation will be ignored.
 
 
 ---
