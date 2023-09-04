@@ -130,15 +130,15 @@ const sidebars = {
         'accessing-data/authorization'
       ]
     },
-    {
-      type: 'category',
-      label: 'Deployment',
-      link: {
-        type: 'doc',
-        id: 'deployment',
-      },
-      items: []
-    }
+    // {
+    //   type: 'category',
+    //   label: 'Deployment',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'deployment',
+    //   },
+    //   items: []
+    // }
 
    
   ],

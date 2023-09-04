@@ -1,3 +1,7 @@
+---
+description: Connects to MongoDB, leveraging Change Streams for real-time event capturing.
+---
+
 # MongoDB
 The Dozer MongoDB connector is an experimental connector for Dozer, replicating any data changes in MongoDB collections into Dozer in real-time. 
 To replicate data from a MongoDB cluster, this cluster needs to be configured as a [replica set], so that MongoDB creates a replication log, which can be used for efficient streaming of data changes. Furthermore, the collections to be replicated need to have [Document Pre- and Post-images] enabled, so that dozer knows what the new version of the changed documents looks like. If access control is enabled on the cluster, the user that is used with the connector needs to have the `find` and `changeStream` privileges.

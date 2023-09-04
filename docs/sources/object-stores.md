@@ -1,3 +1,7 @@
+---
+description: Connects to Object Sorages, automatically polling for new files in order to guarantee a continuous ingestion flow.
+---
+
 # Object Stores
 In Dozer, object store connectors provide interfaces to different data storage solutions. A fundamental component of these connectors is the `tables` attribute, which denotes specific datasets or collections within the storage. Through these table configurations, Dozer enables a modular approach, allowing various storage mediums to be paired with distinct data formats.
 

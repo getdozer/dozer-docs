@@ -1,3 +1,7 @@
+---
+description: Connects to the Ethereum blockchain, allowing real-time processing of Smart Contracts events, Logs and Traces.
+---
+
 # Ethereum
 
 The Dozer Ethereum connector offers a versatile method to tap into the rich dataset of the Ethereum blockchain. With this connector, users can monitor and extract data across three distinct categories: Traces, Logs, and Smart Contracts.

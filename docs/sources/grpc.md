@@ -1,3 +1,7 @@
+---
+description: Allows the programmatic ingestion of events using the streaming gRPC protocol
+---
+
 # gRPC Ingestion
 
 The gRPC connector allows to ingest data on Dozer pushing data to a gRPC endpoint in a streaming fashion.

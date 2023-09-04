@@ -1,3 +1,7 @@
+---
+description: Connects to MySQL, leveraging MySQL native CDC functionalities.
+---
+
 # MySQL
 To use Dozer's MySQL connector, a specific server URL format is required. This URL consolidates details about the server's location, authentication specifics, the target database name, and any other optional parameters that refine the connection.
 
