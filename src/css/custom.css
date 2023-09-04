@@ -256,9 +256,9 @@ a {
   margin-top: 0 !important;
 }
 
-img {
+div[class*=' docItemWrapper'] img {
   border-radius: 5px;
-  max-width: 80%;
+  max-width: 85%;
   display: block;
   margin-top: 10px;
   margin-bottom: 10px;
