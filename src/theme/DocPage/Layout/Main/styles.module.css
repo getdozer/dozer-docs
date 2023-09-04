@@ -25,10 +25,11 @@
       var(--ifm-container-width) + var(--doc-sidebar-width)
     ) !important;
   }
-  
-  .docItemWrapper {
-    max-width: 66rem;
-    /* margin-left: calc(50% - min(50%, 33rem));
-    margin-right: calc(50% - min(50%, 33rem)) */
+
+
+  div[class*=' docItemWrapper']{
+    max-width: 80rem;
   }
+
+
 }
