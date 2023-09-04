@@ -1,65 +1,77 @@
 
 # Architecture
 
-The architectural design of Dozer utilizes three distinct types of nodes: Ingestor, Processor, and Store/API. These nodes work in harmony, communicating with each other through gRPC to perform their respective functions seamlessly. In a typical production deployment, each of these nodes operates as an independent Docker image, making it easy to scale, manage, and deploy.
+Dozer's architecture is built around two main types of nodes: App Nodes and API Nodes. These nodes work together to facilitate data ingestion, processing, and exposure through APIs.
 
-However, for development purposes and ease of use, it's possible to run multiple types of nodes as separate threads within the same process. This flexibility in its architectural design further enhances Dozer's adaptability, making it a robust and reliable solution for building and maintaining real-time data applications. 
+## Deployment Considerations
+
+In a production environment, App Nodes and API Nodes are deployed as separate, independent Docker images. This allows for greater scalability and management flexibility. However, for ease of development and testing, these nodes can be run as separate threads within a single process.
 
 ## Node Types
-Dozer's architecture is designed to efficiently process and deliver data through three types of nodes: Ingestor nodes, Processor nodes, and Store/API nodes. 
 
-**Ingestor Nodes**: These nodes are responsible for data ingestion from various sources such as databases, data warehouses, or object storages. They capture data continuously in real-time using Change Data Capture (CDC) or near-real-time using polling mechanisms. The captured data is transformed into Dozer operations (Inserts, Updates, Deletes) and ingested into the system.
+### App Nodes
 
-**Processor Nodes**: These nodes embody a streaming SQL engine that enables real-time data transformations. As data is ingested, these transformations operate on the incoming streams directly. Processor nodes can source data from multiple ingestors or other processors, and they can combine and aggregate data using SQL.
+App Nodes in Dozer are responsible for data ingestion and real-time processing. They capture data from various data sources like databases, data warehouses, and object storages using methods like Change Data Capture (CDC) or polling. Post-ingestion, data is processed using an in-built streaming SQL engine.
 
-**Store/API Nodes**: Once data is processed, it's transferred to the Store nodes. These nodes implement a data store using LMDB (Lightning Memory-Mapped Database), an ultra-fast, ultra-compact key-value embedded data store. The stored data is automatically indexed to expedite lookup performance and is accessible through gRPC and REST APIs. The definitions of the exposed data are available through OpenAPI or Protocol Buffers definitions.
+The architecture allows for flexibility in deployment. An App Node can be configured solely for data capture or for downstream processing. App Nodes can also be chained, enabling complex, multi-stage data processing pipelines.
 
-![Dozer Architecture](./architecture/arch.svg)
+### API Nodes
+
+API Nodes act as the data access layer in the Dozer architecture. They receive processed data from App Nodes and implement a low-latency data store using LMDB (Lightning Memory-Mapped Database). This data is then exposed through gRPC and REST APIs, with auto-generated API definitions accessible via OpenAPI or Protocol Buffers.
 
 ## Data Flows
 
 ![Dozer Architecture](./architecture/e2e.svg)
 
-### Ingestor Nodes
-Ingestor nodes form the initial data pipeline by connecting to various data sources and streaming data into the system. Each Ingestor node maintains an in-memory queue of all incoming messages, allowing for high-speed data processing. However, this queue has a size limit to prevent memory overflow. 
+### App Nodes
 
-When the volume of incoming data reaches a certain threshold, the Ingestor node initiates an offloading process. The earliest (or head) messages in the queue, which are likely to have been processed already, are moved to a cloud storage system. This mechanism of transferring older data to more permanent storage allows the Ingestor node to free up memory space for new incoming data, ensuring smooth, uninterrupted data flow and real-time processing.
+App Nodes in Dozer serve a dual role, encapsulating both the functionality of Ingestor Nodes and Processor Nodes. They are responsible for data ingestion, real-time transformation, and data flow management. The design allows users to configure an App Node either for pure data ingestion, downstream processing, or both. These nodes can also be chained for more complex, multi-stage data processing pipelines. Below is a more detailed breakdown of these functionalities within an App Node:
 
-Ingestor nodes not only process incoming data but also serve as crucial data access points for the rest of the system. They achieve this by exposing a gRPC endpoint that downstream nodes can connect to. This gRPC endpoint implements a protocol to provide access to data for all downstream nodes, effectively allowing for the distribution and dissemination of data across the system.
+#### Data Ingestion and Queue Management
 
-### Processor Nodes
-Processor nodes in Dozer play a vital role in executing transformations and managing data flow. They translate any SQL query into a streaming Direct Acyclic Graph (DAG), enabling real-time transformation execution. To access the data, these Processor nodes form a gRPC streaming connection with upstream nodes, which could be either Ingestor nodes or other Processor nodes. Like their Ingestor counterparts, Processor nodes also expose a gRPC endpoint to facilitate data access for downstream nodes.
+App Nodes connect to various data sources and stream data into the system, maintaining an in-memory queue for incoming messages. To prevent memory overflow, this queue has a size limit. When the incoming data reaches a threshold, the App Node offloads the earliest messages in the queue to cloud storage, freeing up memory for new data. 
 
-To manage the data generated by transformations, Processor nodes maintain a queue system similar to the one employed by Ingestor nodes. A portion of this data queue is kept in memory, while the remainder is offloaded to cloud storage as needed to maintain optimal memory usage.
+#### Data Access and Distribution
 
-In addition to data queue management, Processor nodes maintain a state for data processing. This state is preserved in memory and snapshotted to cloud storage at regular intervals to ensure data integrity. The snapshotting process utilizes a variation of the Lamport-Candy algorithm to ensure consistency.
+Just like traditional Ingestor Nodes, App Nodes expose a gRPC endpoint for downstream data access. This protocol serves as a critical data access point and allows for the distribution and dissemination of data throughout the system.
 
-Each Processor node hosts numerous micro-nodes, each responsible for executing individual operations. For instance, if a query involves joining several data sources, filtering, and aggregations, each operation is assigned to an individual micro-node. These micro-nodes each run in their own thread, with data passed from one micro-node to the next in a pipeline fashion. This approach maximizes efficiency when running on multi-core processors, ensuring fast and reliable data processing.
+#### Real-time Transformation and Data Flow
 
-![Dozer Architecture](./architecture/proc_node_start.svg)
+App Nodes also embody the functionalities of Processor Nodes, translating SQL queries into a Direct Acyclic Graph (DAG) for real-time transformation execution. They maintain a similar queue system as the ingestion component, balancing in-memory and cloud storage for optimal performance. 
 
-When a new Processor node is instantiated in Dozer, several key steps occur to initialize it and prepare it for operation:
+#### State Management
 
-1. **DAG Transformation**: The incoming SQL is converted into a Direct Acyclic Graph (DAG), and all micro-nodes are initialized for operation. This process sets the stage for efficient and organized data processing.
+For data processing, a state is kept in memory and periodically snapshotted to cloud storage for data integrity. This snapshotting process employs a variant of the Lamport-Candy algorithm to ensure data consistency.
 
-2. **Connection to Upstream Nodes**: The Processor node establishes connections with all necessary upstream nodes and requests access to the ingested data. This connection forms the primary data pathway for the Processor node.
+#### Micro-node Architecture
 
-3. **Data Access from Upstream Nodes**: In response to the request from the Processor node, the upstream nodes provide both the location of offloaded data stored in cloud storage, as well as streaming their in-memory data to the downstream node. This process ensures the Processor node receives all necessary data for processing.
+Within each App Node, multiple micro-nodes execute individual operations like joins, filtering, and aggregations. These micro-nodes run in their own threads, allowing for efficient multi-core processing.
 
-4. **Data Processing**: Upon receiving the data, the Processor node combines the offloaded data with the live data it receives. It starts processing this consolidated data set, generating a new data stream. This newly created data stream is partially kept in memory and partially offloaded to cloud storage, maintaining a balance for efficient resource usage.
+#### Initialization Steps
 
+When an App Node is initialized, it undergoes several key steps:
 
-### Store/API Nodes
+1. **DAG Transformation**: SQL queries are translated into a Direct Acyclic Graph, setting the stage for organized data processing.
+   
+2. **Upstream Connection**: Connections to necessary upstream nodes are established, forming the primary data pathway.
+   
+3. **Data Retrieval**: The node accesses both offloaded and in-memory data from upstream nodes, combining them for processing.
 
-The Store/API nodes are the backbone of Dozer's data accessibility and storage mechanism. They connect to upstream nodes, be they Ingestion or Processor nodes, in a similar manner as previously described for Processor nodes. 
+4. **Data Processing**: The consolidated data set is processed, generating a new data stream that is managed through in-memory and cloud storage.
 
-Upon establishing this connection, the Store/API nodes receive a flow of data which they then store using an embedded LMDB (Lightning Memory-Mapped Database) system. LMDB has been selected for its memory-efficient and high-performance attributes which align perfectly with Dozer's ethos of efficient and effective data management.
+App Nodes are a flexible and robust solution for complex real-time data ingestion and processing requirements.
 
-To facilitate rapid and efficient data access, all stored data in the Store/API nodes is automatically indexed. This streamlined indexing process drastically improves data retrieval times, which is especially beneficial when dealing with vast volumes of data.
+### API Nodes
 
-Beyond data storage and retrieval, Store/API nodes also expose APIs in both gRPC and REST formats. This dual-API exposure creates an accessible and flexible interface for data querying and manipulation by users or other downstream systems.
+The API nodes are the backbone of Dozer's data accessibility and storage mechanism. They connect to upstream nodes, be they Ingestion or Processor nodes, in a similar manner as previously described for Processor nodes. 
 
-The querying capabilities of the Store/API nodes extend beyond simple primary key lookup, supporting secondary key lookups, full-text search, filtering, and pagination.
+Upon establishing this connection, the API nodes receive a flow of data which they then store using an embedded LMDB (Lightning Memory-Mapped Database) system. LMDB has been selected for its memory-efficient and high-performance attributes which align perfectly with Dozer's ethos of efficient and effective data management.
+
+To facilitate rapid and efficient data access, all stored data in the API nodes is automatically indexed. This streamlined indexing process drastically improves data retrieval times, which is especially beneficial when dealing with vast volumes of data.
+
+Beyond data storage and retrieval, API nodes also expose APIs in both gRPC and REST formats. This dual-API exposure creates an accessible and flexible interface for data querying and manipulation by users or other downstream systems.
+
+The querying capabilities of the API nodes extend beyond simple primary key lookup, supporting secondary key lookups, full-text search, filtering, and pagination.
 
 Lastly, to ensure durability and data safety, the LMDB database used by the Store/API nodes is periodically snapshotted to cloud storage. To bolster scalability and elasticity, the architecture of Dozer allows for the dynamic scaling of Store/API nodes, much like stateless API servers in a microservice-oriented architecture. 
 
@@ -67,6 +79,6 @@ Lastly, to ensure durability and data safety, the LMDB database used by the Stor
 
 When a new Store/API node is initiated, it commences its operation cycle with a "hydration" phase. In this phase, it is populated with the most recent snapshot of the data from cloud storage. This snapshot serves as a baseline data set for the new node to start operating.
 
-Following the hydration phase, the new Store/API node catches up to the current data stream by connecting to its upstream node, which could be either a Processor or Ingestor node. The upstream node starts streaming the in-memory data to the newly initiated node, effectively bringing it up to speed with the latest data changes.
+Following the hydration phase, the new API node catches up to the current data stream by connecting to its upstream node, which could be either a Processor or Ingestor node. The upstream node starts streaming the in-memory data to the newly initiated node, effectively bringing it up to speed with the latest data changes.
 
 This dynamic scaling functionality offers a significant advantage when dealing with fluctuating workloads or when swift system expansion is required. It ensures that the Dozer system can adapt to the demands of the data environment, providing consistent performance even under changing conditions.

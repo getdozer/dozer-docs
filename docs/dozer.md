@@ -1,18 +1,18 @@
 
 # Introduction
 
-Dozer is a Data API backend platform, engineered primarily to distribute data via low-latency APIs (gRPC and REST), enabling seamless integration with customer-facing applications and downstream systems. It interfaces with a diverse array of data sources, such as databases, data lakes, and warehouses, utilizing Change Data Capture (CDC) for databases and periodic polling for data lakes and warehouses to keep the data fresh and up-to-date.
+Dozer is a data infrastructure tool enabling easy real-time data products development, deployment and maintenance. 
 
-A standout feature of Dozer is its integrated streaming SQL engine, which enables all sourced data to be joined and transformed in real-time. This real-time transformation and aggregation feature facilitates dynamic data manipulation, providing users with the exact data they require at the right moment.
+It pulls data from various sources like databases, data lakes, and warehouses using Change Data Capture (CDC) and periodic polling mechanisms. This ensures up-to-date data ingestion in real-time or near-real-time.
 
-Additionally, Dozer includes a low-latency datastore where transformed data is stored. This feature allows for high-speed data retrieval, ensuring data accessibility with minimal delay, a critical requirement for customer-facing applications.
+Dozer features an internal streaming SQL engine for real-time data transformation and aggregation. Upcoming versions will support custom transformations through WebAssembly (WASM) and TypeScript, as well as model inferencing via Open Neural Network Exchange (ONNX).
 
-Drawing similarities with a Content Delivery Network (CDN), Dozer aims to bring data and APIs closer to the end user. This drastically reduces latency, optimizes performance, and enables the capacity to handle high-volume data operations efficiently. Furthermore, Dozer's distributed architecture ensures scalability and high availability.
+After transformation, data is stored in a low-latency datastore, optimized for quick retrieval, making it suitable for high-performance use-cases. The distributed architecture of Dozer ensures scalability and high availability.
 
-![Dozer Architecture](./dozer/arch_summary.svg)
+In summary, Dozer provides a straightforward way for developers to build and deploy real-time scalable data products.
 
 ## Why Dozer ?
-As teams embark on the journey of implementing real-time data applications, they invariably come across a host of challenges that can make the task seem daunting:
+As teams embark on the journey of implementing real-time data products, they invariably come across a host of challenges that can make the task seem daunting:
 
 1. **Integration with Various Systems**: Integrating the data application with various data sources and downstream systems can present numerous technical hurdles and interoperability issues.
 
@@ -68,19 +68,3 @@ Materialize and RisingWave are streaning databases.
 
 Dozer, however, is engineered as a comprehensive data API backend, aiming to simplify the real-time data application building process. It ingests data continuously from different sources through CDC or period polling, processes it using its embedded streaming SQL engine, and then stores it in an optimized low-latency datastore. Beyond just maintaining updated views of data, Dozer offers a complete end-to-end solution, integrating real-time data transformation, storage, and distribution closer to the end user through its APIs.
 
-## Why Dozer Cloud ?
-Dozer Cloud is our fully-managed solution for real-time data application development. Leveraging the power and scalability of cloud services, it simplifies the process and boosts productivity. With features like enhanced connectivity, automated deployments, and improved observability, Dozer Cloud is an end-to-end solution that mitigates common development challenges. Here's a look at the key capabilities of Dozer Cloud:
-
-1. **Dynamic Scalability**: Dozer Cloud service automatically scales up and down according to load variations, smoothly accommodating a range of data processing needs.
-
-2. **Geographically Distributed Data and APIs**: Leveraging the global infrastructure of cloud providers, Dozer Cloud distributes data and APIs closer to end users for reduced latency and improved user experiences.
-
-5. **Automated API Versioning and Blue-Green Deployments**: Dozer Cloud incorporates automated API versioning and blue-green deployment strategies. This means that your team can seamlessly roll out updates, minimize downtime during deployments, and quickly roll back if necessary.
-
-6. **Enhanced Security and Compliance**: With advanced cloud security measures in place, Dozer Cloud offers enhanced access control and compliance with various regulatory standards.
-
-7. **Extended Connectivity**: Dozer Cloud provides additional connectors to enterprise databases like Oracle, broadening Dozer's data ingestion capabilities.
-
-8. **Enhanced Observability and Monitoring Integration**: Dozer Cloud offers improved observability features and easily integrates with monitoring tools like Prometheus, offering insights into system health and performance metrics.
-
-11. **Automated Data Recovery**: Leveraging cloud capabilities, Dozer provides automated backups and a robust disaster recovery plan to ensure data application resilience.
