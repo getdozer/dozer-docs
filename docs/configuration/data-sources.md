@@ -27,7 +27,7 @@ Each connection typically requires the following details:
 - User credentials: username and password.
 - Specific details depending on the service type (e.g., schema registry for Kafka).
 
-For a comprehensive list of supported connectors and their configurations, refer to [Dozer's supported connectors documentation](/data-sources).
+For a comprehensive list of supported connectors and their configurations, refer to [Dozer's supported connectors documentation](/category/data-sources).
 
 ## Sources
 
