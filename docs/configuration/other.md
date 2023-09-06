@@ -30,10 +30,10 @@ The `rest` subsection configures the Data APIs REST server.
 
 ```yaml
   rest:
-   - port: 8080
-   - host: localhost
-   - cors: true
-   - enabled: true
+   port: 8080
+   host: localhost
+   cors: true
+   enabled: true
 ```
 #### Parameters
 | Name            | Type    | Description                                                                                                    |
@@ -48,11 +48,11 @@ The `grpc` subsection configures the Data APIs gRPC server.
 
 ```yaml
   grpc:
-   - port: 50051
-   - host: localhost
-   - cors: true
-   - web: true
-   - enabled: true
+   port: 50051
+   host: localhost
+   cors: true
+   web: true
+   enabled: true
 ```
 
 #### Parameters
@@ -69,11 +69,11 @@ The `app_grpc` section configures the App gRPC API server. This server is used f
 
 ```yaml
   app_grpc:
-   - port: 50053
-   - host: localhost
-   - cors: true
-   - web: true
-   - enabled: true
+   port: 50053
+   host: localhost
+   cors: true
+   web: true
+   enabled: true
 ```
 
 #### Parameters
