@@ -39,7 +39,7 @@ To ensure that your application's data sources or its configuration did not chan
 This component is responsible for establishing connections to data sources, ingesting the data from them and applying all the data transformations specified in your `dozer-config.yaml`.
 
 #### `dozer run api`
-`dozer run app` runs the `API` component of the Dozer application built with [`dozer build`]. 
+`dozer run api` runs the `API` component of the Dozer application built with [`dozer build`]. 
 This component manages the low-latency data store and gRPC services. It connects to its corresponding upstream `app` component to receive processed data and serve it to clients through theAPI endpoints defined in `dozer-config.yaml`
 
 
