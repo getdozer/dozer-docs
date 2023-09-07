@@ -25,15 +25,36 @@ Initiates Dozer in a non-interactive way, but starting both `app` and `api` as d
 
 ## Self-Hosted Deployment
 
-#### `dozer build`
-This command is an essential step preceding deployment. During the build process, the current data schema and API configurations are finalized, ensuring that the data contract is consistently stored on disk. Each execution of the `dozer build` command results in the automatic creation of a new version, encapsulating the current state of the application. Consequently, any modifications to the application, such as changes in SQL leading to alterations in the API schema, necessitate a fresh build and the subsequent generation of a distinct version to capture these updates.
+`dozer run` does a lot of work for you, and when developing your application, that is very handy! When creating a production deployment of you dozer application, you will want to separate these steps to have full control.
+
+#### `dozer build [--locked]`
+The first thing that `dozer run` does for you is `build` your application. During the build process, the current data schema and API configurations are finalized and several auxiliary files are generated. 
+After building, your application's data contract specifying all the inputs, transformations and outputs for all the application's endpoints, is written to the `dozer.lock` file, which you might have noticed appearing next to your `dozer-config.yaml`. 
+Before running the application using the `dozer run app` and `dozer run api` commands, make sure you run `dozer build` and that the resulting files (`dozer.lock` and the contents of the `.dozer/` directory) are available to these commands.
+
+To ensure that your application's data sources or its configuration did not change between developing and deploying, you can add the `--locked` flag to `dozer build` during deployment. This will make Dozer check that the built application conforms to the data contract specified in `dozer.lock`.
 
 #### `dozer run app`
-This command initiates the app component of a Dozer application as an isolated process. This component is responsible for establishing connections to data sources and performing real-time data processing tasks.
+`dozer run app` runs the `app` component of the Dozer application built with [`dozer build`]. 
+This component is responsible for establishing connections to data sources, ingesting the data from them and applying all the data transformations specified in your `dozer-config.yaml`.
 
 #### `dozer run api`
-This command launches the API component of a Dozer application as an isolated process. This component manages the low-latency data store and gRPC services. It connects to its corresponding upstream app component to receive and handle processed data in real-time.
+`dozer run app` runs the `API` component of the Dozer application built with [`dozer build`]. 
+This component manages the low-latency data store and gRPC services. It connects to its corresponding upstream `app` component to receive processed data and serve it to clients through theAPI endpoints defined in `dozer-config.yaml`
 
 
 ## Dozer Cloud Deployment
-Coming Soon!
+
+#### `dozer cloud deploy`
+Deploying to Dozer Cloud is as simple as running the `dozer cloud deploy` command.
+Cloud uses your `dozer.lock` to check that the application you deploy is the application you meant to deploy. So, make sure you `dozer build` or `dozer run` your application before deploying. If you don't want `dozer cloud` to check your `dozer.lock`, you can run `dozer cloud deploy` with the `--no-lock` flag.
+
+
+### Versions
+Every Dozer application deployed to Dozer Cloud has a version, which is specified with the `version` option in `dozer-config.yaml`.
+Dozer Cloud will ensure that you don't accidentally make a breaking change to an already deployed version and will abort the deployment if you do.
+A breaking change is any change that will make current access patterns fail, such as removing an endpoint, changing the primary index or changing the
+data type of a field in the schema of an API endpoint. As such, adding an endpoint and adding fields to existing endpoints are not breaking changes.
+If you do need to make a breaking change to an API, you will need to specify a new `version` for the Dozer application. When deploying a new version, the old version will stay up, so any applications that use the old version of the API will continue working.
+
+[`dozer build`]: #dozer-build---locked
