@@ -7,21 +7,21 @@ This is the main structure used to build your query. It consists of:
 
 | Parameter      | Description                                                   |
 |----------------|---------------------------------------------------------------|
-| `filter`       | Used to specify the filter conditions.                        |
-| `order_by`     | Details how results should be ordered.                        |
-| `limit`        | Limits the number of results returned.                        |
-| `skip`         | Specifies the number of results to skip or provides a start point. |
-| `after`        | Begins retrieval after a certain `__dozer_record_id`.         |
+| `$filter`       | Used to specify the filter conditions.                        |
+| `$order_by`     | Details how results should be ordered.                        |
+| `$limit`        | Limits the number of results returned.                        |
+| `$skip`         | Specifies the number of results to skip or provides a start point. |
+| `$after`        | Begins retrieval after a certain `__dozer_record_id`.         |
 
 
 #### Example:
 
 ```json
 {
-    "filter": {"age": {"$gt": 21}},
-    "order_by": {"field_name": "asc"},
-    "limit": 10,
-    "skip": 20
+    "$filter": {"age": {"$gt": 21}},
+    "$order_by": {"field_name": "asc"},
+    "$limit": 10,
+    "$skip": 20
 }
 ```
 
@@ -76,7 +76,7 @@ This structure is used to define the order of the results:
 
 ```json
 {
-    "order_by": {"field_name" : "asc"}
+    "$order_by": {"field_name" : "asc"}
 }
 ```
 
@@ -125,14 +125,3 @@ Operators are used within filter expressions to compare values:
 | `$matches_all` | Matches all of the specified values. |
 
 
-#### Example:
-
-To filter records where a field named "age" is greater than 21:
-
-```json
-{
-    "filter": {
-        "Simple": ["age", {"$gt": 21}]
-    }
-}
-```
