@@ -12,11 +12,11 @@ home_dir: ./.dozer_custom
 ```
 
 #### `app_name`
-Determines the name of the Dozer application 
+Determines the name of the Dozer application.  
 **Type**: String 
 
 #### `app_name`
-Determines the version of the Dozer application 
+Determines the version of the Dozer application.  
 **Type**: Integer 
 
 #### `cache_dir`
