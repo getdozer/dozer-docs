@@ -53,3 +53,25 @@ FROM trips
 GROUP BY region;
 ```
 Dozer will automatically recognize and load all SQL files in this directory, integrating their results into the overall data pipeline.
+
+## User Defined Functions (UDFs)
+
+Dozer supports ONNX based UDFs that can be used as the part of the SQL transformation.
+Following would be an example configuration for UDFs.
+
+```yaml
+udfs:
+   name: is_fraudulent
+   config: !Onnx
+     path: ./path/to/model/model_file
+```
+
+Under sql block, utilizing the function name defined from udf, you can introduce new aggregation.
+
+```yaml
+sql: |
+  SELECT 
+    is_fraudulent(col1, col2, col3, col4) 
+  INTO res 
+  FROM onnx_test;
+```
