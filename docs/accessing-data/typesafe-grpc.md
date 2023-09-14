@@ -49,10 +49,10 @@ grpcurl -d '{"query": "{\"$limit\":1, \"$filter\": {\"PULocationID\": 211}}"}' \
 Replace `<store-name>` and `<StoreName>` with the appropriate store's name for your query. In the provided examples, "trips" is the store name. Make sure to format your query according to the guidelines in the [Query Format](query-format) page.
 
 ## Listening for Store Change Events
-The `on_event` method within the typed gRPC service lets users establish a gRPC stream to monitor real-time changes (like inserts, updates, and deletes) in a particular store, based on specific filter criteria. 
+The `OnEvent` method within the typed gRPC service lets users establish a gRPC stream to monitor real-time changes (like inserts, updates, and deletes) in a particular store, based on specific filter criteria. 
 
 #### Method  
-`on_event`
+`OnEvent`
 
 #### Parameters  
 

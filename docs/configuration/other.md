@@ -1,7 +1,7 @@
 # Other Settings
 
 ## API Configuration
-The `api` section of the Dozer configuration specifies how different types of APIs are set up and interact with other services. This section is organized into three main blocks, each corresponding to a specific type of API: `rest`, `grpc`, and `app_grpc`. Additionally, there's a `api_security` block which designates the security type to be applied across these API interfaces.
+The `api` section of the Dozer configuration specifies how different types of APIs are set up and interact with other services. This section is organized into three main blocks, each corresponding to a specific type of API: `rest`, `grpc`, and `app_grpc`. Additionally, there's a `api_security` block which designates the security type to be applied across these API interfaces. You can also configure the maximum number of records returned from queries using the `default_max_records_num` parameter.
 
 Here's a summarized view of the configuration structure:
 
@@ -15,6 +15,7 @@ api:
     ...
   api_security: !Jwt
       jwt_token 
+  default_max_records_num: 
 ```
 
 ### API Security
@@ -84,3 +85,7 @@ The `app_grpc` section configures the App gRPC API server. This server is used f
 | `cors`         | Boolean | Dictates if CORS is active for the app-specific gRPC API server. Default: `true`.                                                       |
 | `web`          | Boolean | Activates HTTP/1 + web support for the app-specific gRPC API server. Default: `true`.                                                   |
 | `enabled`      | Boolean | Indicator to enable or disable the app-specific gRPC API server. Default: `true`.                                                       |
+
+### Default Query Limit
+
+The `default_max_records_num` is an   `Integer` parameter that specifies the maximum number of records returned from queries. The default value is 50.
