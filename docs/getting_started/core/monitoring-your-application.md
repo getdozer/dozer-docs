@@ -44,7 +44,7 @@ To check if the ***dozer-ui-lite*** is running properly with your dozer applicat
 Then let's run your dozer application!
 
 ```bash
-dozer
+dozer run
 ```
 
 <br/>
