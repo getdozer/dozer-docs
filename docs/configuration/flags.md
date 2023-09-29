@@ -43,7 +43,7 @@ Optional parameter setting the timeout duration, in milliseconds, for commits.
 Optional parameter indicating the buffer capacity, in bytes, for the Log Writer.  
 **Type**: Integer | **Default**: `1073741824`  
 
-#### `err_threshold`
+#### `error_threshold`
 Optional setting determining the error threshold. Exceeding this number would terminate the process.
 **Type**: Integer | **Default**: `0`  
 
