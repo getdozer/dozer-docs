@@ -20,8 +20,8 @@ Initializes a new Dozer project by generating the foundational `dozer-config.yam
 #### `dozer live`
 Initiates an in-browser interface for real-time Dozer application development. As the source code is modified in the IDE, changes are immediately reflected in this interface, enabling instant visualization and interactive testing. It streamlines the feedback loop, offering insights into data flows, configurations, and endpoints, all within the context of the live application.
 
-#### `dozer run`
-Initiates Dozer in a non-interactive way, but starting both `app` and `api` as different threads of the same process.
+#### `dozer run [--locked]`
+Initiates Dozer in a non-interactive way, but starting both `app` and `api` as different threads of the same process. It is optional the `--locked` flag to `dozer run`.
 
 ## Self-Hosted Deployment
 
