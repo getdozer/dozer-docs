@@ -2,7 +2,7 @@
 description: Allows a new Dozer instance to use all tables from an upstream Dozer instance
 ---
 
-# Dozer instance
+# Dozer connector
 
 The Dozer connector allows ingesting data on a Dozer instance from another Dozer instance.
 
