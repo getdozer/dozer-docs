@@ -1,8 +1,8 @@
 ## Configuring UDF on ONNX placeholder
-ONNX is an open format built to represent machine learning models. [https://onnx.ai/]. Using ONNX, you can make transformations, and write User Defined Functions (UDFs) in the Dozer configuration file to perform SQL transformation. Let's set these configurations step by step.
+Open Neural Network Exchange[(ONNX)](https://onnx.ai/) is an open format built to represent machine learning models. . Using ONNX, you can make transformations, and write User Defined Functions (UDFs) in the Dozer configuration file to perform SQL transformation. Let's set these configurations step by step.
 
 #### Write the ONNX model
-You can write the ONNX models, by using pre-trained models, and services, or by converting models from various frameworks. For more details about the ONNX models follow this tutorial [https://github.com/onnx/models].
+You can write the ONNX models, by using pre-trained models, and services, or by converting models from various frameworks. For more details about the ONNX models follow this [ONNX tutorial](https://github.com/onnx/models).
 
 To convert the model in ONNX format you can use the Pytorch library. 
 Install Pytorch in your system, in order to use its functionalities.
@@ -37,4 +37,4 @@ sql: |
 ```
 This transformation is based on the UDFs structure. The result will be put in the endpoint named ```res```.
 
-Check the use case [https://github.com/getdozer/dozer-samples/tree/main/usecases/onnx] for more implementation details.
+Check the [use case](https://github.com/getdozer/dozer-samples/tree/main/usecases/onnx) for more implementation details.
