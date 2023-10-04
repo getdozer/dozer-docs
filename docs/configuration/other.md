@@ -1,7 +1,7 @@
 # Other Settings
 
 ## API Configuration
-The `api` section of the Dozer configuration specifies how different types of APIs are set up and interact with other services. This section is organized into three main blocks, each corresponding to a specific type of API: `rest`, `grpc`, and `app_grpc`. Additionally, there's a `api_security` block which designates the security type to be applied across these API interfaces. You can also configure the default limit of records returned from queries using the `default_max_records_num` parameter.
+The `api` section of the Dozer configuration specifies how different types of APIs are set up and interact with other services. This section is organized into three main blocks, each corresponding to a specific type of API: `rest`, `grpc`, and `app_grpc`. Additionally, there's an `api_security` block that designates the security type to be applied across these API interfaces. You can also configure the default limit of records returned from queries using the `default_max_records_num` parameter.
 
 Here's a summarized view of the configuration structure:
 
@@ -17,14 +17,6 @@ api:
       jwt_token 
   default_max_records_num: 50
 ```
-
-### API Security
-The `api_security` subsection determines the kind of security protocol the API should utilize. The only option availble is JWT, as shown in the sample configuration above.
-
-#### Parameters
-| Name         | Type   | Description                                             |
-|--------------|--------|---------------------------------------------------------|
-| ↳ (JWT Token) | String | If `!Jwt` is chosen, this specifies the secret token for JWT authentication. |
 
 ### REST API
 The `rest` subsection configures the Data APIs REST server.
@@ -85,6 +77,15 @@ The `app_grpc` section configures the App gRPC API server. This server is used f
 | `cors`         | Boolean | Dictates if CORS is active for the app-specific gRPC API server. Default: `true`.                                                       |
 | `web`          | Boolean | Activates HTTP/1 + web support for the app-specific gRPC API server. Default: `true`.                                                   |
 | `enabled`      | Boolean | Indicator to enable or disable the app-specific gRPC API server. Default: `true`.                                                       |
+
+
+### API Security
+The `api_security` subsection determines the kind of security protocol the API should utilize. The only option available is JWT, as shown in the sample configuration above.
+
+#### Parameters
+| Name         | Type   | Description                                             |
+|--------------|--------|---------------------------------------------------------|
+| ↳ (JWT Token) | String | If `!Jwt` is chosen, this specifies the secret token for JWT authentication. |
 
 ### Default Query Limit
 
