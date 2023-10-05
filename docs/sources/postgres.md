@@ -18,9 +18,10 @@ connections:
       host: localhost
       port: 5433
       database: film
+      # in case schema is not the default public
       schema: movies
-```
 
+```
 Alternatively, it's possible to specify a connection string:
 ```yaml
 connections:
