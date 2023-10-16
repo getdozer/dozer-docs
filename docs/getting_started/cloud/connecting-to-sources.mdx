@@ -5,50 +5,46 @@ import TabItem from '@theme/TabItem';
 # Connecting to Sources
 
 
-After logging into Dozer Cloud in CLI. We will setup our sample database for this guide. We will be using Pagala Postgres dataset. 
+After logging into Dozer Cloud in CLI. We will setup our sample database for this guide. We will be a stock monthly data for this example.
 
 ## Pre-requisites
 
 1. Supabase Account to host the Postgres database
 2. Data:
 ```bash
-    mkdir -p data
-    curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-data.sql\
-    --output ./data/pagila-data.sql
-    curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-schema.sql\
-    --output ./data/pagila-schema.sql
-    cat ./data/pagila-schema.sql > ./data/init.sql
-    cat ./data/pagila-data.sql >> ./data/init.sql
+    curl -O https://dozer-samples.s3.amazonaws.com/stock_data_monthly_small/stock_data_monthly.csv
+    aws s3api create-bucket --bucket <yourbucketname> --region ap-southeast-1
+    aws s3 cp stocks_data_monthly s3://yourbucketname/stocks_data_monthly_small/
 
 ```
-3. Import the data to your Postgres Database
-```bash
-    export PG_URL="xxxxxx.supabase.co"
-    psql -h $PG_URL -p 5432 -d postgres -U postgres < data/init.sql
-```
+
 
 ## Sourcing Pagila data from Supabase
 
 Open a new file `dozer-config.yaml` and add the following configuration section:
-
 ```yaml
 version: 1
-app_name: pg-sample
+app_name: s3-example
 connections:
-- config: !Postgres
-    user: "{{ POSTGRES_USER }}"
-    password: "{{ POSTGRES_PASSWORD }}"
-    host: "{{ POSTGRES_HOST }}"
-    port: 5432
-    database: "{{ POSTGRES_DATABASE }}"
-  name: postgres
-
-
+  - config: !S3Storage
+      details:
+        access_key_id: "{{ AWS_ACCESS_KEY }}"
+        secret_access_key: "{{ AWS_SECRET_KEY}}"
+        region: "{{ AWS_REGION_S3}}"
+        bucket_name: "{{ AWS_BUCKET_NAME}}"
+      tables:
+        - !Table
+          name: stocks
+          config: !CSV
+            path: stock_data_monthly_small/ # path to files or folder inside a bucket
+            extension: .csv
+    name: s3
 endpoints:
-- name: actor
-  table_name: actor
-  path: /actor
+- name: stocks
+  table_name: stocks
+  path: /stocks
 ```
+
 
 ## Validating the Sources
 

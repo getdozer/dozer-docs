@@ -3,18 +3,34 @@ import TabItem from "@theme/TabItem";
 
 # Adding Transformations
 
-We now want to join few tables together. For this we will add a `sql` section to the `dozer-config.yaml` that looks like this:
+We now want to do some calculations on the data such as MIN, MAX and AVG. For this we will add a `sql` section to the `dozer-config.yaml` that looks like this:
 
 ```yaml
 sql: |
-  SELECT 
-    rental.rental_id, 
-    CONCAT(customer.first_name, ' ', customer.last_name) AS customer, 
-    film.title 
-  INTO joined_rental 
-  FROM rental 
-  INNER JOIN customer ON rental.customer_id = customer.customer_id 
-  INNER JOIN film ON inventory.film_id = film.film_id;
+  -- Ticker Analysis
+  SELECT Ticker, AVG(Close) AS average_close_price, SUM(Volume) AS total_volume
+  INTO ticker_analysis
+  FROM stocks
+  WHERE Date >= '2025-01-01' AND Date < '2025-02-01'
+  GROUP BY Ticker;
+
+  -- Daily Analysis
+  SELECT Date, AVG(Close) AS average_close_price, SUM(Volume) AS total_volume
+  INTO daily_analysis
+  FROM stocks
+  GROUP BY Date;
+
+  -- Highest Daily Close Price
+  SELECT Date, MAX(Close) AS highest_close_price
+  INTO highest_daily_close
+  FROM stocks
+  GROUP BY Date;
+
+  -- Lowest Daily Close Price
+  SELECT Date, MIN(Close) AS lowest_close_price
+  INTO lowest_daily_close
+  FROM stocks
+  GROUP BY Date;
 ```
 
 ::::note
@@ -25,9 +41,16 @@ To expose the result of this query as an API we will also need to add an additio
 
 ```yaml
 endpoints:
-  - name: joined_rental
-    table_name: joined_rental
-    path: /joined_rental
+  - name: ticker_analysis
+    path: /analysis/ticker
+    table_name: ticker_analysis
+
+  - name: daily_analysis
+    path: /analysis/daily
+    table_name: daily_analysis
+
+  - name: highest_daily_close
+    path: /analysis/highest_daily_close
 ```
 
 
