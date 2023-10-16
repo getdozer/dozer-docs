@@ -1,0 +1,45 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Adding Transformations
+
+We now want to join few tables together. For this we will add a `sql` section to the `dozer-config.yaml` that looks like this:
+
+```yaml
+sql: |
+  SELECT 
+    rental.rental_id, 
+    CONCAT(customer.first_name, ' ', customer.last_name) AS customer, 
+    film.title 
+  INTO joined_rental 
+  FROM rental 
+  INNER JOIN customer ON rental.customer_id = customer.customer_id 
+  INNER JOIN film ON inventory.film_id = film.film_id;
+```
+
+::::note
+The SQL you specify in the .yaml file does not run in the source database. Data is processed in real-time as it comes into Dozer by Dozer's internal streaming SQL engine.
+::::
+
+To expose the result of this query as an API we will also need to add an additional endpoint:
+
+```yaml
+endpoints:
+  - name: joined_rental
+    table_name: joined_rental
+    path: /joined_rental
+```
+
+
+Now we have to build dozer again.
+
+```bash
+dozer build
+```
+
+To deploy this updated with transformation, you have to deploy it again.
+
+```bash
+dozer cloud deploy
+```
+
