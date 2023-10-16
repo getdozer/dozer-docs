@@ -25,5 +25,5 @@ You can choose from different mehtods while querying your data
 
 ### Query
 
-You can query the data using the [format](docs/accessing-data/query-format) in the `Query` field.
+You can query the data using the [format](../../accessing-data.md) in the `Query` field.
 

@@ -17,5 +17,4 @@ Dozer is available in two flavours: an Open Source Core version and a Cloud vers
 - [Connecting to data sources](getting_started/cloud/connecting-to-sources)
 - [Adding transformations](getting_started/cloud/adding-transformations)
 - [Querying data](getting_started/cloud/querying-data)
-- [Monitoring your application](getting_started/cloud/monitoring-your-application)
 
