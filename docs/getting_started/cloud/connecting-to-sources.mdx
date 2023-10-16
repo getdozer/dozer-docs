@@ -1,0 +1,74 @@
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Connecting to Sources
+
+
+After logging into Dozer Cloud in CLI. We will setup our sample database for this guide. We will be using Pagala Postgres dataset. 
+
+## Pre-requisites
+
+1. Supabase Account to host the Postgres database
+2. Data:
+```bash
+    mkdir -p data
+    curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-data.sql\
+    --output ./data/pagila-data.sql
+    curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-schema.sql\
+    --output ./data/pagila-schema.sql
+    cat ./data/pagila-schema.sql > ./data/init.sql
+    cat ./data/pagila-data.sql >> ./data/init.sql
+
+```
+3. Import the data to your Postgres Database
+```bash
+    export PG_URL="xxxxxx.supabase.co"
+    psql -h $PG_URL -p 5432 -d postgres -U postgres < data/init.sql
+```
+
+## Sourcing Pagila data from Supabase
+
+Open a new file `dozer-config.yaml` and add the following configuration section:
+
+```yaml
+version: 1
+app_name: pg-sample
+connections:
+- config: !Postgres
+    user: "{{ POSTGRES_USER }}"
+    password: "{{ POSTGRES_PASSWORD }}"
+    host: "{{ POSTGRES_HOST }}"
+    port: 5432
+    database: "{{ POSTGRES_DATABASE }}"
+  name: postgres
+
+
+endpoints:
+- name: actor
+  table_name: actor
+  path: /actor
+- name: joined_rental
+  table_name: joined_rental
+  path: /joined_rental
+```
+
+## Validating the Sources
+
+Run the following command to validate the sources:
+
+```bash
+dozer build
+```
+
+This will create a `dozer.lock` file in the current directory.
+
+## Deploying on cloud
+
+To deploy the sample on the cloud, run the following command:
+
+```bash
+dozer cloud deploy
+```
+
+
