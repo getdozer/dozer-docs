@@ -16,7 +16,7 @@ Following the examples below requires `grpcurl`. You can install it  from this [
 
 ## Using API Endpoints on Dozer Cloud
 
-After you have succesfully deployed your application on cloud. Head to the API Endpoints section of your application. Here you can get the gRPC and REST endpoints for your application.
+After you have successfully deployed your application on cloud. Head to the API Endpoints section of your application. Here you can get the gRPC and REST endpoints for your application.
 You can choose from different methods while querying your data
 * Count.
 * Query.
@@ -25,4 +25,3 @@ You can choose from different methods while querying your data
 ### Query
 
 You can query the data using the [format](../../accessing-data.md) in the `Query` field.
-
