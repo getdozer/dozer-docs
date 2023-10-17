@@ -13,6 +13,11 @@ Dozer is available in two flavours: an Open Source Core version and a Cloud vers
 
 ## Dozer Cloud
 
+<div width="100%" style={{paddingTop: '1em', paddingBottom: '2em', textAlign: 'center'}}>
+    <iframe src="https://share.descript.com/embed/9UBzJNaRdgB" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
 - [Logging into a Dozer Cloud account](getting_started/cloud/logging-into-cloud)
 - [Connecting to data sources](getting_started/cloud/connecting-to-sources)
 - [Adding transformations](getting_started/cloud/adding-transformations)
