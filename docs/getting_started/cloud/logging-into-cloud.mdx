@@ -1,0 +1,14 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Logging into Dozer Cloud using CLI
+
+After creating an account on Dozer Cloud, you can login to Dozer Cloud using the Dozer CLI. You can get the login string from the [Dozer Cloud Dashboard](https://cloud.getdozer.io/apps/home).
+
+For example
+
+```bash
+dozer cloud login --organisation_slug <your-slug> \
+ --profile_name default --client_id <your_client_id> \
+ --client_secret <your_client_secret>
+```

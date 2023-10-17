@@ -42,17 +42,20 @@ const sidebars = {
         },
         'getting_started/core/connecting-to-sources',
         'getting_started/core/adding-transformations',
-        'getting_started/core/querying-data'
-        // {
-        //   type: 'html',
-        //   value: 'DOZER CLOUD',
-        //   defaultStyle: false,
-        //   className: 'sidebar-item-group',
-        //   customProps: {
-        //     id: 'dozer-cloud',
-        //   },
-        // },
-        // 'getting_started/cloud/installation',
+        'getting_started/core/querying-data',
+        {
+          type: 'html',
+          value: 'DOZER CLOUD',
+          defaultStyle: false,
+          className: 'sidebar-item-group',
+          customProps: {
+            id: 'dozer-cloud',
+          },
+        },
+        'getting_started/cloud/logging-into-cloud',
+        'getting_started/cloud/connecting-to-sources',
+        'getting_started/cloud/adding-transformations',
+        'getting_started/cloud/querying-data',
       ]
     },
 

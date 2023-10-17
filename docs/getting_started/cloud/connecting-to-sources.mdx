@@ -1,0 +1,67 @@
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Connecting to Sources
+
+
+After logging into Dozer Cloud in CLI. We will setup our sample database for this guide. We will be a stock monthly data for this example.
+
+## Pre-requisites
+
+1. Setup your AWS Account
+2. Data:
+```bash
+    curl -O https://dozer-samples.s3.amazonaws.com/stock_data_monthly_small/stock_data_monthly.csv
+    aws s3api create-bucket --bucket <yourbucketname> --region ap-southeast-1
+    aws s3 cp stocks_data_monthly s3://yourbucketname/stocks_data_monthly_small/
+
+```
+
+
+## Sourcing data from AWS S3
+
+Open a new file `dozer-config.yaml` and add the following configuration section:
+```yaml
+version: 1
+app_name: s3-example
+connections:
+  - config: !S3Storage
+      details:
+        access_key_id: "{{ AWS_ACCESS_KEY }}"
+        secret_access_key: "{{ AWS_SECRET_KEY}}"
+        region: "{{ AWS_REGION_S3}}"
+        bucket_name: "{{ AWS_BUCKET_NAME}}"
+      tables:
+        - !Table
+          name: stocks
+          config: !CSV
+            path: stock_data_monthly_small/ # path to files or folder inside a bucket
+            extension: .csv
+    name: s3
+endpoints:
+- name: stocks
+  table_name: stocks
+  path: /stocks
+```
+
+
+## Validating the Sources
+
+Run the following command to validate the sources:
+
+```bash
+dozer build
+```
+
+This will create a `dozer.lock` file in the current directory.
+
+## Deploying on cloud
+
+To deploy the sample on the cloud, run the following command:
+
+```bash
+dozer cloud deploy
+```
+
+
