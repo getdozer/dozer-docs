@@ -13,6 +13,7 @@ connections:
       host: localhost
       port: 5433
       database: film
+      schema: movies
       
   - name: kafka_store
     config: !Kafka
@@ -25,7 +26,7 @@ Each connection typically requires the following details:
 - Port number.
 - Database name.
 - User credentials: username and password.
-- Specific details depending on the service type (e.g., schema registry for Kafka).
+- Specific details depending on the service type, e.g. schema registry for Kafka, schema for PostgreSQL.
 
 For a comprehensive list of supported connectors and their configurations, refer to [Dozer's supported connectors documentation](/category/data-sources).
 
