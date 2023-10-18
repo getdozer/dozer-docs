@@ -15,7 +15,7 @@ home_dir: ./.dozer_custom
 Determines the name of the Dozer application.  
 **Type**: String 
 
-#### `app_name`
+#### `version`
 Determines the version of the Dozer application.  
 **Type**: Integer 
 

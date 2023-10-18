@@ -12,6 +12,7 @@ Traces provide a step-by-step account of all operations in a transaction, from g
 ### Configuration
 ```yaml
 app_name: dozer-eth-dashboard
+version: 1
 connections:
   - config: !Ethereum
       provider: !Trace
