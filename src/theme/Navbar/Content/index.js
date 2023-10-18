@@ -10,6 +10,7 @@ import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
+import TrialButton from '../TrialButton';
 import styles from './styles.module.css';
 import clsx from 'clsx';
 function useNavbarItems() {
@@ -71,6 +72,7 @@ export default function NavbarContent() {
         <div className='flex items-center gap-5'>
           <NavbarItems items={rightItems} />
           <div className="hidden lg:block lg:h-5 lg:w-px lg:bg-zinc-900/10 lg:dark:bg-white/15"></div>
+          <TrialButton/>
           <NavbarColorModeToggle className={styles.colorModeToggle} />
           {/* {!searchBarItem && (
             <NavbarSearch className={clsx('lg:hidden', styles.navbarSearch)}>

@@ -1,0 +1,97 @@
+.trialButton {
+  font-size: 12px;
+  font-family: sans-serif;
+  --token-e2cc1fde-fa54-457f-ba76-62552c6a580f: rgb(176, 72, 140);
+  --token-bd3c5dc6-a1ea-47d4-82f9-d2a79a83a191: #474B7C;
+  --token-4e333953-2f37-433a-a673-f98d20c8033e: #5865F2;
+  --token-17b2e11e-156e-4279-905a-99fe646b1452: rgb(128, 137, 245);
+  --token-e29d8fbc-98a3-4384-bc82-394c773c8cba: rgb(63, 73, 85);
+  --framer-aspect-ratio-supported: auto;
+  box-sizing: border-box;
+  -webkit-font-smoothing: inherit;
+  place-content: center;
+  align-items: center;
+  background: linear-gradient(107deg, var(--token-e2cc1fde-fa54-457f-ba76-62552c6a580f, #b0488c) /* {"name":"HL Pink"} */ 0%, var(--token-4e333953-2f37-433a-a673-f98d20c8033e, rgb(88, 101, 242)) /* {"name":"Bright Purple background"} */ 100%);
+  border-radius: 64px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column;
+  gap: 0px;
+  height: 35px;
+  overflow: hidden;
+  padding: 0px;
+  position: relative;
+  text-decoration: none;
+  width: 182px;
+  will-change: var(--framer-will-change-override, transform);
+}
+.trialButton:hover {
+  text-decoration: none;
+}
+.trialText {
+  --token-e2cc1fde-fa54-457f-ba76-62552c6a580f: rgb(176, 72, 140);
+  --token-bd3c5dc6-a1ea-47d4-82f9-d2a79a83a191: #474B7C;
+  --token-4e333953-2f37-433a-a673-f98d20c8033e: #5865F2;
+  --token-17b2e11e-156e-4279-905a-99fe646b1452: rgb(128, 137, 245);
+  --token-e29d8fbc-98a3-4384-bc82-394c773c8cba: rgb(63, 73, 85);
+  --framer-aspect-ratio-supported: auto;
+  --framer-paragraph-spacing: 0px;
+  text-decoration: none;
+  white-space: pre;
+  box-sizing: border-box;
+  -webkit-font-smoothing: inherit;
+  margin: 0px;
+  padding: 0px;
+  font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
+  font-style: var(--framer-font-style, normal);
+  font-weight: var(--framer-font-weight, 400);
+  color: var(--framer-text-color, #000);
+  font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
+  letter-spacing: var(--framer-letter-spacing, 0);
+  text-transform: var(--framer-text-transform, none);
+  text-decoration: var(--framer-text-decoration, none);
+  line-height: var(--framer-line-height, 1.2em);
+  text-align: var(--framer-text-alignment, start);
+  outline: none;
+  --font-selector: R0Y7SW50ZXItODAw;
+  --framer-font-weight: 800;
+  --framer-line-height: 1em;
+  --framer-text-alignment: center;
+  --framer-text-color: rgb(255, 255, 255);
+}
+.trialText:hover {
+  text-decoration: none;
+}
+.trialSubText {
+  outline: none;
+  text-decoration: none;
+  --token-e2cc1fde-fa54-457f-ba76-62552c6a580f: rgb(176, 72, 140);
+  --token-bd3c5dc6-a1ea-47d4-82f9-d2a79a83a191: #474B7C;
+  --token-4e333953-2f37-433a-a673-f98d20c8033e: #5865F2;
+  --token-17b2e11e-156e-4279-905a-99fe646b1452: rgb(128, 137, 245);
+  --token-e29d8fbc-98a3-4384-bc82-394c773c8cba: rgb(63, 73, 85);
+  --framer-aspect-ratio-supported: auto;
+  --framer-link-text-color: #0099ff;
+  --framer-link-text-decoration: underline;
+  --framer-paragraph-spacing: 0px;
+  white-space: pre;
+  box-sizing: border-box;
+  -webkit-font-smoothing: inherit;
+  margin: 0px;
+  padding: 0px;
+  font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
+  font-style: var(--framer-font-style, normal);
+  font-weight: var(--framer-font-weight, 400);
+  color: var(--framer-text-color, #000);
+  font-size: calc(var(--framer-font-size, 16px) * var(--framer-font-size-scale, 1));
+  letter-spacing: var(--framer-letter-spacing, 0);
+  text-transform: var(--framer-text-transform, none);
+  text-decoration: var(--framer-text-decoration, none);
+  line-height: var(--framer-line-height, 1.2em);
+  text-align: var(--framer-text-alignment, start);
+  --framer-font-size: 7px;
+  --framer-text-color: rgb(255, 255, 255);
+}
+.trialSubText:hover {
+  text-decoration: none;
+}
