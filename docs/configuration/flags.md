@@ -43,9 +43,17 @@ Optional parameter setting the timeout duration, in milliseconds, for commits.
 Optional parameter indicating the buffer capacity, in bytes, for the Log Writer.  
 **Type**: Integer | **Default**: `1073741824`  
 
-#### `err_threshold`
+#### `error_threshold`
 Optional setting determining the error threshold. Exceeding this number would terminate the process.
 **Type**: Integer | **Default**: `0`  
+
+#### `max_num_records_before_persist`
+
+The maximum unpersisted number of records in the processor record store. A log entry will be created when this number is reached.
+
+#### `max_interval_before_persist_in_seconds`
+
+The maximum time in seconds before a new log entry is created. If there're no new records, no log entry will be created.
 
 ## Flags
 These flgs can be specified at the root of the `dozer-config.yaml` under the `flags` section, to enable or disable spefic features or functionalities.
@@ -85,5 +93,6 @@ flags:
 - `in_joins`: Optimizes JOIN operations using probabilistic structures. Defaults to `false`.
 - `in_aggregations`: Optimizes aggregations (SUM, COUNT, MIN, etc.) using probabilistic structures. Defaults to `false`.
 
+#### `enable_app_checkpoints`
 
-
+**Experimental**. If set to `true`, Dozer will periodically checkpoint the application state to disk. This is useful for applications that need to be restarted frequently. Defaults to `false`.
