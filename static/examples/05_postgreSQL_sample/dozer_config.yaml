@@ -1,0 +1,31 @@
+version: 1
+app_name: zones_filter_data
+connections:
+- config: !Postgres
+    user: ** Your Supabase user ** (generally postgres)
+    password: ** Your Supabase password **
+    host: ** Your Supabase host **
+    port: ** Your Supabase port ** (generally 5432)
+    database: postgres
+    schema: zones
+  name: pg
+
+sources:
+  - name: taxi_zone_lookup
+    table_name: zones.taxi_zone_lookup
+    connection: pg
+
+sql: |
+
+  -- Query that calculates the displays Manhattan Zone
+
+  SELECT *
+  INTO table1
+  FROM taxi_zone_lookup
+  WHERE "Borough" LIKE 'Manhattan';
+
+endpoints:
+  - name: manhattan
+    path: /manhattan
+    table_name: table1
+
