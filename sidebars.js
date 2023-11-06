@@ -96,6 +96,7 @@ const sidebars = {
         'sources/object-stores',
         'sources/ethereum',
         'sources/grpc',
+        'sources/javascript',
       ],
     },
 
@@ -143,7 +144,7 @@ const sidebars = {
     //   items: []
     // }
 
-   
+
   ],
 };
 
