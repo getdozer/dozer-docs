@@ -134,7 +134,7 @@ const sidebars = {
         'accessing-data/authorization'
       ]
     },
-    'lambda-functions',
+    //'lambda-functions',
     // {
     //   type: 'category',
     //   label: 'Deployment',
