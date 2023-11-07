@@ -96,6 +96,7 @@ const sidebars = {
         'sources/object-stores',
         'sources/ethereum',
         'sources/grpc',
+        'sources/javascript',
       ],
     },
 
@@ -133,6 +134,7 @@ const sidebars = {
         'accessing-data/authorization'
       ]
     },
+    'lambda-functions',
     // {
     //   type: 'category',
     //   label: 'Deployment',
@@ -143,7 +145,7 @@ const sidebars = {
     //   items: []
     // }
 
-   
+
   ],
 };
 
