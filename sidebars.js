@@ -58,7 +58,18 @@ const sidebars = {
         'getting_started/cloud/querying-data',
       ]
     },
-
+    {
+      type: "category",
+      label: "Use Cases",
+      link: {
+        type: "generated-index",
+        title: 'Use Cases',
+      },
+      collapsed: true,
+      items: [
+        "usecases/build-your-gpt-assistant-with-realtime-data"
+      ],
+    },    
     'cli-reference',
 
     {
