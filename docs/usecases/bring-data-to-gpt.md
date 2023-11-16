@@ -10,7 +10,7 @@ hide_table_of_contents: true
 <div style={{ width: '45%', float: "left", clear: "left" }}>
 
 ## Data Dilemma
-(LLM) assistants is reshaping the business world which have the potential to personalize customer experiences in unprecedented ways. Companies will have to find ways to rapidly unlock the data in silos and feed the LLMs turning information into a competitive edge. 
+(LLM) assistants are reshaping the business world which have the potential to personalize customer experiences in unprecedented ways. Companies will have to find ways to rapidly unlock the data in silos and feed the LLMs turning information into a competitive edge. 
 </div>
 
 
