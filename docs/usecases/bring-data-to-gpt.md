@@ -70,3 +70,23 @@ Unlock the potential of personalized customer experiences with LLM assistants th
 Turn the weeks or months of development time into days. Dozer's efficient framework and intuitive interface mean that you can deploy your LLM assistant rapidly, staying ahead of the market curve.
 
 </div>
+
+
+
+
+<div>
+<br/> 
+
+# Related Articles
+
+
+
+- ### [GPTs And Assistants](https://getdozer.io/blog/articles/gpts-and-assistants/)
+
+    Explore the latest advancements from OpenAI, delving into the world of GPTs and Assistant APIs, and discover their profound implications for the future of artificial intelligence.
+
+- ### [How To Use Assistant APIs? ](https://getdozer.io/blog/articles/how-to-use-assistant-apis/)
+
+    Effortlessly create and deploy your personalized assistant with powerful retrieval capabilities using OpenAI's Assistant APIs. Learn more about this streamlined process. 
+    
+</div>
