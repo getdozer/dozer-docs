@@ -31,7 +31,7 @@ index:
     - dropoff_location
   secondary:
     create:
-      - index: !SortedInverted
+      - !SortedInverted
           fields:
             - hvfhs_license_num
             - trip_miles
@@ -42,8 +42,7 @@ index:
 | Name                                | Type                      | Description                                                                                                                                                    |
 |-------------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `primary_key`                        | List of Strings           | Defines the fields that compose the primary key for the endpoint. Essential for unique record identification.                                                |
-| `secondary.create`                   | List of Objects           | An array of secondary index configurations.                                                                                                                   |
-| ↳ `index`                            | Enum                      | Type of the secondary index. Examples: `!SortedInverted`, `!FullText`. Refer to the sections below for index specific configurations.                                                                                       |
+| `secondary.create`                   | List of Enums           | An array of secondary index configurations. Examples: `!SortedInverted`, `!FullText`. Refer to the sections below for index specific configurations.                          |
 | `skip_default`                       | List of Strings           | Skip the automatic secondary index creation for the listed fields. If not specified, Dozer creates `!SortedInverted` secondary index for every field.  |
 
 #### `SortedInverted` secondary index configuration
