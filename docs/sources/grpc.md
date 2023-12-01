@@ -32,7 +32,7 @@ connections:
 
 ### Notes
 
-The Arrow schema definition is using JSON format, here is an example:
+The Dozer schema definition is using JSON format, here is an example:
 
 ```json
 {
