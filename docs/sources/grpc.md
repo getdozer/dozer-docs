@@ -5,7 +5,7 @@ description: Allows the programmatic ingestion of events using the streaming gRP
 # gRPC Ingestion
 
 The gRPC connector allows to ingest data on Dozer pushing data to a gRPC endpoint in a streaming fashion.
-It supports default data format and Apache Arrow data format.
+It supports Dozer data format and Apache Arrow data format.
 The Dozer ecosystem provides Python and React clients to easily ingest data on Dozer using gRPC.
 
 ## Default Adapter
