@@ -35,7 +35,7 @@ index:
           fields:
             - hvfhs_license_num
             - trip_miles
-  skip_default: 
+    skip_default: 
 ```
 
 ### Parameters
