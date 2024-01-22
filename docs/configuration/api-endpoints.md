@@ -3,23 +3,18 @@ The endpoint configuration defines how Dozer should expose gRPC/REST endpoints. 
 
 ```yaml
 endpoints:
-  - name: trips_cache  
-    path: /trips
-    table_name: trips_cache
-    index:
-      ...
-    conflict_resolution: 
-      ...
+  - table_name: trips_cache
+    kind: !Api
+      path: /trips
 ```
 
 ### Parameters
 | Name                  | Type         | Description                                                                                                                         |
 |-----------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `name`                | String       | The designated name of the endpoint.                                                                                                |
-| `path`                | String       | Determines the route or path for the REST endpoint.                                                                                 |
-| `table_name`          | String       | Identifies the name of the table in the source or in the SQL that this endpoint is set to expose.                                   |
-| [`index`](#indexes)               | Object       | An optional section that describes the index configuration for this endpoint, specifying primary and secondary indexes and whether to skip default configurations.  |
-| [`conflict_resolution`](#conflicts-resolution) | Object       | An optional section that outlines the strategies to handle potential data conflicts for this endpoint.                              |
+| `table_name`          | String       | Identifies the name of the table in the source or in the SQL that this endpoint is set to expose.                                                                
+| `kind`                | String       | Determines the sink used for the endpoint. For example, `!Dummy`, `!Aerospike`, `!Snowflake`                                    |
+| `path`                | String       | Determines the route or path for the REST endpoint.                                                         
+
 
 ## Indexes
 The `index` section of the endpoint configuration in Dozer determines how indexing is managed for the exposed endpoint. Appropriate indexing ensures quick data retrieval and can greatly improve query performance.

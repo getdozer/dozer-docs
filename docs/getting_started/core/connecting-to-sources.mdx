@@ -47,9 +47,8 @@ sources:
     connection: local_storage
 
 endpoints:
-  - name: trips
-    path: /trips
-    table_name: trips
+  - table_name: trips
+    kind: !Dummy
 ```
 
 Now download some sample trip data and copy it to the `data/trips` directory:
@@ -162,14 +161,11 @@ sources:
     connection: pg
 
 endpoints:
-  - name: trips
-    path: /trips
-    table_name: trips
+  - table_name: trips
+    kind: !Dummy
 
-  - name: zones
-    path: /zoness
-    table_name: zones
-
+  - table_name: zones
+    kind: !Dummy
 ```
 
 <Tabs groupId="tool">

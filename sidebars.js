@@ -128,8 +128,18 @@ const sidebars = {
         'transforming-data/windowing'
       ]
     },
-
-
+    {
+      type: 'category',
+      label: 'User Defined Functions',
+      link: {
+        type: 'generated-index',
+        title: 'User Defined Functions',
+      },
+      items: [
+       'udfs/lambda-functions',
+        'udfs/onnx',
+      ]
+    },
     {
       type: 'category',
       label: 'Accessing Data',
@@ -145,18 +155,6 @@ const sidebars = {
         'accessing-data/authorization'
       ]
     },
-    //'lambda-functions',
-    // {
-    //   type: 'category',
-    //   label: 'Deployment',
-    //   link: {
-    //     type: 'doc',
-    //     id: 'deployment',
-    //   },
-    //   items: []
-    // }
-
-
   ],
 };
 
