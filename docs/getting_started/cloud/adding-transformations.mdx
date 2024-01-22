@@ -41,16 +41,17 @@ To expose the result of this query as an API we will also need to add an additio
 
 ```yaml
 endpoints:
-  - name: ticker_analysis
-    path: /analysis/ticker
-    table_name: ticker_analysis
+  - table_name: ticker_analysis
+    kind: !Dummy
 
-  - name: daily_analysis
-    path: /analysis/daily
-    table_name: daily_analysis
+  - table_name: daily_analysis
+    kind: !Dummy
 
-  - name: highest_daily_close
-    path: /analysis/highest_daily_close
+  - table_name: highest_daily_close
+    kind: !Dummy
+
+  - table_name: lowest_daily_close
+    kind: !Dummy   
 ```
 
 

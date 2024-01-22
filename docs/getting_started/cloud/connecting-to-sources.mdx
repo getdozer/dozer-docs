@@ -40,9 +40,8 @@ connections:
             extension: .csv
     name: s3
 endpoints:
-- name: stocks
-  table_name: stocks
-  path: /stocks
+  - table_name: stocks
+    kind: !Dummy
 ```
 
 
