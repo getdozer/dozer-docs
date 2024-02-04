@@ -42,35 +42,21 @@ const sidebars = {
         },
         'getting_started/core/connecting-to-sources',
         'getting_started/core/adding-transformations',
-        'getting_started/core/querying-data',
-        {
-          type: 'html',
-          value: 'DOZER CLOUD',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-cloud',
-          },
-        },
-        'getting_started/cloud/logging-into-cloud',
-        'getting_started/cloud/connecting-to-sources',
-        'getting_started/cloud/adding-transformations',
-        'getting_started/cloud/querying-data',
       ]
     },
-    {
-      type: "category",
-      label: "Use Cases",
-      link: {
-        type: "generated-index",
-        title: 'Use Cases',
-      },
-      collapsed: true,
-      items: [
-        "usecases/build-your-gpt-assistant-with-realtime-data"
-      ],
-    },    
-    'cli-reference',
+    // {
+    //   type: "category",
+    //   label: "Use Cases",
+    //   link: {
+    //     type: "generated-index",
+    //     title: 'Use Cases',
+    //   },
+    //   collapsed: true,
+    //   items: [
+    //     "usecases/build-your-gpt-assistant-with-realtime-data"
+    //   ],
+    // },    
+    // 'cli-reference',
 
     {
       type: 'category',
@@ -140,21 +126,21 @@ const sidebars = {
         'udfs/onnx',
       ]
     },
-    {
-      type: 'category',
-      label: 'Accessing Data',
-      link: {
-        type: 'doc',
-        id: 'accessing-data',
-      },
-      items: [
-        'accessing-data/rest',
-        'accessing-data/typesafe-grpc',
-        'accessing-data/common-grpc',
-        'accessing-data/query-format',
-        'accessing-data/authorization'
-      ]
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Accessing Data',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'accessing-data',
+    //   },
+    //   items: [
+    //     'accessing-data/rest',
+    //     'accessing-data/typesafe-grpc',
+    //     'accessing-data/common-grpc',
+    //     'accessing-data/query-format',
+    //     'accessing-data/authorization'
+    //   ]
+    // },
   ],
 };
 
