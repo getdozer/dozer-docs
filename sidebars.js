@@ -69,8 +69,7 @@ const sidebars = {
       items: [
         'configuration/data-sources',
         'configuration/transformations',
-        'configuration/api-endpoints',
-        'configuration/other',
+        'configuration/endpoints',
         'configuration/flags',
       ]
     },

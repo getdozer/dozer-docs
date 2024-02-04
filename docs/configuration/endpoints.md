@@ -4,7 +4,7 @@ The endpoint configuration defines how Dozer should expose gRPC/REST endpoints. 
 ```yaml
 endpoints:
   - table_name: trips_cache
-    kind: !Api
+    kind: !Aerospike
       path: /trips
 ```
 
