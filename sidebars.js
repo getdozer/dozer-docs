@@ -42,21 +42,22 @@ const sidebars = {
         },
         'getting_started/core/connecting-to-sources',
         'getting_started/core/adding-transformations',
+        'getting_started/core/connecting-to-destinations',
       ]
     },
-    // {
-    //   type: "category",
-    //   label: "Use Cases",
-    //   link: {
-    //     type: "generated-index",
-    //     title: 'Use Cases',
-    //   },
-    //   collapsed: true,
-    //   items: [
-    //     "usecases/build-your-gpt-assistant-with-realtime-data"
-    //   ],
-    // },    
-    // 'cli-reference',
+    //  {
+    //    type: "category",
+    //    label: "Use Cases",
+    //    link: {
+    //      type: "generated-index",
+    //      title: 'Use Cases',
+    //    },
+    //    collapsed: true,
+    //    items: [
+    //      "usecases/build-your-gpt-assistant-with-realtime-data"
+    //    ],
+    //  },    
+     'cli-reference',
 
     {
       type: 'category',

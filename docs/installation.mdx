@@ -41,32 +41,11 @@ sudo apt install openssl libssl-dev clang zlib1g-dev g++
 
 ### Installing Dozer
 
-<Tabs groupId="platform">
-  <TabItem value="amd64" label="amd64">
 
-```bash
-curl -sLO https://github.com/getdozer/dozer/releases/latest/download/dozer-linux-amd64.deb 
-sudo dpkg -i dozer-linux-amd64.deb
-```
 
-  </TabItem>
-  <TabItem value="aarch" label="aarch">
-
-```bash
-curl -sLO https://github.com/getdozer/dozer/releases/latest/download/dozer-linux-aarch64.deb
-sudo dpkg -i dozer-linux-aarch64.deb
-```
-
-  </TabItem>
-</Tabs>
-
-::::tip
-You can test the succesful installation of Dozer with the command `dozer -V`
-::::
 
 
 ## Building from Source
-For those who prefer building from the source:
 
 ::::note
 Ensure [Rust](https://www.rust-lang.org/tools/install).[Protocol Buffers](https://protobuf.dev/downloads/), [OpenSSL](https://github.com/openssl/openssl/blob/master/INSTALL.md#installing-openssl) and other pre-requisites are set up on your system. Add Protocol Buffers to your system's path for seamless Dozer installation.
