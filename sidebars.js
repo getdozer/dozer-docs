@@ -114,6 +114,21 @@ const sidebars = {
         'transforming-data/windowing'
       ]
     },
+
+    {
+      type: 'category',
+      label: 'Sinks',
+      link: {
+        type: 'generated-index',
+        title: 'Sinks',
+      },
+      collapsed: true,
+      items: [
+        'sinks/aerospike',
+
+      ]
+    },
+
     {
       type: 'category',
       label: 'User Defined Functions',
