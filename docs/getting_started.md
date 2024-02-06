@@ -8,8 +8,7 @@ Dozer is available as an Open Source Core version. In these tutorial we will sho
 
 - [Connecting to data sources](getting_started/core/connecting-to-sources)
 - [Adding transformations](getting_started/core/adding-transformations)
-- Endpoints
-- 
+- [Connecting to destinations](getting_started/core/connecting-to-destinations)
 
 ::::note
 There will be a cloud version soon
