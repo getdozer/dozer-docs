@@ -4,7 +4,46 @@ import TabItem from '@theme/TabItem';
 
 # Connecting to Sources
 
-We will be working with two distinct datasets from the [NY taxi dataset](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page): the *trips* dataset, encompassing a range of trip details, and the *zones* dataset, which serves as a reference lookup for various New York zones. Notably, the *trips* data will be sourced from basic text files, whereas the *zones* data will be retrieved directly from a PostgreSQL database. As we navigate through this process, we will aslo illustrate how Dozer performs on-the-fly transformations and effectively replicates the data on the sink database.
+We will be working with Pagila, a sample database that represents a DVD rental store. The database contains information about films, actors, customers, and stores. Postgres is used as the database engine. 
+To quickly setup postgres, you can use docker-compose.
+
+```bash
+version: '3.8'
+services:
+  postgres:
+    container_name: dozer-pagila-postgres
+    image: debezium/postgres:13
+    volumes:
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: pagila
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    ports:
+      - '5433:5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d pagila" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+```
+Don't forget to download data using the following command:
+```bash
+#!/bin/bash
+
+# https://github.com/devrimgunduz/pagila
+mkdir -p data
+
+curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-data.sql --output ./data/pagila-data.sql
+curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-schema.sql --output ./data/pagila-schema.sql
+cat ./data/pagila-schema.sql > ./data/init.sql
+cat ./data/pagila-data.sql >> ./data/init.sql
+
+rm -f ./data/pagila-schema.sql
+rm -f ./data/pagila-data.sql
+```
+
 <!--::::info
 This tutorial can be run using **Dozer Live** or **Dozer CLI**. Dozer Live is an interactive browser-based UI for faster development,
 while Dozer CLI is the standard Dozer Command Line Interface. 
@@ -20,44 +59,33 @@ Select the desired option, and follow the steps below:
 
 ::::
 -->
-## Sourcing trips data from local storage
+## Sourcing trips data from Postgres
 
 Open a new file `dozer-config.yaml` and add the following configuration section:
 
 ```yaml
 cache_max_map_size: 10737418240
 version: 1
-app_name: ny-taxi-sample
+app_name: simple-pg-sample
 connections:
-  - config: !LocalStorage
-      details:
-        path: ./data
-      tables:
-        - !Table
-          name: trips
-          config: !Parquet
-            path: trips
-            extension: .parquet
-    name: local_storage
+  - name: pagila_conn
+    config: !Postgres
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5433
+      database: pagila
+  
 
 sources:
-  - name: trips
-    table_name: trips
-    connection: local_storage
+  - name: actors
+    table_name: actor
+    connection: pagila_conn
 
 sinks:
-  - table_name: trips
+  - table_name: actors
     config: !Dummy
 ```
-
-Now download some sample trip data and copy it to the `data/trips` directory:
-
-```bash 
-curl --create-dirs -o \
-  data/trips/yellow_tripdata_2023-01.parquet \
-  https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
-```
-
 
 
 Start Dozer with the command:
@@ -68,59 +96,54 @@ dozer run --enable-progress
 
 You should be seeing a screen like the following
 ```
-  INFO Source: Initializing input schema: trips
-+-----------------------+-----------+----------+-------+
-| Field                 | Type      | Nullable | PK    |
-+-----------------------+-----------+----------+-------+
-| VendorID              | Int       | true     | false |
-+-----------------------+-----------+----------+-------+
-| tpep_pickup_datetime  | Timestamp | true     | false |
-+-----------------------+-----------+----------+-------+
-| tpep_dropoff_datetime | Timestamp | true     | false |
-+-----------------------+-----------+----------+-------+
-| passenger_count       | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| trip_distance         | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| RatecodeID            | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| store_and_fwd_flag    | String    | true     | false |
-+-----------------------+-----------+----------+-------+
-| PULocationID          | Int       | true     | false |
-+-----------------------+-----------+----------+-------+
-| DOLocationID          | Int       | true     | false |
-+-----------------------+-----------+----------+-------+
-| payment_type          | Int       | true     | false |
-+-----------------------+-----------+----------+-------+
-| fare_amount           | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| extra                 | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| mta_tax               | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| tip_amount            | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| tolls_amount          | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| improvement_surcharge | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| total_amount          | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| congestion_surcharge  | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
-| airport_fee           | Float     | true     | false |
-+-----------------------+-----------+----------+-------+
+ INFO Initializing app: simple-pg-sample    
+ INFO Data directory: ./.dozer    
+ INFO [API] Configuration
++------+----+------+
+| Type | IP | Port |
++------+----+------+
+| REST | -  | -    |
++------+----+------+
+| GRPC | -  | -    |
++------+----+------+
+    
+ INFO [API] Endpoints
++------+------+
+| Path | Name |
++------+------+
+    
+ INFO Source: Initializing input schema: actor
++-------------+-----------+----------+-------+
+| Field       | Type      | Nullable | PK    |
++-------------+-----------+----------+-------+
+| actor_id    | Int       | false    | true  |
++-------------+-----------+----------+-------+
+| first_name  | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_name   | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_update | Timestamp | false    | false |
++-------------+-----------+----------+-------+
+    
+ INFO [pipeline] Validation completed    
+ INFO Source: Initializing input schema: actor
++-------------+-----------+----------+-------+
+| Field       | Type      | Nullable | PK    |
++-------------+-----------+----------+-------+
+| actor_id    | Int       | false    | true  |
++-------------+-----------+----------+-------+
+| first_name  | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_name   | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_update | Timestamp | false    | false |
++-------------+-----------+----------+-------+
     
  INFO [pipeline] Validation completed    
  INFO Starting Internal Server on 0.0.0.0:50053    
-▹▹▹▹▹ trips: 0: 0/s                                                                   INFO Source Object has been added: Path { raw: "trips/yellow_tripdata_2023-01.parquet" }, 2024-02-06T10:15:48.048360070Z    
- INFO Source Object has been added: Path { raw: "trips/yellow_tripdata_2023-01.parquet" }, 2024-02-06T10:15:48.048360070Z    
- INFO Rate: 295482 op/s, Processed 1000 records. Elapsed 3.384432ms    
-▸▹▹▹▹ trips: 1024: 13,115.2887/s                                                      
-INFO Rate: 338859 op/s, Processed 2000 records. Elapsed 2.951195ms    
-▹▸▹▹▹ trips: 2048: 13,563.5544/s                                                      
-INFO Rate: 337127 op/s, Processed 3000 records. Elapsed 2.966332ms    
-▹▹▸▹▹ trips: 3072: 14,419.6447/s                                                     
+ INFO Starting Rest Api Server on http://0.0.0.0:8080 with security: None    
+▹▹▹▹▹ actor: 0: 0/s                                                                                                 
+INFO Snapshotting for connection pagila_conn took 5.471011ms                                                      
 ```
 
 This means Dozer is succesfully running. Now we can add one more connection to our `dozer-config.yaml`.
@@ -128,7 +151,7 @@ This means Dozer is succesfully running. Now we can add one more connection to o
 
 
 
-## Adding a PostgreSQL connection
+## Adding an additonal source
 
 We will now be adding a second connection to a PostgreSQL database. For simplicity, we will use [Supabase](htpps://www.supabase.com), a fully managed PostgreSQL database service.
 
@@ -139,20 +162,18 @@ Once created, head over to your project settings in Supabase, click on **Databas
 Now edit your `dozer-config.yaml` and add a new PostgreSQL connection, a new source and a new endpoint. The new `dozer-config.yaml` file should look like this:
 
 ```yaml
-cache_max_map_size: 10000000000
-app_name: ny-taxi-sample
+cache_max_map_size: 10737418240
+version: 1
+app_name: simple-pg-sample
 connections:
-  - config: !LocalStorage
-      details:
-        path: ./data
-      tables:
-        - !Table
-          name: trips
-          config: !Parquet
-            path: trips
-            extension: .parquet
-    name: local_storage
-
+  - name: pagila_conn
+    config: !Postgres
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5433
+      database: pagila
+  
   - config: !Postgres
       user: ** Your Supabase user ** (generally postgres)
       password: ** Your Supabase password **
@@ -162,16 +183,23 @@ connections:
     name: pg
 
 sources:
-  - name: trips
-    table_name: trips
-    connection: local_storage
+  - name: actors
+    table_name: actor
+    connection: pagila_conn
+
+  - name: films
+    table_name: film
+    connection: pagila_conn
+    columns:
+      - film_id
+      - title
 
   - name: zones
     table_name: zones
     connection: pg
 
 sinks:
-  - table_name: trips
+  - table_name: actors
     config: !Dummy
 
   - table_name: zones

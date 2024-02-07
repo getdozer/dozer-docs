@@ -8,3 +8,28 @@ The following sections describe how to connect to the destination databases. Pre
 For the purpose of this tutorial, we will use Aerospike.
 
 ## Connecting to Aerospike
+
+### Pre-requisites
+
+Make sure you have Aerospike is installed and running. If not, you can follow the instructions [here](https://www.aerospike.com/docs/operations/install/). Or you can use the [Aerospike docker image](https://hub.docker.com/_/aerospike) as shown below.
+
+```bash
+docker pull aerospike
+```
+
+We now want to connect to Aerospike using Dozer to replicate the data from our sources. For this, we will add details about the Aerospike sink to the `config.yaml` file.
+
+```yaml
+connections:
+  - config: !Aerospike
+      namespace: test
+      sets: []
+      hosts: localhost:3000
+    name: sink_connection
+sinks:
+  - table_name: <source table>
+    config: !Aerospike
+      connection: sink_connection
+      namespace: test
+      set_name: <set name> 
+```
