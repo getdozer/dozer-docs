@@ -57,7 +57,7 @@ const sidebars = {
     //      "usecases/build-your-gpt-assistant-with-realtime-data"
     //    ],
     //  },    
-     'cli-reference',
+    'cli-reference',
 
     {
       type: 'category',
@@ -94,6 +94,7 @@ const sidebars = {
         'sources/ethereum',
         'sources/grpc',
         'sources/javascript',
+        'sources/oracle',
       ],
     },
 
@@ -125,7 +126,8 @@ const sidebars = {
       collapsed: true,
       items: [
         'sinks/aerospike',
-
+        'sinks/clickhouse',
+        'sinks/oracle'
       ]
     },
 
@@ -137,7 +139,7 @@ const sidebars = {
         title: 'User Defined Functions',
       },
       items: [
-       'udfs/lambda-functions',
+        'udfs/lambda-functions',
         'udfs/onnx',
       ]
     },
