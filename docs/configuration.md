@@ -12,7 +12,7 @@ Dozer relies on a YAML configuration structure delineated in `dozer-config.yaml`
 |-------------|-----------------------------------------------------------------------------------------------------------------|
 | [Connections and Sources](configuration/data-sources) | Details the array of various database, data wareshouses or any other type of connection and their tables.  |
 | [Transformations](configuration/transformations)       | Describes the transformations applied to the sourced data.                                                   |
-| [Endpoints](configuration/endpoints) | Establishes endpoints, determining how sinks are configured                              |
+| [Sinks](configuration/endpoints) | Establishes endpoints, determining how sinks are configured                              |
 | [Global Parameters and Flags](configuration/flags) | Enables or disables specific options or feature                                  |
 
 
