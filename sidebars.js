@@ -41,7 +41,7 @@ const sidebars = {
           },
         },
         'getting_started/core/connecting-to-sources',
-        'getting_started/core/adding-transformations',
+        // 'getting_started/core/adding-transformations',
         'getting_started/core/connecting-to-destinations',
       ]
     },
