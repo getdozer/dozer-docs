@@ -98,23 +98,23 @@ const sidebars = {
       ],
     },
 
-    {
-      type: 'category',
-      label: 'Transforming Data using SQL',
-      link: {
-        type: 'doc',
-        id: 'transforming-data',
-      },
-      items: [
-        'transforming-data/data-types',
-        'transforming-data/operators',
-        'transforming-data/scalar-functions',
-        'transforming-data/aggregation-functions',
-        'transforming-data/geospatial',
-        'transforming-data/json',
-        'transforming-data/windowing'
-      ]
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Transforming Data using SQL',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'transforming-data',
+    //   },
+    //   items: [
+    //     'transforming-data/data-types',
+    //     'transforming-data/operators',
+    //     'transforming-data/scalar-functions',
+    //     'transforming-data/aggregation-functions',
+    //     'transforming-data/geospatial',
+    //     'transforming-data/json',
+    //     'transforming-data/windowing'
+    //   ]
+    // },
 
     {
       type: 'category',
