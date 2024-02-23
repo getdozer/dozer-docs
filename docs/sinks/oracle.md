@@ -7,8 +7,9 @@ description: Replicate data from your sources to Oracle Database.
 
 ### Configuration
 
+To start, define a new connection to Oracle in your `dozer-config.yaml` file using the steps outlined [here](../sources/oracle.md).
 
-The following configuration block can be used in `dozer-config.yaml` to define a new Oracle sink:
+Thereby, the following configuration block can be added to define a new Oracle sink:
 
 ```yaml
 sinks:

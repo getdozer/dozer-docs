@@ -44,15 +44,13 @@ sinks:
 
 Additionally, Dozer also allows you to denormalize the destination data in Aerospike, allowing for faster read operations.
 
-You can enable denormalization by adding the `denormalize` parameter to the sink configuration. The `denormalize` parameter is a list of denormalization rules to apply to the data before writing it to the destination. Each rule is a dictionary with the following parameters:
+With denormalization, you can combine tables that were previously seperated. This can be useful when you have a table with a lot of reads and you want to avoid joins. In essence, it is like a left-join, so the below example is equivalent to the following SQL query:
 
-| **Parameter Name** | **Type**             | **Description**                                                                                                                                                                                                                                                             |
-|--------------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `from_namespace`             | String               | The namespace for the source record.                                                                                                                                                                 |
-| `from_set`         | String               | The set within the namespace for the source record.                                                                                                                  |
-| `key`             | String | The key to use to join the source and destination records.                                                                                                                                                                              |
-| `columns`             | List | A list of columns to copy from the source record to the destination record.                                                                                                                                                                              |
-
+```sql
+SELECT t.*, c.PHONE_NUMBER 
+FROM transactions AS t 
+LEFT JOIN customers AS c ON t.CUSTOMER_ID = c.PK -- PK being the aerospike key here
+```
 
 Example:
 
@@ -70,6 +68,18 @@ sinks:
           columns:
             - PHONE_NUMBER
 ```
+
+You can enable denormalization by adding the `denormalize` parameter to the sink configuration. The `denormalize` parameter is a list of denormalization rules to apply to the data before writing it to the destination. Each rule is a dictionary with the following parameters:
+
+| **Parameter Name** | **Type**             | **Description**                                                                                                                                                                                                                                                             |
+|--------------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `from_namespace`             | String               | The namespace for the source record.                                                                                                                                                                 |
+| `from_set`         | String               | The set within the namespace for the source record.                                                                                                                  |
+| `key`             | String | The key to use to join the source and destination records.                                                                                                                                                                              |
+| `columns`             | List | A list of columns to copy from the source record to the destination record.                                                                                                                                                                              |
+
+
+
 
 
 
