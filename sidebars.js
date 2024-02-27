@@ -19,7 +19,25 @@ const sidebars = {
   // But you can create a sidebar manually
   tutorialSidebar: [
     'dozer',
-    'architecture',
+    {
+      type: 'html',
+      value: 'DOZER ANALYTICAL LAYER',
+      defaultStyle: false,
+      className: 'sidebar-item-group',
+      customProps: {
+        id: 'dozer-core',
+      },
+    },
+    'getting-started-pulse',
+    {
+      type: 'html',
+      value: 'DOZER CONNECTORS',
+      defaultStyle: false,
+      className: 'sidebar-item-group',
+      customProps: {
+        id: 'dozer-core',
+      },
+    },
     'installation',
 
     {
@@ -31,32 +49,10 @@ const sidebars = {
       },
       collapsed: true,
       items: [
-        {
-          type: 'html',
-          value: 'DOZER CORE',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-core',
-          },
-        },
         'getting_started/core/connecting-to-sources',
-        // 'getting_started/core/adding-transformations',
         'getting_started/core/connecting-to-destinations',
       ]
     },
-    //  {
-    //    type: "category",
-    //    label: "Use Cases",
-    //    link: {
-    //      type: "generated-index",
-    //      title: 'Use Cases',
-    //    },
-    //    collapsed: true,
-    //    items: [
-    //      "usecases/build-your-gpt-assistant-with-realtime-data"
-    //    ],
-    //  },    
     'cli-reference',
 
     {
