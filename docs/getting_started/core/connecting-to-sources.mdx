@@ -4,9 +4,44 @@ import TabItem from '@theme/TabItem';
 
 # Connecting to Sources
 
-We will be working with two distinct datasets from the [NY taxi dataset](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page): the *trips* dataset, encompassing a range of trip details, and the *zones* dataset, which serves as a reference lookup for various New York zones. Notably, the *trips* data will be sourced from basic text files, whereas the *zones* data will be retrieved directly from a PostgreSQL database. As we navigate through this process, we will also illustrate how Dozer performs on-the-fly transformations and effectively exposes APIs.
 
-::::info
+We will be working with Pagila, a sample database that represents a DVD rental store. The database contains information about films, actors, customers, and stores. Postgres is used as the database engine. 
+To quickly setup postgres, you can use docker-compose.
+
+```bash
+version: '3.8'
+services:
+  postgres:
+    container_name: dozer-pagila-postgres
+    image: debezium/postgres:13
+    volumes:
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: pagila
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    ports:
+      - '5433:5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d pagila" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+```
+Don't forget to download data using the following command:
+```bash
+#!/bin/bash
+
+# https://github.com/devrimgunduz/pagila
+mkdir -p data
+
+curl https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-schema.sql \
+     https://raw.githubusercontent.com/devrimgunduz/pagila/726c724df9f86406577c47790d6f8e6f2be06186/pagila-data.sql \
+     | cat > data/init.sql
+```
+
+<!--::::info
 This tutorial can be run using **Dozer Live** or **Dozer CLI**. Dozer Live is an interactive browser-based UI for faster development,
 while Dozer CLI is the standard Dozer Command Line Interface. 
 
@@ -20,105 +55,100 @@ Select the desired option, and follow the steps below:
 </Tabs>
 
 ::::
-
-## Sourcing trips data from local storage
+-->
+## Sourcing trips data from Postgres
 
 Open a new file `dozer-config.yaml` and add the following configuration section:
 
 ```yaml
 cache_max_map_size: 10737418240
 version: 1
-app_name: ny-taxi-sample
+app_name: simple-pg-sample
 connections:
-  - config: !LocalStorage
-      details:
-        path: ./data
-      tables:
-        - !Table
-          name: trips
-          config: !Parquet
-            path: trips
-            extension: .parquet
-    name: local_storage
+  - name: pagila_conn
+    config: !Postgres
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5433
+      database: pagila
+  
 
 sources:
-  - name: trips
-    table_name: trips
-    connection: local_storage
+  - name: actors
+    table_name: actor
+    connection: pagila_conn
 
-endpoints:
-  - table_name: trips
-    kind: !Dummy
+sinks:
+  - table_name: actors
+    config: !Dummy
 ```
 
-Now download some sample trip data and copy it to the `data/trips` directory:
-
-```bash 
-curl --create-dirs -o \
-  data/trips/yellow_tripdata_2023-01.parquet \
-  https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
-```
-
-<Tabs groupId="tool">
-<TabItem value="live" label="Dozer Live">
-
-Start Dozer Live with the command:
-```bash
-dozer live
-```
-This will open your browser and redirect you to the Dozer Live UI.
-
-::::note
-The first time you kickstart Dozer Live, a registration page will make its grand entrance. This is just our curious side wanting to know a bit more about our awesome users. Rest assured, any details you choose to share are simply for our learning and are completely optional.
-::::
-
-The following page will appear:
-![Github](img/live_start.png)
-
-This displays all connections, sources, endpoints and a Directed Acyclic Graph (DAG) of the data processing pipeline. Click on the <div className="live-button">RUN ▶</div> button on the upper right 
-corner to start ingesting the data. Dozer Live will load a progress panel in the lower part of the screen informing you about the data processing progress.
-
-![Github](img/live_progress.png)
-
-Once started, click on the **Endpoints** icon (the second from the top) on the left toolbar, which will load the following screen: 
-
-![Github](img/live_query.png)
-
-This screen allows you to start querying Dozer using REST and gRPC. Simply click on the <div className="live-button">EXECUTE</div> button to start querying the Dozer store.
-Nowe we can click on the <div className="live-button">STOP ⏹</div> button and add one more connection to our `dozer-config.yaml`.
-
-
-  </TabItem>
-
-  <TabItem value="cli" label="Dozer CLI">
 
 Start Dozer with the command:
 
 ```bash
-dozer --enable-progress
+dozer run --enable-progress
 ```
 
 You should be seeing a screen like the following
 ```
- INFO starting 10 workers
-▹▹▹▹▸ trips: 3066000: 1,123,447.5798/s
-▹▹▹▹▸ trips: 3065488: 196,977.7552/s
-▸▹▹▹▹ reader: trips: 1530382: 141,610.4148/s
+ INFO Initializing app: simple-pg-sample    
+ INFO Data directory: ./.dozer    
+ INFO [API] Configuration
++------+----+------+
+| Type | IP | Port |
++------+----+------+
+| REST | -  | -    |
++------+----+------+
+| GRPC | -  | -    |
++------+----+------+
+    
+ INFO [API] Endpoints
++------+------+
+| Path | Name |
++------+------+
+    
+ INFO Source: Initializing input schema: actor
++-------------+-----------+----------+-------+
+| Field       | Type      | Nullable | PK    |
++-------------+-----------+----------+-------+
+| actor_id    | Int       | false    | true  |
++-------------+-----------+----------+-------+
+| first_name  | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_name   | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_update | Timestamp | false    | false |
++-------------+-----------+----------+-------+
+    
+ INFO [pipeline] Validation completed    
+ INFO Source: Initializing input schema: actor
++-------------+-----------+----------+-------+
+| Field       | Type      | Nullable | PK    |
++-------------+-----------+----------+-------+
+| actor_id    | Int       | false    | true  |
++-------------+-----------+----------+-------+
+| first_name  | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_name   | String    | false    | false |
++-------------+-----------+----------+-------+
+| last_update | Timestamp | false    | false |
++-------------+-----------+----------+-------+
+    
+ INFO [pipeline] Validation completed    
+ INFO Starting Internal Server on 0.0.0.0:50053    
+ INFO Starting Rest Api Server on http://0.0.0.0:8080 with security: None    
+▹▹▹▹▹ actor: 0: 0/s                                                                                                 
+INFO Snapshotting for connection pagila_conn took 5.471011ms                                                      
 ```
 
-This means Dozer is succesfully running. To validate that, you can run a simple REST query:
-
-```bash
-curl -X POST  http://localhost:8080/trips/query \
-  --header 'Content-Type: application/json' --data-raw '{"$limit":3}'
-```
-
-This will retrieve the first 3 records from the `trips` collection.
-  </TabItem>
-</Tabs>
+This means Dozer is succesfully running. Now we can add one more connection to our `dozer-config.yaml`.
 
 
-## Adding a PostgreSQL connection
+
+
+## Adding an additonal source
 
 We will now be adding a second connection to a PostgreSQL database. For simplicity, we will use [Supabase](htpps://www.supabase.com), a fully managed PostgreSQL database service.
 
@@ -129,20 +159,18 @@ Once created, head over to your project settings in Supabase, click on **Databas
 Now edit your `dozer-config.yaml` and add a new PostgreSQL connection, a new source and a new endpoint. The new `dozer-config.yaml` file should look like this:
 
 ```yaml
-cache_max_map_size: 10000000000
-app_name: ny-taxi-sample
+cache_max_map_size: 10737418240
+version: 1
+app_name: simple-pg-sample
 connections:
-  - config: !LocalStorage
-      details:
-        path: ./data
-      tables:
-        - !Table
-          name: trips
-          config: !Parquet
-            path: trips
-            extension: .parquet
-    name: local_storage
-
+  - name: pagila_conn
+    config: !Postgres
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5433
+      database: pagila
+  
   - config: !Postgres
       user: ** Your Supabase user ** (generally postgres)
       password: ** Your Supabase password **
@@ -152,32 +180,29 @@ connections:
     name: pg
 
 sources:
-  - name: trips
-    table_name: trips
-    connection: local_storage
+  - name: actors
+    table_name: actor
+    connection: pagila_conn
+
+  - name: films
+    table_name: film
+    connection: pagila_conn
+    columns:
+      - film_id
+      - title
 
   - name: zones
     table_name: zones
     connection: pg
 
-endpoints:
-  - table_name: trips
-    kind: !Dummy
+sinks:
+  - table_name: actors
+    config: !Dummy
 
   - table_name: zones
-    kind: !Dummy
+    config: !Dummy
 ```
-
-<Tabs groupId="tool">
-  <TabItem value="live" label="Dozer Live">
-
-As you change anything in the `dozer-config.yaml` you will notice that configuration is re-loaded. You will notice that a new collection called `zones` will be available.
-You can click on the <div className="live-button">RUN ▶</div> again to restart the application and query the new data. In the next section we will be adding SQL transformations to our data sources.
-
-  </TabItem>
-  <TabItem value="cli" label="Dozer CLI">
 
 Now you can restart Dozer. You will notice that a new collection called `zones` is available. In the next section we will be adding SQL transformations to our data sources.
 
-  </TabItem>
-</Tabs>
+In the next section we will be connecting to a real sink instead of dummy for the replication pipeline.

@@ -6,38 +6,55 @@ import TabItem from '@theme/TabItem';
 We now want to join the two datasets and perform an aggregations to determine the average fare of trips between zones. For this we will add a `sql` section to the `dozer-config.yaml` that looks like this:
 
 ```yaml
-sql: |
-    SELECT 
-      PULocationID, DOLocationID, 
-      pu_zones.Zone as PULocationName, 
-      do_zones.Zone as DOLocationName, 
-      AVG(fare_amount) as avg_amount
-    INTO avg_fares
-    FROM trips
-    INNER JOIN zones pu_zones ON trips.PULocationID = pu_zones.LocationID
-    INNER JOIN zones do_zones ON trips.DOLocationID = do_zones.LocationID
-    GROUP BY PULocationID, DOLocationID;
+sources:
+  - name: actors
+    table_name: actor
+    connection: pagila_conn
+    columns:
+      - actor_id
+      - first_name
+      - last_name
+  - name: films
+    table_name: film
+    connection: pagila_conn
+    columns:
+      - film_id
+      - title
+      - rental_rate
+  - name: film_actors
+    table_name: film_actor
+    connection: pagila_conn
+    columns:
+      - actor_id
+      - film_id
+
+sql:  |
+  SELECT a.first_name AS actor_first_name, 
+         a.last_name AS actor_last_name, 
+         f.title AS film_title, 
+         f.rental_rate
+  into actor_films
+  FROM actors a
+  JOIN film_actors fa ON a.actor_id = fa.actor_id
+  JOIN films f ON fa.film_id = f.film_id
+  WHERE f.rental_rate > 3;
 ```
 ::::note
 The SQL you specify in the .yaml file does not run in the source database. Data is processed in real-time as it comes into Dozer by Dozer's internal streaming SQL engine.
 ::::
+Here we used `actors`, `films` and `film_actors` as sources and joined them to create a new table `actor_films`. We also filtered the data to only include films with a rental rate greater than 3. 
 
-To expose the result of this query as an API we will also need to add an additional endpoint:
-
+This new table would replicated into the sink database.
 ```yaml
-endpoints:
-  - table_name: avg_fares
-    kind: !Dummy
+sinks:
+  - table_name: actor_films
+    config: !Dummy
 ```
 
-<Tabs groupId="tool">
-  <TabItem value="live" label="Dozer Live">
-Once you have done your chnages, restart the Dozer to re-trigger the ingestion from the CSV file and Supabase concurrently, and execute the above query in real-time.
-  </TabItem>
-  <TabItem value="cli" label="Dozer CLI">
 
-Now restart `dozer`, to re-trigger the ingestion from the CSV file and Supabase concurrently, and execute the above query in real-time.
-  
-  </TabItem>
-</Tabs>
+Now restart `dozer`, to re-trigger the Snapshotting and Replication process. 
+
+```bash
+dozer run
+```
 

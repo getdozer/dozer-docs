@@ -19,7 +19,25 @@ const sidebars = {
   // But you can create a sidebar manually
   tutorialSidebar: [
     'dozer',
-    'architecture',
+    {
+      type: 'html',
+      value: 'DOZER ANALYTICAL LAYER',
+      defaultStyle: false,
+      className: 'sidebar-item-group',
+      customProps: {
+        id: 'dozer-core',
+      },
+    },
+    'getting-started-pulse',
+    {
+      type: 'html',
+      value: 'DOZER CONNECTORS',
+      defaultStyle: false,
+      className: 'sidebar-item-group',
+      customProps: {
+        id: 'dozer-core',
+      },
+    },
     'installation',
 
     {
@@ -31,45 +49,10 @@ const sidebars = {
       },
       collapsed: true,
       items: [
-        {
-          type: 'html',
-          value: 'DOZER CORE',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-core',
-          },
-        },
         'getting_started/core/connecting-to-sources',
-        'getting_started/core/adding-transformations',
-        'getting_started/core/querying-data',
-        {
-          type: 'html',
-          value: 'DOZER CLOUD',
-          defaultStyle: false,
-          className: 'sidebar-item-group',
-          customProps: {
-            id: 'dozer-cloud',
-          },
-        },
-        'getting_started/cloud/logging-into-cloud',
-        'getting_started/cloud/connecting-to-sources',
-        'getting_started/cloud/adding-transformations',
-        'getting_started/cloud/querying-data',
+        'getting_started/core/connecting-to-destinations',
       ]
     },
-    {
-      type: "category",
-      label: "Use Cases",
-      link: {
-        type: "generated-index",
-        title: 'Use Cases',
-      },
-      collapsed: true,
-      items: [
-        "usecases/build-your-gpt-assistant-with-realtime-data"
-      ],
-    },    
     'cli-reference',
 
     {
@@ -83,8 +66,7 @@ const sidebars = {
       items: [
         'configuration/data-sources',
         'configuration/transformations',
-        'configuration/api-endpoints',
-        'configuration/other',
+        'configuration/endpoints',
         'configuration/flags',
       ]
     },
@@ -108,26 +90,43 @@ const sidebars = {
         'sources/ethereum',
         'sources/grpc',
         'sources/javascript',
+        'sources/oracle',
       ],
     },
 
+    // {
+    //   type: 'category',
+    //   label: 'Transforming Data using SQL',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'transforming-data',
+    //   },
+    //   items: [
+    //     'transforming-data/data-types',
+    //     'transforming-data/operators',
+    //     'transforming-data/scalar-functions',
+    //     'transforming-data/aggregation-functions',
+    //     'transforming-data/geospatial',
+    //     'transforming-data/json',
+    //     'transforming-data/windowing'
+    //   ]
+    // },
+
     {
       type: 'category',
-      label: 'Transforming Data using SQL',
+      label: 'Sinks',
       link: {
-        type: 'doc',
-        id: 'transforming-data',
+        type: 'generated-index',
+        title: 'Sinks',
       },
+      collapsed: true,
       items: [
-        'transforming-data/data-types',
-        'transforming-data/operators',
-        'transforming-data/scalar-functions',
-        'transforming-data/aggregation-functions',
-        'transforming-data/geospatial',
-        'transforming-data/json',
-        'transforming-data/windowing'
+        'sinks/aerospike',
+        'sinks/clickhouse',
+        'sinks/oracle'
       ]
     },
+
     {
       type: 'category',
       label: 'User Defined Functions',
@@ -136,25 +135,25 @@ const sidebars = {
         title: 'User Defined Functions',
       },
       items: [
-       'udfs/lambda-functions',
+        'udfs/lambda-functions',
         'udfs/onnx',
       ]
     },
-    {
-      type: 'category',
-      label: 'Accessing Data',
-      link: {
-        type: 'doc',
-        id: 'accessing-data',
-      },
-      items: [
-        'accessing-data/rest',
-        'accessing-data/typesafe-grpc',
-        'accessing-data/common-grpc',
-        'accessing-data/query-format',
-        'accessing-data/authorization'
-      ]
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Accessing Data',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'accessing-data',
+    //   },
+    //   items: [
+    //     'accessing-data/rest',
+    //     'accessing-data/typesafe-grpc',
+    //     'accessing-data/common-grpc',
+    //     'accessing-data/query-format',
+    //     'accessing-data/authorization'
+    //   ]
+    // },
   ],
 };
 
