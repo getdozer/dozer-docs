@@ -6,9 +6,9 @@ Dozer Replication is available as an Open Source Core version. In these tutorial
 
 ## Dozer Core
 
-- [Connecting to data sources](getting_started/core/connecting-to-sources)
+- [Connecting to data sources](/getting_started/core/connecting-to-sources/)
 <!-- - [Adding transformations](getting_started/core/adding-transformations) -->
-- [Connecting to destinations](getting_started/core/connecting-to-destinations)
+- [Connecting to destinations](/getting_started/core/connecting-to-destinations/)
 
 ::::note
 There will be a cloud version soon
